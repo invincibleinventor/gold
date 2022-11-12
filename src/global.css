@@ -9,6 +9,11 @@
 @tailwind utilities;
 
 
+html{
+  overscroll-behavior: none;
+height: 100%;
+}
+
 .font-jost{
     font-family: 'Jost', sans;
 }
