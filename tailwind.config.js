@@ -7,6 +7,7 @@ module.exports = {
       screens:
       {
         '3xl': '1640px',
+        '2xl': '1500px'
       },
       backgroundImage:
          {

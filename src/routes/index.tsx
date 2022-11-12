@@ -41,7 +41,7 @@ export default component$(() => {
 
 </div>
 
-<div class="grid  md:grid-cols-2 grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 lg:mx-20  mx-3  mt-6 lg:my-10 lg:mt-0 mt-0 ">
+<div class="grid  md:grid-cols-2 grid-cols-1 2xl:grid-cols-3 lg:grid-cols-2 lg:mx-20  mx-3  mt-6 lg:my-10 lg:mt-0 mt-0 ">
       
 <Card title="Turn Coat" src="https://picsum.photos/300/200" desc="It is an event conducted by the English department promoting usage of profilic vocabulary amongst children"></Card>
 <Card title="Turn Coat" src="https://picsum.photos/300/200" desc="It is an event conducted by the English department promoting usage of profilic vocabulary amongst children"></Card>
