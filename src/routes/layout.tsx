@@ -10,7 +10,7 @@ export default component$(() => {
   <div class="absolute bottom-5 left-14 h-56 w-56  rounded-full bg-gradient-to-tr from-blue-300 to-blue-700   bg-opacity-70 block"></div>
   <div class="absolute top-5 right-10 h-72 w-72  rounded-full  bg-opacity-20 block bg-gradient-to-bl lg:from-pink-300 from-blue-400 via-indigo-900 to-pink-900 lg:to-blue-700 "></div>
 
- <div class=" min-h-screen lg:min-h-[calc(100vh-128px)] w-full  bg-blue-200 bg-opacity-10 border border-sky-700  filter backdrop-blur-2xl lg:backdrop-blur-lg md:shadow-2xl md:rounded-[30px] mx-auto pb-10 lg:pb-20 xl:pb-0">
+ <div class=" min-h-screen lg:min-h-[calc(100vh-128px)] w-full  bg-blue-200 bg-opacity-10 border border-sky-700  filter backdrop-blur-md lg:backdrop-blur-lg md:shadow-2xl md:rounded-[30px] mx-auto pb-10 lg:pb-20 xl:pb-0">
 <div class="hidden lg:block">
 <Navbar></Navbar>
 </div>
