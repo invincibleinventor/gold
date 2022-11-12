@@ -20,7 +20,7 @@ export default component$(() => {
     </div>
     </div>
      
-    <div class="grid xl:grid-cols-3  md:grid-cols-2 grid-cols-1  grs lg:mx-20 lg:my-10 lg:mt-0 mt-0 ">
+    <div class="grid 2xl:grid-cols-3  md:grid-cols-2 grid-cols-1  grs lg:mx-20 lg:my-10 lg:mt-0 mt-0 ">
       
     <Card title="Turn Coat" url="turn-coat" src="https://picsum.photos/300/200" desc="It is an event conducted by the English department promoting usage of profilic vocabulary amongst children"></Card>
     <Card title="Turn Coat" url="turn-coat" src="https://picsum.photos/300/200" desc="It is an event conducted by the English department promoting usage of profilic vocabulary amongst children"></Card>
