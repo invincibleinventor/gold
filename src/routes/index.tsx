@@ -1,7 +1,6 @@
 import { component$, } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 
-import { Link } from '@builder.io/qwik-city';
 import Card from '~/components/card/card';
 
 export default component$(() => {
@@ -23,7 +22,7 @@ export default component$(() => {
     </div>
 
     <div class="flex flex-col lg:flex-row lg:py-10 space-x-0 space-y-6 lg:space-y-0  px-8 lg:px-0 lg:space-x-6 lg:mt-0">
-    <Link href="/events" class="bg-white shadow-2xl font-medium lg:font-semibold font-poppins text-blue-900 px-10  transition-all ease-linear duration-100 hover:scale-105 py-3 rounded-md text-lg text-center"><span class="mx-auto">View Events</span></Link>
+    <a href="/events" class="bg-white shadow-2xl font-medium lg:font-semibold font-poppins text-blue-900 px-10  transition-all ease-linear duration-100 hover:scale-105 py-3 rounded-md text-lg text-center"><span class="mx-auto">View Events</span></a>
 
     <button class="bg-black bg-opacity-30 shadow-2xl font-medium lg:font-semibold font-poppins text-white px-10 transition-all ease-linear duration-100  hover:scale-105 py-3 rounded-md text-lg">Are you an alumnus?</button>
     </div>
@@ -42,7 +41,7 @@ export default component$(() => {
 
 </div>
 
-<div class="grid  md:grid-cols-2 grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 lg:mx-20  mx-3  mt-5 lg:my-10 lg:mt-0 mt-0 ">
+<div class="grid  md:grid-cols-2 grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 lg:mx-20  mx-3  mt-6 lg:my-10 lg:mt-0 mt-0 ">
       
 <Card title="Turn Coat" src="https://picsum.photos/300/200" desc="It is an event conducted by the English department promoting usage of profilic vocabulary amongst children"></Card>
 <Card title="Turn Coat" src="https://picsum.photos/300/200" desc="It is an event conducted by the English department promoting usage of profilic vocabulary amongst children"></Card>

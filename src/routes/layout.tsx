@@ -5,7 +5,7 @@ export default component$(() => {
     <>
       <main class="overflow-y-auto h-screen">
         <section>
-        <div class="flex flex-row min-h-screen min-w-screen  items-center content-center lg:p-16 xl:px-40"> 
+        <div class="flex flex-row min-h-screen min-w-screen  items-center content-center lg:p-16 xl:px-24 3xl:px-40"> 
   
   <div class="absolute bottom-5 left-14 h-56 w-56  rounded-full bg-gradient-to-tr from-blue-300 to-blue-700   bg-opacity-70 hidden lg:block"></div>
   <div class="absolute top-5 right-10 h-72 w-72  rounded-full  bg-opacity-20  bg-gradient-to-bl lg:from-pink-300  hidden lg:block from-blue-400 via-indigo-900 to-pink-900 lg:to-blue-700 "></div>
