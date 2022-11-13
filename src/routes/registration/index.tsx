@@ -3,8 +3,6 @@ import { authuser } from '../../services/firebase';
 import 'firebase/compat/auth';
 import { supabase } from '../../services/firebase';
 
-//788255212688-t3roufe0qbg0a5abbjjfrurpfvg9sfdo.apps.googleusercontent.com
-
 
 export const LoadingComponent = () => <div class="container" style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
  
@@ -63,7 +61,7 @@ if(error?.code=='23505'){alert('Someone has already registered with this email a
     <>
         
 
-    <div class="px-5 md:px-0">
+    <div class="px-5 md:px-0 mt-24 lg:mt-0">
       <form class="mx-auto my-8 md:my-16 lg:my-20 rounded-xl lg:rounded-2xl p-8 md:p-16 md:px-10 bg-black bg-opacity-30  md:w-3/5 lg:w-2/4 xl:w-2/5" preventdefault:submit onSubmit$={handleSubmit$}>
       <h1 class="font-poppins text-white text-[28px] font-bold text-center">Common Registration</h1>
       <h1 class="font-poppins text-white opacity-80 text-lg my-4 leading-relaxed mt-2 md:mt-3  font-medium text-center mb-10">Fill the below form for registering to Swarnotsav</h1>

@@ -9,15 +9,15 @@ export default component$(() => {
 
   return (
    
- <div class="flex flex-col">
+ <div class="flex flex-col mt-24 lg:mt-0">
    <div class="flex flex-col xl:flex-row lg:pt-20 space-y-10 xl:space-y-0 lg:px-20">
    <div class="flex flex-col w-full  ">
    <div class="flex flex-row my-auto  lg:h-56 w-full items-center content-center">
     <div class="w-3  h-44 lg:block shadow-lg hidden my-auto rounded-full bg-white bg-opacity-70"></div>
-    <div class="flex flex-col my-auto mx-auto lg:mx-0 lg:pl-10  my-20 mb-3 lg:mb-20  lg:py-0 lg:pt-0 ">
+    <div class="flex flex-col my-auto mx-auto lg:mx-0 lg:pl-10  mt-5  mb-3 lg:mb-6  lg:py-0 lg:pt-0 ">
     <h1 class="font-bold text-white drop-shadow-xl font-poppins mb-1 lg:mb-[4px] text-5xl hidden lg:block">A Legacy Beyond</h1>
     <h1 class="lg:font-bold font-bold text-white lg:text-yellow-300 drop-shadow-xl  font-poppins text-[30px] px-10 lg:px-0 lg:text-5xl lg:leading-normal leading-[44px] text-center lg:text-left"><span class="lg:hidden inline-block ">A Legacy Beyond</span> 50 Years</h1>
-    <h1 class=" font-inter  lg:font-normal  text-lg mx-auto lg:mx-0 my-6  lg:my-0 text-blue-50  lg:text-left text-center lg:text-xl  w-4/5 sm:w-3/5 lg:mt-1 lg:leading-7"><span class=" ">The TVS School</span> stands tall filled with pride as it celebrates its golden jubilee this year</h1>
+    <h1 class=" font-inter  lg:font-normal  text-lg mx-auto lg:mx-0 my-6   lg:my-0 text-blue-50  lg:text-left text-center lg:text-xl  w-4/5 sm:w-3/5 lg:mt-1 lg:leading-7"><span class=" ">The TVS School</span> stands tall filled with pride as it celebrates its golden jubilee this year</h1>
 
     </div>
     </div>
@@ -37,7 +37,7 @@ export default component$(() => {
    
 </div>
 
-<div class="lg:mx-20  lg:mb-3 ">
+<div class="lg:mx-20 lg:mt-0 mt-3  lg:mb-3 ">
 <h1 class="font-semibold text-white text-left drop-shadow-xl font-poppins text-center mb-1 lg:mb-[4px] text-4xl "></h1>
 
 </div>

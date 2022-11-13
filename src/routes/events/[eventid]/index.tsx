@@ -2,7 +2,7 @@ import { component$ } from '@builder.io/qwik';
 export default component$(() => {
 
   return (
-    <div class="flex flex-col lg:flex-row">
+    <div class="flex flex-col lg:flex-row mt-24 lg:mt-0">
       <div class="lg:w-1/2 md:p-20 p-10 lg:pr-10 lg:pl-[120px] lg:py-10">
         
 <img src="https://picsum.photos/300/400" class="w-full shadow-2xl md:h-[526px] rounded-2xl"></img>
