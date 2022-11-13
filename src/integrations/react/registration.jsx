@@ -1,17 +1,10 @@
-/** @jsxImportSource react */
-import React,{ useState} from 'react'
 
-import { qwikify$ } from '@builder.io/qwik-react'
+// or
+import {qwikify$} from '@builder.io/qwik-react'
 
-export function Testing(){
-  const [st,setSt]=useState(0)
-  return(
-    <>
-    <button onClick={setSt(1)}>Click Me</button>
-    <div>{st}</div>
-    </>
-  )
-  
+export const Login = (response) => {
+  console.log(response);
 }
 
-export default qwikify$(Testing);
+
+export default qwikify$(Login)

@@ -3,6 +3,7 @@ import { QwikCity, RouterOutlet, ServiceWorkerRegister } from '@builder.io/qwik-
 import { RouterHead } from './components/router-head/router-head';
 
 import './global.css';
+import { SupabaseProvider } from './SupabaseProvider';
 
 // Initialize Firebase
 export default component$(() => {
@@ -14,6 +15,7 @@ export default component$(() => {
    * Dont remove the `<head>` and `<body>` elements.
    */
   return (
+
     <QwikCity>
       <head>
         <meta charSet="utf-8" />

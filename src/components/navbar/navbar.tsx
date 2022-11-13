@@ -7,7 +7,7 @@ return(
 <a href="/events" class="font-poppins font-medium  text-md ml-auto text-white">Verseny'22</a>
 <h1 class="font-poppins font-medium text-white text-md ml-16">About Us</h1>
 <h1 class="font-poppins font-medium text-white text-md ml-16">Contact</h1>
-<button class="bg-white shadow-2xl font-semibold font-poppins text-blue-900 px-10 ml-16 transition-all ease-linear duration-100 hover:scale-105 py-3 rounded-md text-lg">Register Now</button>
+<a href="/registration" class="bg-white shadow-2xl font-semibold font-poppins text-blue-900 px-10 ml-16 transition-all ease-linear duration-100 hover:scale-105 py-3 rounded-md text-lg">Register Now</a>
 </div>
  
  </nav>

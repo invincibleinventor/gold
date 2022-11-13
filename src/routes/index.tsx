@@ -2,7 +2,8 @@ import { component$, } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 
 import Card from '~/components/card/card';
-
+import { authuser } from '~/services/firebase';
+console.log(authuser)
 export default component$(() => {
   
 
@@ -29,7 +30,7 @@ export default component$(() => {
 
    </div>
   
-   <div class="h-80 mx-5  xl:mx-0 xl:w-1/2 hidden lg:block bg-black rounded-lg">
+   <div class="h-80 mx-5  xl:mx-0 xl:w-3/4 hidden lg:block bg-black rounded-lg">
 
    </div>
 
