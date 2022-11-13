@@ -1,9 +1,7 @@
-
-// or
 import {qwikify$} from '@builder.io/qwik-react'
 
-export const Login = (response) => {
-  console.log(response);
+export const Login = () => {
+ return( <button >Click Me</button>)
 }
 
 
