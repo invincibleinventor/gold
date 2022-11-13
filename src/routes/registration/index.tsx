@@ -1,16 +1,10 @@
 import { $, component$, useStore } from '@builder.io/qwik';
-import { authuser } from '../../services/firebase';
-import 'firebase/compat/auth';
 import { supabase } from '../../services/firebase';
 
 
 export const LoadingComponent = () => <div class="container" style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
  
 </div>;
-
-console.log(authuser)
-
-
 
 
 export default component$(() => {

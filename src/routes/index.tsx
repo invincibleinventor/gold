@@ -2,8 +2,7 @@ import { component$, } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 
 import Card from '~/components/card/card';
-import { authuser } from '~/services/firebase';
-console.log(authuser)
+
 export default component$(() => {
   
 
