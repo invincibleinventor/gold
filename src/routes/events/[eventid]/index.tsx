@@ -1,7 +1,40 @@
 import { component$ } from '@builder.io/qwik';
+import { useStore, useClientEffect$ } from '@builder.io/qwik';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth  } from '~/services/firebase';
+import {  } from '@builder.io/qwik-city';
+
 export default component$(() => {
+ 
+  const state = useStore({
+    isLoggedIn: false,
+    loading:false,
+    user:'',
+    data:false,
+    d: [],
+    nope:'hidden'
+  });
+  useClientEffect$(() => {
+    onAuthStateChanged(auth, (user) => {
+      state.isLoggedIn = !!user;
+      if(user?.email!=null && user?.email != undefined){state.user = user?.email}
+    
+ 
+  /*if(typeof data !== 'undefined' && data.length > 0){
+  state.data=true
+  }
+  else{
+    state.data=false
+  }
+  state.d=data
+  console.log(state.d,state.data)
+*/})
+  })
+
+
 
   return (
+
     <div class="flex flex-col lg:flex-row mt-24 lg:mt-0">
       <div class="lg:w-1/2 md:p-20 p-10 lg:pr-10 lg:pl-[120px] lg:py-10">
         
@@ -23,9 +56,13 @@ export default component$(() => {
 
 
 
-        
+      <div class="flex flex-row lg:py-7 py-5">
+        <button class="bg-white shadow-2xl font-semibold font-poppins text-blue-900 px-10 transition-all ease-linear duration-100 hover:scale-105 py-3 rounded-md text-lg" onClick$={()=>state.user?'':location.href='/registration'}>Register for this event</button>
+    </div>
       </div>
       
+
+      
     </div>
-  );
+  );    
 });

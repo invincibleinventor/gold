@@ -1,8 +1,11 @@
+// @ts-ignore
+{/* 
+  // @ts-ignore */}
+
 import { $, useClientEffect$, component$, useStore } from '@builder.io/qwik';
 import { supabase } from '../../services/firebase';
-import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from 'firebase/auth';
+import {  GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from 'firebase/auth';
 import {auth} from '../../services/firebase'
-import e from 'express';
 export const LoadingComponent = () => <div class="container" style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
  
 </div>;
@@ -23,28 +26,29 @@ export default component$(() => {
     loading:false,
     user:'',
     data:false,
-    d: [],
+    // eslint-disable-next-line @typescript-eslint/no-array-constructor
+    d: Array(),
     nope:'hidden'
   });
   useClientEffect$(() => {
     onAuthStateChanged(auth, (user) => {
       state.isLoggedIn = !!user;
-      state.user = user?.email;
+      if(user?.email!=null && user?.email != undefined){state.user = user?.email}
       console.log(state.user)
 async function validate(){
-    const { data, error } = await supabase
+    const { data } = await supabase
     .from("Verseny")
     .select("*")
     .eq("uid",`${state.user}`)
     console.log('below')
   console.log(data)
-  if(typeof data !== 'undefined' && data.length > 0){
+  if(typeof data !== 'undefined' && data!=null && data.length > 0){
   state.data=true
   }
   else{
     state.data=false
   }
-  state.d=data
+  if(data!=null){state.d=data}
   console.log(state.d,state.data)
 
     
@@ -73,13 +77,12 @@ if(state.user){
     }
   });
 
-let btn="Register Now", updt="Registered" ,title="Register Yourself",desc="Fill in this form to register for Swarnotsav",name='',date=null,classs="",ph=null,wa=null,schl=null;
+let btn="Register Now" ,title="Register Yourself",desc="Fill in this form to register for Swarnotsav",name='',date='',classs="",ph='',wa='',schl='';
   
 
 if (state.data){
-  state.nope=true
   title="Update Details"
-  desc="Update your profile details"
+  desc="You have already registered. Update your profile details"
   name=state.d[0]['name']
   date=state.d[0]['date']
   classs=state.d[0]['class']
@@ -87,7 +90,6 @@ if (state.data){
   ph=state.d[0]['ph']
   wa=state.d[0]['wa']
   btn="Update Details"
-  updt="Updated"
 }
 
 
@@ -207,7 +209,7 @@ else{
 </input>
 </div>
 
-<button type="submit" class="py-5 text-lg px-6 font-semibold bg-black bg-opacity-30 rounded-md w-full shadow-2xl text-white font-poppins">Register Now</button>
+<button type="submit" class="py-5 text-lg px-6 font-semibold bg-black bg-opacity-30 rounded-md w-full shadow-2xl text-white font-poppins">{btn}</button>
 
 
       </form>

@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { component$ } from "@builder.io/qwik"
+import { component$, useClientEffect$, useStore } from "@builder.io/qwik"
 import { Link } from "@builder.io/qwik-city"
+import { onAuthStateChanged } from "firebase/auth"
+import { auth } from "~/services/firebase"
+import { supabase } from "~/services/firebase"
 export default component$(({title,desc, src, url}:any) => {
+   
 return(
     <div class="w-auto m-5 lg:mx-10 lg:m-10 relative h-[530px] lg:h-[570px] rounded-xl bg-blue-800 bg-opacity-40 shadow-2xl ">
         <img src={src} class="rounded-b-2xl h-full w-full rounded-t-xl">
@@ -12,7 +16,7 @@ return(
 <h1 class="text-[15px] sm:text-[16px] leading-relaxed lg:leading-relaxed opacity-100 lg:opacity-100 font-poppins font-medium text-neutral-100 mt-2 mx-8 mb-7">{desc}</h1>
     <div class="flex absolute bottom-0 w-full bg-white py-4 lg:py-5 rounded-b-xl bg-opacity-10 mt-8 px-6   items-center">
     <a href={'/events/'+url} class=" rounded-md font-poppins font-semibold py-1 pl-[12px] opacity-100 lg:opacity-100 lg:text-[17px] text-[15px]  sm:text-sm text-neutral-200">Learn More </a>
-    <button class="bg-white  rounded-md font-poppins font-bold lg:py-4 py-3 lg:text-[17px] transition-all ease-linear duration-100 hover:scale-105 text-[13px]  sm:text-sm px-7 ml-auto text-gray-700">Register</button>
+    <a href={'/events/'+url+'#register'} class="bg-white  rounded-md font-poppins font-bold lg:py-4 py-3 lg:text-[17px] transition-all ease-linear duration-100 hover:scale-105 text-[13px]  sm:text-sm px-7 ml-auto text-gray-700">Register</a>
     </div>
 </div>
     </div>

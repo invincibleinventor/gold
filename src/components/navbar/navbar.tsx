@@ -1,3 +1,5 @@
+//@ts-ignore
+
 import { component$,useClientEffect$,useStore } from "@builder.io/qwik"
 import { onAuthStateChanged } from "firebase/auth"
 import { auth } from "~/services/firebase"
@@ -10,7 +12,7 @@ export default component$(() => {
       useClientEffect$(() => {
         onAuthStateChanged(auth, (user) => {
           stoot.isLoggedIn = !!user;
-          stoot.user = user?.email;
+          if(user?.email!=null && user?.email != undefined){stoot.user = user?.email}
     
         })
       })

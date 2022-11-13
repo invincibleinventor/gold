@@ -1,3 +1,4 @@
+//@ts-ignore
 import { component$, useStylesScoped$, useClientEffect$ } from '@builder.io/qwik';
 import styles from './header.css?inline';
 import { useStore } from '@builder.io/qwik';
@@ -11,7 +12,7 @@ export default component$(() => {
   useClientEffect$(() => {
     onAuthStateChanged(auth, (user) => {
       stoot.isLoggedIn = !!user;
-      stoot.user = user?.email;
+      if(user?.email!=null && user?.email != undefined){stoot.user = user?.email}
 
     })
   })
