@@ -1,37 +1,115 @@
-import { component$ } from '@builder.io/qwik';
+import { $, component$ } from '@builder.io/qwik';
 import { useStore, useClientEffect$ } from '@builder.io/qwik';
+import { useLocation } from '@builder.io/qwik-city';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth  } from '~/services/firebase';
-import {  } from '@builder.io/qwik-city';
+import { auth, supabase } from '~/services/firebase';
 
+import ds from '../../config.json'
 export default component$(() => {
- 
+ const loc = useLocation()
   const state = useStore({
     isLoggedIn: false,
     loading:false,
     user:'',
     data:false,
     d: [],
-    nope:'hidden'
+    nope:'hidden',
+    number:0,
+    dt:[]
   });
   useClientEffect$(() => {
+console.log(state.data)
+    async function getd(){
+      const {data } = await  supabase
+        .from("Verseny")
+        .select("*")
+        .eq("uid",`${state.user}`)
+        console.log('below')
+        state.dt=(data as any);
+    console.log(typeof(data?data[0]["events"]:[]))
+    const a = JSON.parse(data?data[0]["events"]:[])
+    console.log(a)
+    for(let i =0;i<=a.length-1;i++){
+
+      console.log(loc.params.eventid==(ds.verseny.events as any) [a[i]])
+      if(loc.params.eventid==(ds.verseny.events as any)[a[i]]){
+        state.data=true
+        state.d=a
+        break;
+       
+      }
+      else{
+        getNumber()
+      }
+    }
+      
+     
+      function getNumber(){
+        for(let i =1;i<=15;i++){
+          if(loc.params.eventid==(ds.verseny.events as any)[i]){
+            state.number=i
+            console.log(state.number)
+        }
+      }
+
+    }
+      
+    
+    }
     onAuthStateChanged(auth, (user) => {
       state.isLoggedIn = !!user;
       if(user?.email!=null && user?.email != undefined){state.user = user?.email}
     
+      
+      getd()
+
+ })
+
  
-  /*if(typeof data !== 'undefined' && data.length > 0){
-  state.data=true
+
+  })
+const register = $(async()=>{
+  let name;
+  if(state.user){
+    // eslint-disable-next-line no-extra-boolean-cast
+    if(!!state.dt[0]){
+  
+ const date=state.dt[0]['date']
+ const classs=state.dt[0]['class']
+ const schl=state.dt[0]['school']
+ const ph=state.dt[0]['ph']
+ const wa=state.dt[0]['wa']
+  let a:any= state.dt[0]["events"]
+
+  console.log('belowss')
+  console.log(a)
+  a=JSON.parse(a)
+  a.push(state.number)
+  const { error } = await supabase
+  .from('Verseny')
+
+  .upsert({uid:state.user,name:name,date:date,class:classs,school:schl,wa:wa,ph:ph, events : a})
+  if(error){
+    console.log(error)
+      }
+      else{
+        alert('Registered')
+        location.reload()
+      }
+    }
+    else{
+      location.href="/registration"
+    }
   }
   else{
-    state.data=false
+    location.href="/registration"
   }
-  state.d=data
-  console.log(state.d,state.data)
-*/})
-  })
+})
 
 
+
+  console.log(state.data)
+  console.log(state.d)
 
   return (
 
@@ -57,7 +135,7 @@ export default component$(() => {
 
 
       <div class="flex flex-row lg:py-7 py-5">
-        <button class="bg-white shadow-2xl font-semibold font-poppins text-blue-900 px-10 transition-all ease-linear duration-100 hover:scale-105 py-3 rounded-md text-lg" onClick$={()=>state.user?'':location.href='/registration'}>Register for this event</button>
+        <button disabled={state.data} class={`${state.data ? `${'bg-neutral-800 text-neutral-100 '}` : 'bg-white text-blue-900 '}shadow-2xl font-semibold font-poppins px-10 transition-all ease-linear duration-100 ${!state.data?"hover:scale-105":''} py-3 rounded-md text-lg`} onClick$={()=>register()}>{state.data?'Already Registered':'Register for this event'}</button>
     </div>
       </div>
       

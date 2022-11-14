@@ -8,7 +8,7 @@ export default component$(() => {
 
   return (
    
- <div class="flex flex-col mt-24 lg:mt-0">
+ <div class="flex flex-col mt-[92px] lg:mt-0">
    <div class="flex flex-col xl:flex-row lg:pt-20 space-y-10 xl:space-y-0 lg:px-20">
    <div class="flex flex-col w-full  ">
    <div class="flex flex-row my-auto  lg:h-56 w-full items-center content-center">
