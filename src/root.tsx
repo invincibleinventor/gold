@@ -21,7 +21,7 @@ export default component$(() => {
         <RouterHead />
       </head>
       
-      <body class="bg-gradient-to-tr from-blue-800 to-cyan-800  lg:from-[#4169e1] to-indigo-900 lg:via-blue-800 lg:to-black overflow-hidden h-[100%] " lang="en">
+      <body class="bg-gradient-to-tr from-blue-800 to-cyan-800   overflow-hidden xl:bg-[#00132E] h-[100%] " lang="en">
         <RouterOutlet />
         <ServiceWorkerRegister />
       </body>
