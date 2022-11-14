@@ -3,21 +3,7 @@ import type { DocumentHead } from '@builder.io/qwik-city';
 
 import Card from '~/components/card/card';
 
-import img1 from "1.jpg"
-import img2 from "2.jpg"
-import img3 from "3.jpg"
-import img4 from "4.jpg"
-import img5 from "5.jpg"
-import img6 from "6.jpg"
-import img7 from "7.jpg"
-import img8 from "8.jpg"
-import img9 from "9.jpg"
-import img10 from "10.jpg"
-import img11 from "11.jpg"
-import img12 from "12.jpg"
-import img13 from "13.jpg"
-import img14 from "14.jpg"
-import img15 from "15.jpg"
+
 
 
 export default component$(() => {
@@ -38,21 +24,21 @@ export default component$(() => {
      
     <div class="grid 2xl:grid-cols-3  md:grid-cols-2 grid-cols-1  grs lg:mx-20 lg:my-10 lg:mt-0 mt-0 ">
        
-    <Card title="Clash Of Minds" url="turn-coat" src={img1} desc="Clash of Minds (Debate), Schools will be competing for a single contradicting topic in Tamil."></Card>
-    <Card title="Perspective Drawing" url="turn-coat" src={img2}  desc="Imagine and Draw on the spot."></Card>
-    <Card title="Creative Singing" url="turn-coat" src={img3}  desc="Participants can sing creatively comprising of Beat Box, Own songs, Remix, etc by using their own creative equipments"></Card>
-    <Card title="Group Dance" url="turn-coat" src={img4}  desc="The participants shall perform any type of dance styles like folk/classical/continental/dance representing any state."></Card>
-    <Card title="Mime" url="turn-coat" src={img5}  desc="Theme : Any interesting incident in your school life"></Card>
-    <Card title="Short Film" url="turn-coat" src={img6} desc="Theme : Self realisation"></Card>
-    <Card title="Ad Act" url="turn-coat" src={img7}  desc="Participants will be given a product image. They should use their creativity to convince the customers to buy them."></Card>
-    <Card title="Story Writing" url="turn-coat" src={img8}  desc="Participants can take 3 hints from a bowl and develop a story from those hints in either English or Tamil."></Card>
-    <Card title="Young Tycoons" url="turn-coat" src={img9}  desc="Participanyts shall choose a product of their own and explain about their product and startup ideas to the judges."></Card>
-    <Card title="Skit" url="turn-coat" src={img10} desc="Theme : Solution for any social issue."></Card>
-    <Card title="General Quiz" url="turn-coat" src={img11} desc="Written logical question paper will be given. The short listed participants will be selected for the second round."></Card>
-    <Card title="Trivia Night" url="turn-coat" src={img12}  desc="A situation will be given. The teams are to analyse the situation in a given time.The team also will be questioned based on the situation."></Card>
-    <Card title="Turn Coat" url="turn-coat" src={img13}  desc="Turn Coat will be in the form of lot process. Schools will be competing for a single contradicting topic in English."></Card>
-    <Card title="As You Like It" url="turn-coat" src={img14}  desc="Nail Art, Mehandi, Art from Waste, Calligraphy, etc:- and other unique talents also can be exhibited."></Card>
-    <Card title="Treasure Hunt" url="turn-coat" src={img15}  desc="The game leads the seekers through a set of clues that takes them from place to place to find a treasure."></Card>
+    <Card title="Clash Of Minds" url="turn-coat" src="img1.jpg" desc="Clash of Minds (Debate), Schools will be competing for a single contradicting topic in Tamil."></Card>
+    <Card title="Perspective Drawing" url="turn-coat" src="img2.jpg"  desc="Imagine and Draw on the spot."></Card>
+    <Card title="Creative Singing" url="turn-coat" src="img3.jpg"  desc="Participants can sing creatively comprising of Beat Box, Own songs, Remix, etc by using their own creative equipments"></Card>
+    <Card title="Group Dance" url="turn-coat" src="img4.jpg"  desc="The participants shall perform any type of dance styles like folk/classical/continental/dance representing any state."></Card>
+    <Card title="Mime" url="turn-coat" src="img4.jpg"  desc="Theme : Any interesting incident in your school life"></Card>
+    <Card title="Short Film" url="turn-coat" src="img4.jpg" desc="Theme : Self realisation"></Card>
+    <Card title="Ad Act" url="turn-coat" src="img4.jpg" desc="Participants will be given a product image. They should use their creativity to convince the customers to buy them."></Card>
+    <Card title="Story Writing" url="turn-coat" src="img4.jpg"  desc="Participants can take 3 hints from a bowl and develop a story from those hints in either English or Tamil."></Card>
+    <Card title="Young Tycoons" url="turn-coat" src="img4.jpg" desc="Participanyts shall choose a product of their own and explain about their product and startup ideas to the judges."></Card>
+    <Card title="Skit" url="turn-coat" src="img4.jpg" desc="Theme : Solution for any social issue."></Card>
+    <Card title="General Quiz" url="turn-coat" src="img4.jpg" desc="Written logical question paper will be given. The short listed participants will be selected for the second round."></Card>
+    <Card title="Trivia Night" url="turn-coat" src="img4.jpg"  desc="A situation will be given. The teams are to analyse the situation in a given time.The team also will be questioned based on the situation."></Card>
+    <Card title="Turn Coat" url="turn-coat" src="img4.jpg"  desc="Turn Coat will be in the form of lot process. Schools will be competing for a single contradicting topic in English."></Card>
+    <Card title="As You Like It" url="turn-coat" src="img4.jpg" desc="Nail Art, Mehandi, Art from Waste, Calligraphy, etc:- and other unique talents also can be exhibited."></Card>
+    <Card title="Treasure Hunt" url="turn-coat" src="img4.jpg"  desc="The game leads the seekers through a set of clues that takes them from place to place to find a treasure."></Card>
     </div>
       </div>
       </div>
