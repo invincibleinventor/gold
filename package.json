@@ -37,6 +37,7 @@
     "@types/node": "latest",
     "@types/passport": "^1.0.11",
     "@types/passport-google-oauth": "^1.0.42",
+    "@types/qrcode": "^1.5.0",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",
     "@typescript-eslint/eslint-plugin": "5.42.0",
@@ -68,6 +69,8 @@
     "qrcode": "^1.5.1",
     "react-qr": "^0.0.2",
     "react-qr-code": "^2.0.8",
+    "react-qr-reader": "^3.0.0-beta-1",
+    "react-qr-scanner": "^1.0.0-alpha.11",
     "tailwind-scrollbar": "^2.0.1",
     "zod": "^3.19.1"
   }
