@@ -157,7 +157,7 @@ if(state.isLoggedIn){
     const a = await genqr(state.uid)
     const { error } = await supabase
     .from('Verseny')
-    .insert({ uid:state.user,name:name, date:date,class:classs, school:schl,wa:wa,ph:ph,qr:a})
+    .insert({ uid:state.user,name:name, date:date,class:classs, school:schl,wa:wa,ph:ph,qr:a,id:state.uid})
 
     if(error){
       console.log(error)
@@ -170,7 +170,7 @@ if(state.isLoggedIn){
  else{
   const { error } = await supabase
   .from('Verseny')
-  .upsert({ uid:state.user,name:name, date:date,class:classs, school:schl,wa:wa,ph:ph })
+  .upsert({ uid:state.user,name:name, date:date,class:classs, school:schl,wa:wa,ph:ph,id:state.uid,qr:state.qr })
   if(error){
     console.log(error)
       }

@@ -40,7 +40,8 @@ export default component$(() => {
     hidden:true,
     name:'',
     email:'',
-    data:''
+    data:'',
+    qr:''
   })
   const handleSubmit$ = $( async (event: Event) => {
     event.preventDefault();
@@ -64,6 +65,20 @@ export default component$(() => {
         }    
 
   })
+
+  const getResults = $(async (res:any) => {
+    state.qr=res.text
+const { data } = await supabase
+.from('Verseny')
+.select("*")
+.eq("id",`${res}`)
+if(data && data.length!=0){state.data;state.name=data[0].name;state.email=data[0].uid;console.log(data)}else{console.log('no data')}
+
+  })
+
+
+getResults('XFV1HLfa0HZEwaMY9IokMXHyLnr1')
+
 
 return(
     <>
@@ -105,9 +120,9 @@ return(
 <QRReader onResult$={(result:any) => {
   
           if (result) {
-            state.data=result?.text;
+            getResults(result)
           }}} constraints={{facingMode: 'user'}}/>
-          <h1>{state.data}</h1>
+          <h1>{state.qr}</h1>
 </form>
 </div>
 }
