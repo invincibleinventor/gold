@@ -15,8 +15,8 @@ return(
 <h1 class="text-[22px] xl:text-[24px] font-bold font-poppins opacity-100 lg:opacity-100 text-gray-100 drop-shadow-lg mx-8">{title}</h1>
 <h1 class="text-[15px] sm:text-[16px] leading-relaxed lg:leading-relaxed opacity-100 lg:opacity-100 font-poppins font-medium text-neutral-100 mt-2 mx-8 mb-7">{desc}</h1>
     <div class="flex absolute bottom-0 w-full bg-white py-4 lg:py-5 rounded-b-xl bg-opacity-10 mt-8 px-6   items-center">
-    <a href={'/events/'+url} class=" rounded-md font-poppins font-semibold py-1 pl-[12px] opacity-100 lg:opacity-100 lg:text-[17px] text-[15px]  sm:text-sm text-neutral-200">Learn More </a>
-    <a href={'/events/'+url+'#register'} class="bg-white  rounded-md font-poppins font-bold lg:py-4 py-3 lg:text-[17px] transition-all ease-linear duration-100 hover:scale-105 text-[13px]  sm:text-sm px-7 ml-auto text-gray-700">Register</a>
+    <Link href={'/events/'+url} class=" rounded-md font-poppins font-semibold py-1 pl-[12px] opacity-100 lg:opacity-100 lg:text-[17px] text-[15px]  sm:text-sm text-neutral-200">Learn More </Link>
+    <Link href={'/events/'+url+'#register'} class="bg-white  rounded-md font-poppins font-bold lg:py-4 py-3 lg:text-[17px] transition-all ease-linear duration-100 hover:scale-105 text-[13px]  sm:text-sm px-7 ml-auto text-gray-700">Register</Link>
     </div>
 </div>
     </div>

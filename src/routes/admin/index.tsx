@@ -77,7 +77,6 @@ if(data && data.length!=0){state.data;state.name=data[0].name;state.email=data[0
   })
 
 
-getResults('XFV1HLfa0HZEwaMY9IokMXHyLnr1')
 
 
 return(
