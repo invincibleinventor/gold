@@ -214,6 +214,9 @@ else{
     { (state.isLoggedIn) &&
     <>
       <form class={`mx-auto my-8 md:my-16 lg:my-20 rounded-xl lg:rounded-2xl p-8 md:p-16 md:px-10 bg-black bg-opacity-30  md:w-3/5 lg:w-2/4 xl:w-2/5 `} preventdefault:submit onSubmit$={handleSubmit$}>
+      {(state.isLoggedIn && state.data) &&
+      <img class="mx-auto mt-0 mb-10 rounded-md" src={state.qr}></img>
+     }
       <h1 class="font-poppins text-white text-[28px] font-bold text-center">{title}</h1>
       <h1 class="font-poppins text-white opacity-80 text-lg my-4 leading-relaxed mt-2 md:mt-3  font-medium text-center mb-10">{desc}</h1>
       
@@ -259,9 +262,7 @@ else{
 <button type="submit" class="py-5 text-lg px-6 font-semibold bg-black bg-opacity-30 rounded-md w-full shadow-2xl text-white font-poppins">{btn}</button>
 
       </form>
-     {(state.isLoggedIn && state.data) &&
-      <img class="mx-auto my-5" src={state.qr}></img>
-     }
+    
       
                     </>
 

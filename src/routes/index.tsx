@@ -43,11 +43,9 @@ export default component$(() => {
 
 <div class="grid  md:grid-cols-2 grid-cols-1 2xl:grid-cols-3 lg:grid-cols-2 lg:mx-20  mx-3  mt-6 lg:my-10 lg:mt-0 mt-0 ">
      
-<Card title="Verseny'22" src="https://picsum.photos/300/200" desc=" Verseny is a Inter school competitions conducted by students of THE TVS SCHOOL"></Card>
-<Card title="Juhla" src="https://picsum.photos/300/200" desc="Juhla is a Inter school sports competitions conducted by students of THE TVS SCHOOL"></Card>
+<Card title="Events" src="https://picsum.photos/300/200" desc="Tons of exciting events and competitions providing an enthralling experience of lifetime"></Card>
 <Card title="Marathon Run" src="https://picsum.photos/300/200" desc="Marathon run is an event conducted by the School for a cause by all LVS students and staff"></Card>
 <Card title="Carnival" src="https://picsum.photos/300/200" desc="Carnival is an event conducted by the School for LVS STAFF & Our students and parents"></Card>
-<Card title="Golden Jubilee" src="https://picsum.photos/300/200" desc="It is an event conducted by the School for the grand inaguration of the Golden Jubilee"></Card>
 
 
 </div>

@@ -45,7 +45,7 @@ console.log(state.data)
       
      
       function getNumber(){
-        for(let i =1;i<=15;i++){
+        for(let i =0;i<=14;i++){
           if(loc.params.eventid==(ds.verseny.events as any)[i]){
             state.number=i
             console.log(state.number)
@@ -88,7 +88,7 @@ const register = $(async()=>{
   const { error } = await supabase
   .from('Verseny')
 
-  .upsert({uid:state.user,name:name,date:date,class:classs,school:schl,wa:wa,ph:ph, events : a})
+  .upsert({uid:state.user,name:name,date:date,class:classs,school:schl,wa:wa,ph:ph, events : a,qr:state.dt[0]["qr"]})
   if(error){
     console.log(error)
       }
