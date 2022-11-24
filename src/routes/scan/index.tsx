@@ -90,7 +90,7 @@ return(
 
     {(!(stoot.isLoggedIn) && !(stoot.user == "invincibleinventor@gmail.com")) &&
     <h1 class="my-4 text-2xl text-white font-semibold font-poppins mx-auto">No Admin Access</h1>
-    }uid
+    }
     {((stoot.isLoggedIn) && (stoot.user == "invincibleinventor@gmail.com")) &&
 <div>
 <form class={`mx-auto my-8 md:my-16 lg:my-20 rounded-xl lg:rounded-2xl p-8 md:p-16 md:px-10 bg-black bg-opacity-30  md:w-3/5 lg:w-2/4 xl:w-2/5 `} preventdefault:submit onSubmit$={handleSubmit$}>
