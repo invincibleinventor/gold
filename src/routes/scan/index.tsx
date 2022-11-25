@@ -135,7 +135,10 @@ return(
   
           if (result) {
             getResults(result)
-          }}} constraints={{facingMode: 'user'}}/>
+          }}} constraints={{
+            facingMode: 'environment'
+        }}
+        />
           <h1>{state.qr}</h1>
 </form>
 </div>
