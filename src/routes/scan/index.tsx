@@ -8,6 +8,7 @@ import { $ } from '@builder.io/qwik';
 import { supabase } from '~/services/firebase';
 import { QRReader } from '~/integrations/react/registration';
 
+
 export const Options = component$(()=>{
     const a:any=Object.values(dt.verseny.events)
     const eles = []
@@ -88,10 +89,10 @@ return(
       <div class="mx-auto w-full">
 
 
-    {(!(stoot.isLoggedIn) && !(stoot.user == "invincibleinventor@gmail.com")) &&
+    {(!(stoot.isLoggedIn) && !(stoot.user == "invincibleinventor@gmail.com" || stoot.user == "bhargavanrajeshr@gmail.com" || stoot.user == "erp.thetvs2021@gmail.com" || stoot.user == "principal.thetvs@gmail.com" || stoot.user == "arunakumari@tvslvs.com")) &&
     <h1 class="my-4 text-2xl text-white font-semibold font-poppins mx-auto">No Admin Access</h1>
     }
-    {((stoot.isLoggedIn) && (stoot.user == "invincibleinventor@gmail.com")) &&
+    {((stoot.isLoggedIn) && (stoot.user == "invincibleinventor@gmail.com" || stoot.user == "bhargavanrajeshr@gmail.com" || stoot.user == "erp.thetvs2021@gmail.com" || stoot.user == "principal.thetvs@gmail.com" || stoot.user == "arunakumari@tvslvs.com" )) &&
 <div>
 <form class={`mx-auto my-8 md:my-16 lg:my-20 rounded-xl lg:rounded-2xl p-8 md:p-16 md:px-10 bg-black bg-opacity-30  md:w-3/5 lg:w-2/4 xl:w-2/5 `} preventdefault:submit onSubmit$={handleSubmit$}>
       <h1 class="font-poppins text-white text-[28px] font-bold text-center">{"Logger"}</h1>
