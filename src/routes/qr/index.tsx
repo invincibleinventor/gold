@@ -23,7 +23,7 @@ export async function genqr(){
 
 
 export async function getFiles(){
-const {data} =  await supabase.from('Parts').select('*')
+const {data} =  await supabase.from('Total').select('*').eq('ROLL NO',1108)
 console.log(data)
 const b=data!=null?data:[]
 for(let i =0;i<=b.length-1;i++){
