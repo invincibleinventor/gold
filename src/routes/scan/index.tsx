@@ -11,16 +11,15 @@ import { QRReader } from '~/integrations/react/registration';
 export const users = ['invincibleinventor@gmail.com','bhargavanrajeshr@gmail.com','aish160490@gmail.com','erp.thetvs2021@gmail.com','srameshnba@gmail.com']
 
 export const Options = component$(()=>{
-    const a:any=Object.values(dt.verseny.events)
+    const a:any=Object.values(dt.carnival.events)
     const eles = []
-    eles.push(<option value={"Attendance"}>Attendance</option>)
 
     for (let i=0;i<=a.length;i++){
         eles.push(<option value={a[i]}>{a[i]}</option>)
 
     }
     return(
-        <select name="event" id="event" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6" style=" -webkit-appearance: none;
+        <select name="event" multiple id="event" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6" style=" -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;">
 {eles}
@@ -28,6 +27,90 @@ export const Options = component$(()=>{
     )
 
 })
+
+
+interface mycmppprops{
+  magic?:false
+}
+export const Magic = component$((props:mycmppprops)=>{
+  const a:any=Object.values(dt.carnival.slots)
+  const eles = []
+
+  for (let i=0;i<=a.length;i++){
+      eles.push(<option value={a[i]}>{a[i]}</option>)
+
+  }
+  return(
+      <select name="magic"  id="magic" class={`text-lg  font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6`} style=" -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;">
+{eles}
+</select>
+  )
+
+})
+
+
+
+
+
+export const Slots = component$((props:mycmppprops)=>{
+  const a:any=Object.values(dt.carnival.slots)
+  const eles = []
+
+  for (let i=0;i<=a.length;i++){
+      eles.push(<option value={a[i]}>{a[i]}</option>)
+
+  }
+  return(
+      <select name="slots"  id="slots" class={`text-lg ${!props.magic?'hidden':''} font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6`} style=" -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;">
+{eles}
+</select>
+  )
+
+})
+
+export const Parents = component$(()=>{
+  const a:any=Object.values(dt.carnival.parents)
+  const eles = []
+
+  for (let i=0;i<=a.length;i++){
+      eles.push(<option value={a[i]}>{a[i]}</option>)
+
+  }
+  return(
+      <select name="parents"  id="parents" class={`text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6`} style=" -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;">
+{eles}
+</select>
+  )
+
+})
+
+export const Payment = component$(()=>{
+  const a:any=Object.values(dt.carnival.payment)
+  const eles = []
+
+  for (let i=0;i<=a.length;i++){
+      eles.push(<option value={a[i]}>{a[i]}</option>)
+
+  }
+  return(
+      <select name="payment"  id="payment" class={`text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6`} style=" -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;">
+{eles}
+</select>
+  )
+
+})
+
+
+
+
 export default component$(() => {
   const stoot = useStore({
     isLoggedIn:false,
@@ -46,22 +129,35 @@ export default component$(() => {
     id:'',
     data:'',
     qr:'',
-    events:''
+    events:'',
+    number:''
+    ,class:'',
+    parent:'',
+    magic:'',
+    slot:'',
+    payment:''
   })
   const handleSubmit$ = $( async (event: Event) => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const name = form.name2.value;
-    const email = form.code.value;
+    const adm = form.code.value;
     const eve = form.event.value;
+    const number = form.number.value;
+    const classs=form.classs.value;
+const slots = form.slots.value;
+const magic = form.magic.value;
+const parents = form.parents.value;
+const payment = form.payment.value;
 
     let dts = new Date()
     const date = new Date()
     dts= new Date(date.getTime() - date.getTimezoneOffset()*60000);
-
+    const {data}=await supabase.from('Total').select('*').eq('ADM NO',adm)
+    
     const { error } = await supabase
     .from('Logs')
-    .insert({ uid:email,name:name, time:dts,event:eve })
+    .upsert({ "ADM NO":adm,"ROLL NO":data[0]["ROLL NO"],"GEN":data[0]["GEN"],"STUDENT NAME":name, "EVENTS":dts,event:eve, "CLASS":classs, "NO OF PARTICIPANTS":number, "HASH":data[0]["HASH"],"MAGIC SHOW":magic,"PAYMENT MODE":payment,"PARENTS CARNIVAL":parents,"SLOT":slots})
     if(error){
       console.log(error)
         }
@@ -74,10 +170,10 @@ export default component$(() => {
   const getResults = $(async (res:any) => {
     state.qr=res.text
 const { data } = await supabase
-.from('Parts')
+.from('Total')
 .select("*")
 .eq("HASH",`${res}`)
-if(data && data.length!=0){state.data;state.name=data[0]["PARTICIPANT NAME"];state.id=data[0]["ID"];state.events=data[0]["EVENTS"];console.log(data)}else{console.log('no data')}
+if(data && data.length!=0){state.data;state.name=data[0]["STUDENT NAME"];state.id=data[0]["ADM NO"];state.class=data[0]["CLASS"];state.number=data[0]["NUMBER OF PARTICIPANTS"];state.slot=data[0]["SLOT"];state.magic=data[0]["MAGIC SHOW"];state.payment=data[0]["PAYMENT MODE"];state.parent=data[0]["PARENTS CARNIVAL"];console.log(data)}else{console.log('no data')}
 
   })
 
@@ -107,27 +203,55 @@ return(
 </div>
 
 <div class="flex flex-col mb-10">
-<label class="text-white text-lg font-poppins font-medium opacity-80 ">Code</label>
+<label class="text-white text-lg font-poppins font-medium opacity-80 ">Admission Number</label>
 <input disabled value={state.id} name="code" id="email" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
 </input>
 </div>
 
 <div class="flex flex-col mb-10">
-<label class="text-white text-lg font-poppins font-medium opacity-80 ">Events</label>
-<input disabled value={state.events} name="events" id="events" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
+<label class="text-white text-lg font-poppins font-medium opacity-80 ">Class</label>
+<input disabled value={state.class} name="classs" id="classs" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
 </input>
 </div>
 
+<div class="flex flex-col mb-8">
+<label class="text-white text-lg font-poppins font-medium opacity-80 ">Program</label>
+<Options></Options>
+</div>
 
 
 
+<div class="flex flex-col mb-10">
+<label class="text-white text-lg font-poppins font-medium opacity-80 ">Number of participants</label>
+<input  value={state.number} name="number" id="number" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
+</input>
+</div>
 
+<div class="flex flex-col mb-8">
+<label class="text-white text-lg font-poppins font-medium opacity-80 ">Magic Show</label>
+<Magic></Magic>
+</div>
+
+<div class="flex flex-col mb-8">
+<label class="text-white text-lg font-poppins font-medium opacity-80 ">Parents Carnival</label>
+<Parents></Parents>
+</div>
+
+<div class="flex flex-col mb-8">
+<label class="text-white text-lg font-poppins font-medium opacity-80 ">Slot for Magic Show</label>
+<Slots></Slots>
+</div>
 
 
 <div class="flex flex-col mb-8">
-<label class="text-white text-lg font-poppins font-medium opacity-80 ">Event</label>
-<Options></Options>
+<label class="text-white text-lg font-poppins font-medium opacity-80 ">Payment Method</label>
+<Payment></Payment>
 </div>
+
+
+
+
+
 <div class="flex flex-col mb-10">
 <button type="submit" class="py-5 text-lg px-6 font-semibold bg-black bg-opacity-30 rounded-md w-full shadow-2xl text-white font-poppins">{"Log this participant"}</button>
 </div>

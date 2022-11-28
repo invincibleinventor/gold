@@ -1,9 +1,28 @@
 import { component$ } from "@builder.io/qwik";
+import CryptoJS from "crypto-js";
 import QRCode from "qrcode";
 import { supabase } from "~/services/firebase";
 //import QRCode from "react-qr-code";
-
  
+export async function genqr(){
+    const {data} =  await supabase.from('Total').select('*')
+    const b=data!=null?data:[]
+    for(let i =0;i<=b.length-1;i++){
+        console.log(b[i])
+        let encrypted = CryptoJS.AES.encrypt(String(b[i]["ADM NO"]),"thisisthebestkeyforhashingit").toString()
+        let decrypted = CryptoJS.AES.decrypt(encrypted,'thisisthebestkeyforhashingit').toString(CryptoJS.enc.Utf8)
+    
+        if(b[i]["HASH"]==null){
+        await supabase.from('Total').upsert({"ADM NO":b[i]["ADM NO"],"STUDENT NAME":b[i]["STUDENT NAME"],"GEN":b[i]["GEN"],"CLASS":b[i]["CLASS"],"HASH":encrypted,"EVENTS":b[i]["EVENTS"],"NO OF PARTICIPANTS":b[i]["NO OF PARTICIPANTS"],"MAGIC SHOW":b[i]["MAGIC SHOW"],"PARENTS CARNIVAL":b[i]["PARENTS CARNIVAL"],"SLOT":b[i]["SLOT"],"PAYMENT MODE":b[i]["PAYMENT MODE"]})
+
+        }
+        console.log(b.length)
+
+    }
+}
+
+
+
 export async function getFiles(){
 const {data} =  await supabase.from('Parts').select('*')
 console.log(data)
@@ -44,6 +63,7 @@ for(let i =0;i<=b.length-1;i++){
 
 
 export default component$(()=>{
+
     return(
         <div class="flex h-full w-full items-center content-center flex-col">
             <div id="ok">

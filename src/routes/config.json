@@ -22,5 +22,35 @@
 
 
     }
+},
+"carnival":
+{
+    "events":{
+        "1":"carnival",
+        "2":"magic-show"
+        
+
+
+
+
+    },
+    "slots":{
+        "10:30-11:30":"10:30 - 11:30",
+        "12:30-01:30":"12:30 - 01:30"
+
+    },
+    "magic":{
+        "Yes":true,
+        "No":false
+    },
+    "parents":{
+        "Yes":true,
+        "No":false
+    },
+    "payment":{
+        "Cash":"cash",
+        "E-Payment":"epayment",
+        "Maybe Later":"maybe"
+    }
 }
 }
