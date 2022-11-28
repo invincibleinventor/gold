@@ -32,7 +32,7 @@ export const Options = component$(()=>{
 interface mycmppprops{
   magic?:false
 }
-export const Magic = component$((props:mycmppprops)=>{
+export const Magic = component$(()=>{
   const a:any=Object.values(dt.carnival.slots)
   const eles = []
 
@@ -154,10 +154,10 @@ const payment = form.payment.value;
     const date = new Date()
     dts= new Date(date.getTime() - date.getTimezoneOffset()*60000);
     const {data}=await supabase.from('Total').select('*').eq('ADM NO',adm)
-    
+    const b=data?data:[]
     const { error } = await supabase
     .from('Logs')
-    .upsert({ "ADM NO":adm,"ROLL NO":data[0]["ROLL NO"],"GEN":data[0]["GEN"],"STUDENT NAME":name, "EVENTS":dts,event:eve, "CLASS":classs, "NO OF PARTICIPANTS":number, "HASH":data[0]["HASH"],"MAGIC SHOW":magic,"PAYMENT MODE":payment,"PARENTS CARNIVAL":parents,"SLOT":slots})
+    .upsert({ "ADM NO":adm,"ROLL NO":b[0]["ROLL NO"],"GEN":b[0]["GEN"],"STUDENT NAME":name, "EVENTS":dts,event:eve, "CLASS":classs, "NO OF PARTICIPANTS":number, "HASH":b[0]["HASH"],"MAGIC SHOW":magic,"PAYMENT MODE":payment,"PARENTS CARNIVAL":parents,"SLOT":slots})
     if(error){
       console.log(error)
         }

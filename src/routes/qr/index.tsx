@@ -9,8 +9,7 @@ export async function genqr(){
     const b=data!=null?data:[]
     for(let i =0;i<=b.length-1;i++){
         console.log(b[i])
-        let encrypted = CryptoJS.AES.encrypt(String(b[i]["ADM NO"]),"thisisthebestkeyforhashingit").toString()
-        let decrypted = CryptoJS.AES.decrypt(encrypted,'thisisthebestkeyforhashingit').toString(CryptoJS.enc.Utf8)
+       const  encrypted = CryptoJS.AES.encrypt(String(b[i]["ADM NO"]),"thisisthebestkeyforhashingit").toString()
     
         if(b[i]["HASH"]==null){
         await supabase.from('Total').upsert({"ADM NO":b[i]["ADM NO"],"STUDENT NAME":b[i]["STUDENT NAME"],"GEN":b[i]["GEN"],"CLASS":b[i]["CLASS"],"HASH":encrypted,"EVENTS":b[i]["EVENTS"],"NO OF PARTICIPANTS":b[i]["NO OF PARTICIPANTS"],"MAGIC SHOW":b[i]["MAGIC SHOW"],"PARENTS CARNIVAL":b[i]["PARENTS CARNIVAL"],"SLOT":b[i]["SLOT"],"PAYMENT MODE":b[i]["PAYMENT MODE"]})
