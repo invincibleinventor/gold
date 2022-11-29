@@ -6,7 +6,8 @@ import { auth } from '~/services/firebase';
 import dt from '../config.json'
 import { $ } from '@builder.io/qwik';
 import { supabase } from '~/services/firebase';
-import { BarCode } from '~/integrations/react/registration';
+import { QRReader } from '~/integrations/react/registration';
+
 export const users = ['invincibleinventor@gmail.com','bhargavanrajeshr@gmail.com','aish160490@gmail.com','erp.thetvs2021@gmail.com','srameshnba@gmail.com']
 
 export const Options = component$(()=>{
@@ -135,7 +136,7 @@ export default component$(() => {
     magic:'',
     slot:'',
     payment:'',
-    totalprice:'',
+    totalprice:0,
     magicprice:0,
     parentsprice:0,
     magicstate:true
@@ -291,18 +292,14 @@ return(
 <div class="flex flex-col mb-10">
 <button type="submit" class="py-5 text-lg px-6 font-semibold bg-black bg-opacity-30 rounded-md w-full shadow-2xl text-white font-poppins">{"Log this participant"}</button>
 </div>
-<BarCode
-onUpdate$={ (err: any, resp:any): void => {
-         if(resp) {
-             getResults(resp.getText())
-             console.log(resp.getText())
-         }
-         if(err){
-          console.log(err)
-         }
-      }}
-      >
-</BarCode>
+<QRReader onResult$={(result:any) => {
+  
+          if (result) {
+            getResults(result)
+          }}} constraints={{
+            facingMode: 'environment'
+        }}
+        />
           <h1>{state.qr}</h1>
 </form>
 </div>
