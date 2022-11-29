@@ -40,12 +40,12 @@
 
     },
     "magic":{
-        "Yes":true,
-        "No":false
+        "Yes":"true",
+        "No":"false"
     },
     "parents":{
-        "Yes":true,
-        "No":false
+        "Yes":"true",
+        "No":"false"
     },
     "payment":{
         "Cash":"cash",

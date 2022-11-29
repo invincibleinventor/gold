@@ -11,29 +11,27 @@ import { QRReader } from '~/integrations/react/registration';
 export const users = ['invincibleinventor@gmail.com','bhargavanrajeshr@gmail.com','aish160490@gmail.com','erp.thetvs2021@gmail.com','srameshnba@gmail.com']
 
 export const Options = component$(()=>{
-    const a:any=Object.values(dt.carnival.events)
-    const eles = []
+  const a:any=Object.values(dt.carnival.events)
+  const eles = []
 
-    for (let i=0;i<=a.length;i++){
-        eles.push(<option value={a[i]}>{a[i]}</option>)
+  for (let i=0;i<=a.length;i++){
+      eles.push(<option value={a[i]}>{a[i]}</option>)
 
-    }
-    return(
-        <select name="event" multiple id="event" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6" style=" -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;">
+  }
+  return(
+      <select name="event"  id="event" class={`text-lg  font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6`} style=" -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;">
 {eles}
 </select>
-    )
+  )
 
 })
 
 
-interface mycmppprops{
-  magic?:false
-}
+
 export const Magic = component$(()=>{
-  const a:any=Object.values(dt.carnival.slots)
+  const a:any=Object.values(dt.carnival.magic)
   const eles = []
 
   for (let i=0;i<=a.length;i++){
@@ -54,7 +52,7 @@ export const Magic = component$(()=>{
 
 
 
-export const Slots = component$((props:mycmppprops)=>{
+export const Slots = component$(()=>{
   const a:any=Object.values(dt.carnival.slots)
   const eles = []
 
@@ -63,7 +61,7 @@ export const Slots = component$((props:mycmppprops)=>{
 
   }
   return(
-      <select name="slots"  id="slots" class={`text-lg ${!props.magic?'hidden':''} font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6`} style=" -webkit-appearance: none;
+      <select name="slots"  id="slots" class={`text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6`} style=" -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;">
 {eles}
@@ -130,34 +128,54 @@ export default component$(() => {
     data:'',
     qr:'',
     events:'',
-    number:''
+    numbermagic:'',
+    numberparents:''
     ,class:'',
     parent:'',
     magic:'',
     slot:'',
-    payment:''
+    payment:'',
+    totalprice:'',
   })
   const handleSubmit$ = $( async (event: Event) => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const name = form.name2.value;
     const adm = form.code.value;
-    const eve = form.event.value;
-    const number = form.number.value;
+    let eve = ''
+   
+    const numbermagic = Number(form.numbermagic.value);
+    const numberparents = Number(form.numberparents.value);
+    
     const classs=form.classs.value;
 const slots = form.slots.value;
 const magic = form.magic.value;
 const parents = form.parents.value;
+
+if(magic.value==true){
+  eve+='magic '
+  
+  state.totalprice+=Number(numbermagic)*150
+}
+if(parents.value==true){
+  eve+='parents'
+  const adults = Number(numberparents)-1
+  const adultsprice = adults*100
+  const totalprice = adultsprice + 50
+  state.totalprice+=totalprice
+
+}
 const payment = form.payment.value;
 
     let dts = new Date()
     const date = new Date()
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     dts= new Date(date.getTime() - date.getTimezoneOffset()*60000);
     const {data}=await supabase.from('Total').select('*').eq('ADM NO',adm)
     const b=data?data:[]
     const { error } = await supabase
-    .from('Logs')
-    .upsert({ "ADM NO":adm,"ROLL NO":b[0]["ROLL NO"],"GEN":b[0]["GEN"],"STUDENT NAME":name, "EVENTS":dts,event:eve, "CLASS":classs, "NO OF PARTICIPANTS":number, "HASH":b[0]["HASH"],"MAGIC SHOW":magic,"PAYMENT MODE":payment,"PARENTS CARNIVAL":parents,"SLOT":slots})
+    .from('Total')
+    .upsert({ "ADM NO":adm,"ROLL NO":b[0]["ROLL NO"],"GEN":b[0]["GEN"],"STUDENT NAME":name, "EVENTS":eve, "CLASS":classs, "MAGIC NUMBER":numbermagic,"PARENTS NUMBER":numberparents, "HASH":b[0]["HASH"],"MAGIC SHOW":magic,"PAYMENT MODE":payment,"PARENTS CARNIVAL":parents,"SLOT":slots})
     if(error){
       console.log(error)
         }
@@ -173,7 +191,7 @@ const { data } = await supabase
 .from('Total')
 .select("*")
 .eq("HASH",`${res}`)
-if(data && data.length!=0){state.data;state.name=data[0]["STUDENT NAME"];state.id=data[0]["ADM NO"];state.class=data[0]["CLASS"];state.number=data[0]["NUMBER OF PARTICIPANTS"];state.slot=data[0]["SLOT"];state.magic=data[0]["MAGIC SHOW"];state.payment=data[0]["PAYMENT MODE"];state.parent=data[0]["PARENTS CARNIVAL"];console.log(data)}else{console.log('no data')}
+if(data && data.length!=0){state.data;state.name=data[0]["STUDENT NAME"];state.id=data[0]["ADM NO"];state.class=data[0]["CLASS"];state.numbermagic=data[0]["MAGIC NUMBER"];state.numberparents=data[0]["PARENTS NUMBER"];state.slot=data[0]["SLOT"];state.magic=data[0]["MAGIC SHOW"];state.payment=data[0]["PAYMENT MODE"];state.parent=data[0]["PARENTS CARNIVAL"];console.log(data)}else{console.log('no data')}
 
   })
 
@@ -214,16 +232,17 @@ return(
 </input>
 </div>
 
-<div class="flex flex-col mb-8">
-<label class="text-white text-lg font-poppins font-medium opacity-80 ">Program</label>
-<Options></Options>
-</div>
-
 
 
 <div class="flex flex-col mb-10">
-<label class="text-white text-lg font-poppins font-medium opacity-80 ">Number of participants</label>
-<input  value={state.number} name="number" id="number" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
+<label class="text-white text-lg font-poppins font-medium opacity-80 ">Magic Show no of participants</label>
+<input  value={state.numbermagic} name="numbermagic" id="numbermagic" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
+</input>
+</div>
+
+<div class="flex flex-col mb-10">
+<label class="text-white text-lg font-poppins font-medium opacity-80 ">Parents Carnival no of participants</label>
+<input  value={state.numberparents} name="numberparents" id="numberparents" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
 </input>
 </div>
 
@@ -248,7 +267,10 @@ return(
 <Payment></Payment>
 </div>
 
+<h1 class="text-white text-xl font-poppins font-medium opacity-80 mb-8">
+  Total Price:- Rs {state.totalprice}
 
+</h1>
 
 
 

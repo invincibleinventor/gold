@@ -12,7 +12,7 @@ export async function genqr(){
        const  encrypted = CryptoJS.AES.encrypt(String(b[i]["ADM NO"]),"thisisthebestkeyforhashingit").toString()
     
         if(b[i]["HASH"]==null){
-        await supabase.from('Total').upsert({"ADM NO":b[i]["ADM NO"],"STUDENT NAME":b[i]["STUDENT NAME"],"GEN":b[i]["GEN"],"CLASS":b[i]["CLASS"],"HASH":encrypted,"EVENTS":b[i]["EVENTS"],"NO OF PARTICIPANTS":b[i]["NO OF PARTICIPANTS"],"MAGIC SHOW":b[i]["MAGIC SHOW"],"PARENTS CARNIVAL":b[i]["PARENTS CARNIVAL"],"SLOT":b[i]["SLOT"],"PAYMENT MODE":b[i]["PAYMENT MODE"]})
+        await supabase.from('Total').upsert({"ADM NO":b[i]["ADM NO"],"STUDENT NAME":b[i]["STUDENT NAME"],"GEN":b[i]["GEN"],"CLASS":b[i]["CLASS"],"HASH":encrypted,"EVENTS":b[i]["EVENTS"],"MAGIC NUMBER":b[i]["MAGIC NUMBER"],"PARENTS NUMBER":b[i]["PARENTS NUMBER"],"MAGIC SHOW":b[i]["MAGIC SHOW"],"PARENTS CARNIVAL":b[i]["PARENTS CARNIVAL"],"SLOT":b[i]["SLOT"],"PAYMENT MODE":b[i]["PAYMENT MODE"]})
 
         }
         console.log(b.length)
@@ -23,7 +23,7 @@ export async function genqr(){
 
 
 export async function getFiles(){
-const {data} =  await supabase.from('Total').select('*').eq('ROLL NO',1108)
+const {data} =  await supabase.from('Total').select('*').eq('CLASS','I- A')
 console.log(data)
 const b=data!=null?data:[]
 for(let i =0;i<=b.length-1;i++){
@@ -40,8 +40,8 @@ for(let i =0;i<=b.length-1;i++){
             const context = canvas.getContext('2d')
             if(context!=null)
             {            context.font = "13pt Calibri";}
-            context?.fillText(b[i]['ID'], 20, 13);
-            downloadURI(canvas.toDataURL(),b[i]['ID'])
+            context?.fillText(b[i]['ADM NO'], 20, 13);
+            downloadURI(canvas.toDataURL(),b[i]['ADM NO'])
 
         }
     })
