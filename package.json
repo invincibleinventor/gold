@@ -63,6 +63,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.1.0",
+    "barcode-react-scanner": "^1.2.0",
     "cookie": "^0.5.0",
     "crypto-js": "^4.1.1",
     "express-session": "^1.17.3",
@@ -73,7 +74,9 @@
     "passport": "^0.6.0",
     "passport-google-oauth": "^2.0.0",
     "qrcode": "^1.5.1",
+    "react-barcode-reader": "^0.0.2",
     "react-qr": "^0.0.2",
+    "react-qr-barcode-scanner": "^1.0.6",
     "react-qr-code": "^2.0.8",
     "react-qr-reader": "^3.0.0-beta-1",
     "react-qr-scanner": "^1.0.0-alpha.11",

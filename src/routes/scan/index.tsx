@@ -6,8 +6,7 @@ import { auth } from '~/services/firebase';
 import dt from '../config.json'
 import { $ } from '@builder.io/qwik';
 import { supabase } from '~/services/firebase';
-import { QRReader } from '~/integrations/react/registration';
-
+import { BarCode } from '~/integrations/react/registration';
 export const users = ['invincibleinventor@gmail.com','bhargavanrajeshr@gmail.com','aish160490@gmail.com','erp.thetvs2021@gmail.com','srameshnba@gmail.com']
 
 export const Options = component$(()=>{
@@ -27,6 +26,7 @@ export const Options = component$(()=>{
   )
 
 })
+
 
 
 
@@ -136,6 +136,9 @@ export default component$(() => {
     slot:'',
     payment:'',
     totalprice:'',
+    magicprice:0,
+    parentsprice:0,
+    magicstate:true
   })
   const handleSubmit$ = $( async (event: Event) => {
     event.preventDefault();
@@ -144,25 +147,26 @@ export default component$(() => {
     const adm = form.code.value;
     let eve = ''
    
-    const numbermagic = Number(form.numbermagic.value);
+    let numbermagic = Number(form.numbermagic.value);
     const numberparents = Number(form.numberparents.value);
     
     const classs=form.classs.value;
-const slots = form.slots.value;
+let slots = form.slots.value;
+if(!state.magicstate){
+slots="Not Applicable"
+numbermagic=0
+}
 const magic = form.magic.value;
 const parents = form.parents.value;
 
 if(magic.value==true){
   eve+='magic '
-  
-  state.totalprice+=Number(numbermagic)*150
+
+
 }
 if(parents.value==true){
   eve+='parents'
-  const adults = Number(numberparents)-1
-  const adultsprice = adults*100
-  const totalprice = adultsprice + 50
-  state.totalprice+=totalprice
+
 
 }
 const payment = form.payment.value;
@@ -234,29 +238,39 @@ return(
 
 
 
-<div class="flex flex-col mb-10">
+<div class={`flex flex-col mb-8 ${state.magicstate?'':'hidden'}`}>
 <label class="text-white text-lg font-poppins font-medium opacity-80 ">Magic Show no of participants</label>
-<input  value={state.numbermagic} name="numbermagic" id="numbermagic" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
+<input type="number" value={state.numbermagic} name="numbermagic" id="numbermagic" onInput$={(e:any) => (state.magicprice=Number(e.target.value)*150)} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
 </input>
 </div>
 
 <div class="flex flex-col mb-10">
 <label class="text-white text-lg font-poppins font-medium opacity-80 ">Parents Carnival no of participants</label>
-<input  value={state.numberparents} name="numberparents" id="numberparents" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
+<input type="number" value={state.numberparents} onInput$={(e:any) => (state.parentsprice=Number(Number(50)+Number((Number(e.target.value)-Number(1))*100)))} name="numberparents" id="numberparents" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
 </input>
 </div>
 
 <div class="flex flex-col mb-8">
 <label class="text-white text-lg font-poppins font-medium opacity-80 ">Magic Show</label>
-<Magic></Magic>
-</div>
+<select name="magic" onInput$={
+  (e:any)=>(
+    state.magicstate=(e.target.value === 'true'),
+    console.log(state.magicstate)
+  )
+} id="magic" class={`text-lg  font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6`} style=" -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;">
+        <option id="yes" value={"true"}>Yes</option>
+        <option id="no" value={"false"}>No</option>
+        </select>
+      </div>
 
 <div class="flex flex-col mb-8">
 <label class="text-white text-lg font-poppins font-medium opacity-80 ">Parents Carnival</label>
 <Parents></Parents>
 </div>
 
-<div class="flex flex-col mb-8">
+<div class={`flex flex-col mb-8 ${state.magicstate?'':'hidden'}`}>
 <label class="text-white text-lg font-poppins font-medium opacity-80 ">Slot for Magic Show</label>
 <Slots></Slots>
 </div>
@@ -268,7 +282,7 @@ return(
 </div>
 
 <h1 class="text-white text-xl font-poppins font-medium opacity-80 mb-8">
-  Total Price:- Rs {state.totalprice}
+  Total Price:- Rs {state.magicprice+state.parentsprice}
 
 </h1>
 
@@ -277,14 +291,18 @@ return(
 <div class="flex flex-col mb-10">
 <button type="submit" class="py-5 text-lg px-6 font-semibold bg-black bg-opacity-30 rounded-md w-full shadow-2xl text-white font-poppins">{"Log this participant"}</button>
 </div>
-<QRReader onResult$={(result:any) => {
-  
-          if (result) {
-            getResults(result)
-          }}} constraints={{
-            facingMode: 'environment'
-        }}
-        />
+<BarCode
+onUpdate$={ (err: any, resp:any): void => {
+         if(resp) {
+             getResults(resp.getText())
+             console.log(resp.getText())
+         }
+         if(err){
+          console.log(err)
+         }
+      }}
+      >
+</BarCode>
           <h1>{state.qr}</h1>
 </form>
 </div>
