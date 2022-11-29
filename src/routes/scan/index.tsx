@@ -34,6 +34,8 @@ export const Options = component$(()=>{
 export const Magic = component$(()=>{
   const a:any=Object.values(dt.carnival.magic)
   const eles = []
+  eles.push(<option value=""></option>
+)
 
   for (let i=0;i<=a.length;i++){
       eles.push(<option value={a[i]}>{a[i]}</option>)
@@ -56,6 +58,8 @@ export const Magic = component$(()=>{
 export const Slots = component$(()=>{
   const a:any=Object.values(dt.carnival.slots)
   const eles = []
+  eles.push(<option value=""></option>
+)
 
   for (let i=0;i<=a.length-1;i++){
       eles.push(<option value={a[i]}>{a[i]}</option>)
@@ -74,6 +78,8 @@ export const Slots = component$(()=>{
 export const Parents = component$(()=>{
   const a:any=Object.values(dt.carnival.parents)
   const eles = []
+  eles.push(<option value=""></option>
+)
 
   for (let i=0;i<=a.length-1;i++){
       eles.push(<option value={a[i]}>{a[i]}</option>)
@@ -92,8 +98,9 @@ export const Parents = component$(()=>{
 export const Payment = component$(()=>{
   const a:any=Object.values(dt.carnival.payment)
   const eles = []
-
-  for (let i=0;i<=a.length;i++){
+eles.push(<option value=""></option>
+)
+  for (let i=0;i<=a.length-1;i++){
       eles.push(<option value={a[i]}>{a[i]}</option>)
 
   }
@@ -139,7 +146,7 @@ export default component$(() => {
     totalprice:0,
     magicprice:0,
     parentsprice:0,
-    magicstate:true
+    magicstate:true,parentsstate:true
   })
   const handleSubmit$ = $( async (event: Event) => {
     event.preventDefault();
@@ -186,6 +193,7 @@ const payment = form.payment.value;
         }
         else{
           alert('Logged')
+          window.location.replace('/done')
         }    
 
   })
@@ -197,7 +205,12 @@ const { data } = await supabase
 .select("*")
 .eq("HASH",`${res}`)
 if(data && data.length!=0){state.data;state.name=data[0]["STUDENT NAME"];state.id=data[0]["ADM NO"];state.class=data[0]["CLASS"];state.numbermagic=data[0]["MAGIC NUMBER"];state.numberparents=data[0]["PARENTS NUMBER"];state.slot=data[0]["SLOT"];state.magic=data[0]["MAGIC SHOW"];state.payment=data[0]["PAYMENT MODE"];state.parent=data[0]["PARENTS CARNIVAL"];console.log(data)}else{console.log('no data')}
+if(data && data[0]["PARENTS NUMBER"]!=null){
+console.log('ok')
 
+
+  window.location.replace('/done')
+}
   })
 
 
@@ -205,8 +218,9 @@ if(data && data.length!=0){state.data;state.name=data[0]["STUDENT NAME"];state.i
 
 return(
     <>
+    
  <div class="flex flex-col items-center content-center lg:py-20 py-10 mt-16 lg:mt-0">
-      <div class="mx-auto w-full">
+          <div class="mx-auto w-full">
 
 
     {(!(stoot.isLoggedIn) && !(users.includes(stoot.user))) &&
@@ -218,7 +232,7 @@ return(
       <h1 class="font-poppins text-white text-[28px] font-bold text-center">{"Logger"}</h1>
       <h1 class="font-poppins text-white opacity-80 text-lg my-4 leading-relaxed mt-2 md:mt-3  font-medium text-center mb-10">{"Log the details of the participants"}</h1>
       
-
+<div class={state.qr?``:'hidden'}>
 <div class="flex flex-col mb-10">
 <label class="text-white text-lg font-poppins font-medium opacity-80 ">Name</label>
 <input disabled value={state.name} name="name2" id="name" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
@@ -245,7 +259,7 @@ return(
 </input>
 </div>
 
-<div class="flex flex-col mb-10">
+<div class={`flex flex-col mb-8 ${state.parentsstate?'':'hidden'}`}>
 <label class="text-white text-lg font-poppins font-medium opacity-80 ">Parents Carnival no of participants</label>
 <input type="number" value={state.numberparents} onInput$={(e:any) => (state.parentsprice=Number(Number(50)+Number((Number(e.target.value)-Number(1))*100)))} name="numberparents" id="numberparents" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
 </input>
@@ -253,7 +267,7 @@ return(
 
 <div class="flex flex-col mb-8">
 <label class="text-white text-lg font-poppins font-medium opacity-80 ">Magic Show</label>
-<select name="magic" onInput$={
+<select name="magic"  onInput$={
   (e:any)=>(
     state.magicstate=(e.target.value === 'true'),
     console.log(state.magicstate)
@@ -261,6 +275,8 @@ return(
 } id="magic" class={`text-lg  font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6`} style=" -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;">
+   <option value=""></option>
+
         <option id="yes" value={"true"}>Yes</option>
         <option id="no" value={"false"}>No</option>
         </select>
@@ -268,7 +284,20 @@ return(
 
 <div class="flex flex-col mb-8">
 <label class="text-white text-lg font-poppins font-medium opacity-80 ">Parents Carnival</label>
-<Parents></Parents>
+<select name="parents" id="parents" onInput$={
+  (e:any)=>(
+    state.parentsstate=(e.target.value === 'true'),
+    console.log(state.parentsstate)
+  )
+}  class={`text-lg  font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6`} style=" -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;">
+   <option value=""></option>
+
+        <option id="yes" value={"true"}>Yes</option>
+        <option id="no" value={"false"}>No</option>
+        </select>
+
 </div>
 
 <div class={`flex flex-col mb-8 ${state.magicstate?'':'hidden'}`}>
@@ -291,6 +320,8 @@ return(
 
 <div class="flex flex-col mb-10">
 <button type="submit" class="py-5 text-lg px-6 font-semibold bg-black bg-opacity-30 rounded-md w-full shadow-2xl text-white font-poppins">{"Log this participant"}</button>
+</div>
+
 </div>
 <QRReader onResult$={(result:any) => {
   
