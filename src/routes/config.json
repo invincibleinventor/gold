@@ -44,8 +44,8 @@
         "No":"false"
     },
     "parents":{
-        "Yes":"true",
-        "No":"false"
+        "true":"Yes",
+        "false":"No"
     },
     "payment":{
         "Cash":"cash",

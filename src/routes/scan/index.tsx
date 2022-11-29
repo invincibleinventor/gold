@@ -57,7 +57,7 @@ export const Slots = component$(()=>{
   const a:any=Object.values(dt.carnival.slots)
   const eles = []
 
-  for (let i=0;i<=a.length;i++){
+  for (let i=0;i<=a.length-1;i++){
       eles.push(<option value={a[i]}>{a[i]}</option>)
 
   }
@@ -75,7 +75,7 @@ export const Parents = component$(()=>{
   const a:any=Object.values(dt.carnival.parents)
   const eles = []
 
-  for (let i=0;i<=a.length;i++){
+  for (let i=0;i<=a.length-1;i++){
       eles.push(<option value={a[i]}>{a[i]}</option>)
 
   }
