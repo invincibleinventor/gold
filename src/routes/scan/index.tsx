@@ -147,7 +147,7 @@ export default component$(() => {
     magicprice:0,
     parentsprice:0,
     admn:0,
-    magicstate:true,parentsstate:true
+    magicstate:false,parentsstate:false
   })
   const handleSubmit$ = $( async (event: Event) => {
     event.preventDefault();
@@ -188,7 +188,7 @@ const payment = form.payment.value;
     const b=data?data:[]
     const { error } = await supabase
     .from('Total')
-    .upsert({ "ADM NO":adm,"ROLL NO":b[0]["ROLL NO"],"GEN":b[0]["GEN"],"STUDENT NAME":name, "EVENTS":eve, "CLASS":classs, "MAGIC NUMBER":numbermagic,"PARENTS NUMBER":numberparents, "HASH":b[0]["HASH"],"MAGIC SHOW":magic,"PAYMENT MODE":payment,"PARENTS CARNIVAL":parents,"SLOT":slots})
+    .upsert({ "ADM NO":adm,"ROLL NO":b[0]["ROLL NO"],"GEN":b[0]["GEN"],"STUDENT NAME":name, "EVENTS":eve, "CLASS":classs, "MAGIC NUMBER":numbermagic,"PARENTS NUMBER":numberparents, "MAGIC SHOW":magic,"PAYMENT MODE":payment,"PARENTS CARNIVAL":parents,"SLOT":slots})
     if(error){
       console.log(error)
         }
@@ -254,17 +254,8 @@ return(
 
 
 
-<div class={`flex flex-col mb-8 ${state.magicstate?'':'hidden'}`}>
-<label class="text-white text-lg font-poppins font-medium opacity-80 ">Magic Show no of participants</label>
-<input type="number" value={state.numbermagic} name="numbermagic" id="numbermagic" onInput$={(e:any) => (state.magicprice=Number(e.target.value)*150)} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
-</input>
-</div>
 
-<div class={`flex flex-col mb-8 ${state.parentsstate?'':'hidden'}`}>
-<label class="text-white text-lg font-poppins font-medium opacity-80 ">Parents Carnival no of participants</label>
-<input type="number" value={state.numberparents} onInput$={(e:any) => (state.parentsprice=Number(Number(50)+Number((Number(e.target.value)-Number(1))*100)))} name="numberparents" id="numberparents" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
-</input>
-</div>
+
 
 <div class="flex flex-col mb-8">
 <label class="text-white text-lg font-poppins font-medium opacity-80 ">Magic Show</label>
@@ -283,6 +274,13 @@ return(
         </select>
       </div>
 
+      <div class={`flex flex-col mb-8 ${state.magicstate?'':'hidden'}`}>
+<label class="text-white text-lg font-poppins font-medium opacity-80 ">Magic Show no of participants</label>
+<input type="number" value={state.numbermagic} name="numbermagic" id="numbermagic" onInput$={(e:any) => (state.magicprice=Number(e.target.value)*150)} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
+</input>
+</div>
+
+
 <div class="flex flex-col mb-8">
 <label class="text-white text-lg font-poppins font-medium opacity-80 ">Parents Carnival</label>
 <select name="parents" id="parents" onInput$={
@@ -299,6 +297,12 @@ return(
         <option id="no" value={"false"}>No</option>
         </select>
 
+</div>
+
+<div class={`flex flex-col mb-8 ${state.parentsstate?'':'hidden'}`}>
+<label class="text-white text-lg font-poppins font-medium opacity-80 ">Parents Carnival no of participants</label>
+<input type="number" value={state.numberparents} onInput$={(e:any) => (state.parentsprice=Number(Number(50)+Number((Number(e.target.value)-Number(1))*100)))} name="numberparents" id="numberparents" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
+</input>
 </div>
 
 <div class={`flex flex-col mb-8 ${state.magicstate?'':'hidden'}`}>
