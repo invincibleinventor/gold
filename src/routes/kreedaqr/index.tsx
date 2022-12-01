@@ -11,7 +11,11 @@ console.log(data)
 const b=data!=null?data:[]
 for(let i =0;i<=b.length-1;i++){
     console.log(b[i])
-    QRCode.toCanvas(String(b[i]['ID']), function (err,canvas){
+    QRCode.toCanvas(String(b[i]['ID']
+       ),{
+        margin: 10,
+        scale:5
+    }, function (err,canvas){
         if(err){
             console.log(err)
         }
@@ -20,11 +24,22 @@ for(let i =0;i<=b.length-1;i++){
             //downloadURI(url,b[i]['ID'])
             document.getElementById('ok')?.append(canvas)
             canvas.classList.add('my-2')
+        
             const context = canvas.getContext('2d')
+            
             if(context!=null)
-            {            context.font = "13pt Calibri";}
-            context?.fillText(b[i]['ID'], 20, 13);
-            downloadURI(canvas.toDataURL(),b[i]['ID'])
+            {        
+                    context.font = "13pt Calibri";}
+                    context?.fillText(b[i]['ID'],0,13);
+                    if(context!=null)
+{                    context.font = "10pt Calibri";
+}
+                    context?.fillText(b[i]['NAME OF THE STUDENT'],0,canvas.height-1);
+                    if(context!=null){
+                    context.font = "13pt Calibri";
+                    }
+                    context?.fillText('  '+b[i]['CLASS'],canvas.width-120,13);
+                    // downloadURI(canvas.toDataURL(),b[i]['ID'])
 
         }
     })
@@ -48,7 +63,7 @@ export default component$(()=>{
 
     return(
         <div class="flex h-full w-full items-center content-center flex-col">
-            <div id="ok">
+            <div id="ok" >
 
             </div>
 <button class="bg-white shadow-2xl my-20 font-medium lg:font-semibold font-poppins text-blue-900 px-10  transition-all ease-linear duration-100 hover:scale-105 py-3 rounded-md text-lg text-center"  onClick$={()=>getFiles()}>Get All QRs</button>
