@@ -39,7 +39,7 @@ for(let i =0;i<=b.length-1;i++){
                     context.font = "13pt Calibri";
                     }
                     context?.fillText('  '+b[i]['CLASS'],canvas.width-120,13);
-                    // downloadURI(canvas.toDataURL(),b[i]['ID'])
+                    downloadURI(canvas.toDataURL(),b[i]['ID'])
 
         }
     })
