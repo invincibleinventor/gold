@@ -90,7 +90,7 @@ export default component$(() => {
 const { data } = await supabase
 .from('Kreeda')
 .select("*")
-.eq('ID',"10610")
+.eq('ID',`${res}`)
 console.log(data)
 if(data && data.length!=0){state.data;state.name=data[0]["NAME OF THE STUDENT"];state.eve=data[0]["EVENT"];state.id=data[0]["ID"];state.class=data[0]["CLASS"];state.school=data[0]["SCHOOL"];console.log(data)}else{console.log('no data')}
 
@@ -160,7 +160,7 @@ return(
 <button type="submit" class="py-5 text-lg px-6 font-semibold bg-black bg-opacity-30 rounded-md w-full shadow-2xl text-white font-poppins">{"Log this participant"}</button>
 </div>
 </div>
-
+<div class={state.qr?`hidden`:''}>
 <QRReader onResult$={(result:any) => {
   
           if (result) {
@@ -171,13 +171,6 @@ return(
         />
           <h1 class="mt-8 text-white text-center mx-auto font-semibold">Or</h1>
 
-<div class={`flex flex-col my-8}`}>
-<label class="text-white text-lg font-poppins font-medium opacity-80 ">Code No</label>
-<input  class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  type="number" onInput$={(e:any)=>{if(e){
-state.res=(e.target.value)
-
-}} } ></input>
-<button  class="py-5 mt-8 text-lg px-6 font-semibold bg-black bg-opacity-30 rounded-md w-full shadow-2xl text-white font-poppins"  onClick$={(e:any)=>{e.preventDefault(),getResults(state.res)}}>Get Details</button>
 </div>
           <h1>{state.qr}</h1>
 </form>
