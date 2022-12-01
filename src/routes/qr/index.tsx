@@ -66,7 +66,7 @@ export default component$(()=>{
 
     return(
         <div class="flex h-full w-full items-center content-center flex-col">
-            <div id="ok">
+            <div id="ok" class="grid  md:grid-cols-2 grid-cols-1 lg:grid-cols-3">
 
             </div>
 <button class="bg-white shadow-2xl my-20 font-medium lg:font-semibold font-poppins text-blue-900 px-10  transition-all ease-linear duration-100 hover:scale-105 py-3 rounded-md text-lg text-center"  onClick$={()=>getFiles()}>Get All QRs</button>

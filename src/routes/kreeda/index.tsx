@@ -90,6 +90,7 @@ export default component$(() => {
 const { data } = await supabase
 .from('Kreeda')
 .select("*")
+.eq('ID',"10610")
 console.log(data)
 if(data && data.length!=0){state.data;state.name=data[0]["NAME OF THE STUDENT"];state.eve=data[0]["EVENT"];state.id=data[0]["ID"];state.class=data[0]["CLASS"];state.school=data[0]["SCHOOL"];console.log(data)}else{console.log('no data')}
 
