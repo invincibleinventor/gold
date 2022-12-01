@@ -146,6 +146,7 @@ export default component$(() => {
     totalprice:0,
     magicprice:0,
     parentsprice:0,
+    admn:0,
     magicstate:true,parentsstate:true
   })
   const handleSubmit$ = $( async (event: Event) => {
@@ -199,11 +200,11 @@ const payment = form.payment.value;
   })
 
   const getResults = $(async (res:any) => {
-    state.qr=res.text
+    state.qr=res
 const { data } = await supabase
 .from('Total')
 .select("*")
-.eq("HASH",`${res}`)
+.eq("ADM NO",`${res}`)
 if(data && data.length!=0){state.data;state.name=data[0]["STUDENT NAME"];state.id=data[0]["ADM NO"];state.class=data[0]["CLASS"];state.numbermagic=data[0]["MAGIC NUMBER"];state.numberparents=data[0]["PARENTS NUMBER"];state.slot=data[0]["SLOT"];state.magic=data[0]["MAGIC SHOW"];state.payment=data[0]["PAYMENT MODE"];state.parent=data[0]["PARENTS CARNIVAL"];console.log(data)}else{console.log('no data')}
 if(data && data[0]["PARENTS NUMBER"]!=null){
 console.log('ok')
@@ -323,13 +324,25 @@ return(
 </div>
 
 </div>
+<div class={`${state.qr?'hidden':''}`}>
 <BarCode onUpdate$={ (err, resp): void => {
          if(resp) {
              getResults(resp.getText())
              console.log(resp.getText())
          }
       }}/>
+    <h1 class="mt-8 text-white text-center mx-auto font-semibold">Or</h1>
+
+    <div class={`flex flex-col my-8}`}>
+<label class="text-white text-lg font-poppins font-medium opacity-80 ">Admn No</label>
+<input  class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  type="number" onInput$={(e:any)=>{if(e){
+  state.admn=e.target.value
+}} } ></input>
+<button  class="py-5 mt-8 text-lg px-6 font-semibold bg-black bg-opacity-30 rounded-md w-full shadow-2xl text-white font-poppins"  onClick$={(e:any)=>{e.preventDefault(),getResults(state.admn)}}>Get Details</button>
+</div>
+
           <h1>{state.qr}</h1>
+          </div>
 </form>
 </div>
 }
