@@ -6,7 +6,7 @@ import { auth } from '~/services/firebase';
 import dt from '../config.json'
 import { $ } from '@builder.io/qwik';
 import { supabase } from '~/services/firebase';
-import { QRReader } from '~/integrations/react/registration';
+import { BarCode } from '~/integrations/react/registration';
 
 export const users = ['invincibleinventor@gmail.com','bhargavanrajeshr@gmail.com','aish160490@gmail.com','erp.thetvs2021@gmail.com','srameshnba@gmail.com']
 
@@ -323,14 +323,11 @@ return(
 </div>
 
 </div>
-<QRReader onResult$={(result:any) => {
-  
-          if (result) {
-            getResults(result)
-          }}} constraints={{
-            facingMode: 'environment'
-        }}
-        />
+<BarCode onUpdate$={ (err, resp): void => {
+         if(resp) {
+             getResults(resp.getText())
+         }
+      }}/>
           <h1>{state.qr}</h1>
 </form>
 </div>

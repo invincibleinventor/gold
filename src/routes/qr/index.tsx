@@ -3,6 +3,7 @@ import CryptoJS from "crypto-js";
 import QRCode from "qrcode";
 import { supabase } from "~/services/firebase";
 //import QRCode from "react-qr-code";
+
  
 export async function genqr(){
     const {data} =  await supabase.from('Total').select('*')
