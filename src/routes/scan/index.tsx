@@ -326,6 +326,7 @@ return(
 <BarCode onUpdate$={ (err, resp): void => {
          if(resp) {
              getResults(resp.getText())
+             console.log(resp.getText())
          }
       }}/>
           <h1>{state.qr}</h1>
