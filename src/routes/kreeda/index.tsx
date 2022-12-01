@@ -48,7 +48,9 @@ export default component$(() => {
     qr:'',
     events:'',
     class:'',
-    school:''
+    school:'',
+    eve:'',
+    res:''
   })
   const handleSubmit$ = $( async (event: Event) => {
     event.preventDefault();
@@ -57,7 +59,7 @@ export default component$(() => {
     const email = form.code.value;
     const school = form.school.value;
     const classs = form.class.value;
-
+    const eve = form.eve.value;
     let dts = new Date()
     const date = new Date()
     dts= new Date(date.getTime() - date.getTimezoneOffset()*60000);
@@ -70,6 +72,7 @@ export default component$(() => {
             "CLASS":classs,
             "SCHOOL":school,
             "PRESENT":true,
+            "EVENT":eve,
             "DATE":String(dts)
         }
     )
@@ -83,12 +86,12 @@ export default component$(() => {
   })
 
   const getResults = $(async (res:any) => {
-    state.qr=res.text
+    state.qr=res
 const { data } = await supabase
 .from('Kreeda')
 .select("*")
-.eq("ID",`${res}`)
-if(data && data.length!=0){state.data;state.name=data[0]["NAME OF THE STUDENT"];state.id=data[0]["ID"];state.class=data[0]["CLASS"];state.school=data[0]["SCHOOL"];console.log(data)}else{console.log('no data')}
+console.log(data)
+if(data && data.length!=0){state.data;state.name=data[0]["NAME OF THE STUDENT"];state.eve=data[0]["EVENT"];state.id=data[0]["ID"];state.class=data[0]["CLASS"];state.school=data[0]["SCHOOL"];console.log(data)}else{console.log('no data')}
 
   })
 
@@ -125,6 +128,12 @@ return(
 </input>
 </div>
 
+<div class="flex flex-col mb-10">
+<label class="text-white text-lg font-poppins font-medium opacity-80 ">Event</label>
+<input disabled value={state.eve} name="eve" id="eve" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
+</input>
+</div>
+
 
 <div class="flex flex-col mb-10">
 <label class="text-white text-lg font-poppins font-medium opacity-80 ">Class</label>
@@ -154,11 +163,21 @@ return(
 <QRReader onResult$={(result:any) => {
   
           if (result) {
-            getResults(result)
+            getResults(result.text)
           }}} constraints={{
             facingMode: 'environment'
         }}
         />
+          <h1 class="mt-8 text-white text-center mx-auto font-semibold">Or</h1>
+
+<div class={`flex flex-col my-8}`}>
+<label class="text-white text-lg font-poppins font-medium opacity-80 ">Code No</label>
+<input  class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  type="number" onInput$={(e:any)=>{if(e){
+state.res=(e.target.value)
+
+}} } ></input>
+<button  class="py-5 mt-8 text-lg px-6 font-semibold bg-black bg-opacity-30 rounded-md w-full shadow-2xl text-white font-poppins"  onClick$={(e:any)=>{e.preventDefault(),getResults(state.res)}}>Get Details</button>
+</div>
           <h1>{state.qr}</h1>
 </form>
 </div>

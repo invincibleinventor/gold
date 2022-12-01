@@ -34,11 +34,13 @@ for(let i =0;i<=b.length-1;i++){
                     if(context!=null)
 {                    context.font = "10pt Calibri";
 }
-                    context?.fillText(b[i]['NAME OF THE STUDENT'],0,canvas.height-1);
-                    if(context!=null){
+context?.fillText(b[i]['NAME OF THE STUDENT'],0,canvas.height-13);
+context?.fillText(b[i]['EVENT'],0,canvas.height-1);
+if(context!=null){
                     context.font = "13pt Calibri";
                     }
                     context?.fillText('  '+b[i]['CLASS'],canvas.width-120,13);
+                    
                     downloadURI(canvas.toDataURL(),b[i]['ID'])
 
         }
