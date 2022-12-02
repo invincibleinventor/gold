@@ -8,6 +8,9 @@ import { $ } from '@builder.io/qwik';
 import { supabase } from '~/services/firebase';
 import { BarCode } from '~/integrations/react/registration';
 
+
+
+
 export const users = ['invincibleinventor@gmail.com','bhargavanrajeshr@gmail.com','aish160490@gmail.com','erp.thetvs2021@gmail.com','srameshnba@gmail.com']
 
 export const Options = component$(()=>{
