@@ -8,19 +8,30 @@ import { supabase } from "~/services/firebase";
 export async function getFiles(){
 const {data} =  await supabase.from('Mapping').select('*')
 console.log(data)
-const b=data!=null?data:[]
-for(let i =0;i<=b.length-1;i++){
+for(let i =1;i<=50;i++){
     let originalCanvas:any;
-    QRCode.toCanvas(String(b[i]['ID']
-       ),{
-        margin: 10,
-        scale:5
+    QRCode.toCanvas(''+i,{
+        margin: 3,
+        scale:4
     }, function (err,canvas){
         if(err){
             console.log(err)
         }
         else{
             originalCanvas = canvas
+        }
+    })
+
+    let originalCanvas2:any;
+    QRCode.toCanvas(''+i,{
+        margin: 3,
+        scale:4
+    }, function (err,canvas){
+        if(err){
+            console.log(err)
+        }
+        else{
+            originalCanvas2 = canvas
         }
     })
 
@@ -36,27 +47,45 @@ for(let i =0;i<=b.length-1;i++){
     mydiv.classList.add('my-2')
         
     const context = originalCanvas!.getContext('2d')
+    const context2 = originalCanvas2!.getContext('2d')
     
     if(context!=null)
     {        
         context.font = "13pt Calibri";
     }
-    context?.fillText(b[i]['Code'],0,13);
+    context?.fillText(''+i,0,13);
     mydiv.appendChild(originalCanvas)
+    if(context2!=null)
+    {        
+        context2.font = "13pt Calibri";
+    }
+    context2?.fillText(''+i,0,13);
+    mydiv.appendChild(originalCanvas2)
 
 
 
     let duplicateCanvas:any;
-    QRCode.toCanvas(String(b[i]['ID']
-       ),{
-        margin: 10,
-        scale:5
+    QRCode.toCanvas(''+i,{
+        margin: 3,
+        scale:4
     }, function (err,canvas){
         if(err){
             console.log(err)
         }
         else{
             duplicateCanvas = canvas
+        }
+    })
+    let duplicateCanvas2:any;
+    QRCode.toCanvas(''+i,{
+        margin: 3,
+        scale:4
+    }, function (err,canvas){
+        if(err){
+            console.log(err)
+        }
+        else{
+            duplicateCanvas2 = canvas
         }
     })
     const duplicateDiv = document.createElement('div')
@@ -68,17 +97,25 @@ for(let i =0;i<=b.length-1;i++){
     document.getElementById('ok')?.appendChild(duplicateDiv)
     mydiv.classList.add('my-2')
     const duplicateContext = duplicateCanvas!.getContext('2d')
+    const duplicateContext2 = duplicateCanvas2!.getContext('2d')
         
     
     if(duplicateContext!=null)
     {        
         duplicateContext.font = "13pt Calibri";
     }
-    duplicateContext?.fillText(b[i]['Code'],0,13);
+    duplicateContext?.fillText(''+i,0,13);
     mydiv.appendChild(duplicateCanvas)
 
+    if(duplicateContext2!=null)
+    {        
+        duplicateContext2.font = "13pt Calibri";
+    }
+    duplicateContext2?.fillText(''+i,0,13);
+    mydiv.appendChild(duplicateCanvas2)
 
-    downloadURI(originalCanvas.toDataURL(),b[i]['Code'])
+
+  //  downloadURI(originalCanvas.toDataURL(),''+i)
     
 }
 
