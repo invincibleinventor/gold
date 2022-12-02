@@ -5,7 +5,7 @@ export default component$(() => {
 
   return (
     <>
-      <main class="overflow-y-auto h-screen">
+      <main class="overflow-y-auto h-screen bg-white">
     
           <Slot />
 
