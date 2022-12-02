@@ -138,18 +138,20 @@ export default component$(() => {
     data:'',
     qr:'',
     events:'',
-    numbermagic:'',
-    numberparents:''
+    numbermagic:'0',
+    numberparents:'1'
     ,class:'',
-    parent:'',
-    magic:'',
+    parent:'true',
+    magic:'false',
     slot:'',
     payment:'',
     totalprice:0,
     magicprice:0,
     cl:0,
     parentsprice:0,
+    childrenprice:0,
     mon:0,
+    numberchildren:1,
     admn:0,
     magicstate:false,parentsstate:false
   })
@@ -159,24 +161,18 @@ export default component$(() => {
     const name = form.name2.value;
     const adm = form.code.value;
     let eve = ''
-   
-    let numbermagic = Number(form.numbermagic.value);
+   const numbermagic=0
     const numberparents = Number(form.numberparents.value);
-    
+    const numberchildren = Number(form.numberchildren.value);
     const classs=form.classs.value;
+    
 let slots = form.slots.value;
 if(!state.magicstate){
 slots="Not Applicable"
-numbermagic=0
 }
-const magic = form.magic.value;
+const magic = false
 const parents = form.parents.value;
 
-if(magic.value==true){
-  eve+='magic '
-
-
-}
 if(parents.value==true){
   eve+='parents'
 
@@ -192,7 +188,7 @@ const payment = form.payment.value;
     const b=data?data:[]
     const { error } = await supabase
     .from('Total')
-    .upsert({ "ADM NO":adm,"ROLL NO":b[0]["ROLL NO"],"GEN":b[0]["GEN"],"STUDENT NAME":name, "EVENTS":eve, "CLASS":classs, "MAGIC NUMBER":numbermagic,"PARENTS NUMBER":numberparents, "MAGIC SHOW":magic,"PAYMENT MODE":payment,"PARENTS CARNIVAL":parents,"SLOT":slots})
+    .upsert({ "ADM NO":adm,"ROLL NO":b[0]["ROLL NO"],"GEN":b[0]["GEN"],"STUDENT NAME":name, "EVENTS":eve, "CLASS":classs, "MAGIC NUMBER":numbermagic,"PARENTS NUMBER":numberparents, "CHILDREN NUMBER":numberchildren,"MAGIC SHOW":magic,"PAYMENT MODE":payment,"PARENTS CARNIVAL":parents,"SLOT":slots})
     if(error){
       console.log(error)
         }
@@ -233,7 +229,7 @@ const { data } = await supabase
 .from('Total')
 .select("*")
 .eq("ADM NO",`${v}`)
-if(data && data.length!=0){state.data;state.name=data[0]["STUDENT NAME"];state.id=data[0]["ADM NO"];state.class=data[0]["CLASS"];state.numbermagic=data[0]["MAGIC NUMBER"];state.numberparents=data[0]["PARENTS NUMBER"];state.slot=data[0]["SLOT"];state.magic=data[0]["MAGIC SHOW"];state.payment=data[0]["PAYMENT MODE"];state.parent=data[0]["PARENTS CARNIVAL"];
+if(data && data.length!=0){state.data;state.name=data[0]["STUDENT NAME"];state.id=data[0]["ADM NO"];state.class=data[0]["CLASS"];state.numbermagic=data[0]["MAGIC NUMBER"];state.numberparents=data[0]["PARENTS NUMBER"];state.numberchildren=data[0]["CHILDREN NUMBER"];state.slot=data[0]["SLOT"];state.magic=data[0]["MAGIC SHOW"];state.payment=data[0]["PAYMENT MODE"];state.parent=data[0]["PARENTS CARNIVAL"];
 const test:any = [];
 const l = ["LKG","UKG"]
 const k:any=data[0]["CLASS"].split('-')
@@ -257,7 +253,7 @@ console.log(state.cl)
 
 
 console.log(data)}else{console.log('no data')}
-if(data && ((data[0]["PARENTS NUMBER"]!=0) || (data[0]["PARENTS NUMBER"]!=0))){
+if(data && ((data[0]["CHILDREN NUMBER"]>1) || (data[0]["PARENTS NUMBER"]>1))){
 console.log('ok')
 
 
@@ -311,29 +307,7 @@ return(
 
 
 
-<div class="flex flex-col mb-8">
-<label class="text-white text-lg font-poppins font-medium opacity-80 ">Magic Show</label>
-<select name="magic"  onInput$={
-  (e:any)=>(
-    state.magicstate=(e.target.value === 'true'),
-    console.log(state.magicstate)
-  )
-} id="magic" class={`text-lg  font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6`} style=" -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;">
-   <option value=""></option>
-
-        <option id="yes" value={"true"}>Yes</option>
-        <option id="no" value={"false"}>No</option>
-        </select>
-      </div>
-
-      <div class={`flex flex-col mb-8 ${state.magicstate?'':'hidden'}`}>
-<label class="text-white text-lg font-poppins font-medium opacity-80 ">Magic Show no of participants</label>
-<input type="number" value={state.numbermagic} name="numbermagic" id="numbermagic" onInput$={(e:any) => (state.magicprice=Number(e.target.value)*150)} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
-</input>
-</div>
-
+      
 
 <div class="flex flex-col mb-8">
 <label class="text-white text-lg font-poppins font-medium opacity-80 ">Parents Carnival</label>
@@ -354,8 +328,14 @@ return(
 </div>
 
 <div class={`flex flex-col mb-8 ${state.parentsstate?'':'hidden'}`}>
-<label class="text-white text-lg font-poppins font-medium opacity-80 ">Parents Carnival no of participants</label>
-<input type="number" value={state.numberparents} onInput$={(e:any) => (state.parentsprice=Number((state.cl<=6?Number(50):Number(100))+Number((Number(e.target.value)-Number(1))*100)))} name="numberparents" id="numberparents" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
+<label class="text-white text-lg font-poppins font-medium opacity-80 ">Number of adults</label>
+<input type="number" value={state.numberparents} name="numberparents" id="numberparents" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
+</input>
+</div>
+
+<div class={`flex flex-col mb-8 ${state.parentsstate?'':'hidden'}`}>
+<label class="text-white text-lg font-poppins font-medium opacity-80 ">Number of children</label>
+<input type="number" value={state.numberchildren} name="numberchildren" id="numberchildren" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
 </input>
 </div>
 
@@ -370,10 +350,7 @@ return(
 <Payment></Payment>
 </div>
 
-<h1 class="text-white text-xl font-poppins font-medium opacity-80 mb-8">
-  Total Price:- Rs {state.magicprice+state.parentsprice}
 
-</h1>
 
 
 
