@@ -42,8 +42,10 @@ for(let i =1;i<=50;i++){
     mydiv.classList.add('flex-row')
     mydiv.classList.add('space-x-5')
 
+    const dup = document.createElement('div');dup.appendChild(mydiv);dup.classList.add('inline-block');dup.classList.add('mx-2')
 
-    document.getElementById('ok')?.appendChild(mydiv)
+    document.getElementById('ok')?.appendChild(dup)
+    
     mydiv.classList.add('my-2')
         
     const context = originalCanvas!.getContext('2d')
@@ -60,7 +62,6 @@ for(let i =1;i<=50;i++){
         context2.font = "13pt Calibri";
     }
     context2?.fillText(''+i,0,13);
-    mydiv.appendChild(originalCanvas2)
 
 
 
@@ -92,9 +93,9 @@ for(let i =1;i<=50;i++){
     duplicateDiv.classList.add('flex')
     duplicateDiv.classList.add('flex-row')
     duplicateDiv.classList.add('space-x-5')
+    const dudiv = document.createElement('div');dudiv.appendChild(duplicateDiv);dudiv.classList.add('inline-block');dudiv.classList.add('mx-2')
+    document.getElementById('ok')?.appendChild(dudiv)
 
-
-    document.getElementById('ok')?.appendChild(duplicateDiv)
     mydiv.classList.add('my-2')
     const duplicateContext = duplicateCanvas!.getContext('2d')
     const duplicateContext2 = duplicateCanvas2!.getContext('2d')
@@ -112,7 +113,6 @@ for(let i =1;i<=50;i++){
         duplicateContext2.font = "13pt Calibri";
     }
     duplicateContext2?.fillText(''+i,0,13);
-    mydiv.appendChild(duplicateCanvas2)
 
 
   //  downloadURI(originalCanvas.toDataURL(),''+i)
