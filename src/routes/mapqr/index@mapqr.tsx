@@ -8,7 +8,7 @@ import { supabase } from "~/services/firebase";
 export async function getFiles(){
 const {data} =  await supabase.from('Mapping').select('*')
 console.log(data)
-for(let i =1;i<=50;i++){
+for(let i =1;i<=6000;i++){
     let originalCanvas:any;
     QRCode.toCanvas(''+i,{
         margin: 3,
@@ -68,7 +68,7 @@ for(let i =1;i<=50;i++){
     let duplicateCanvas:any;
     QRCode.toCanvas(''+i,{
         margin: 3,
-        scale:4
+        scale:5
     }, function (err,canvas){
         if(err){
             console.log(err)
@@ -80,7 +80,7 @@ for(let i =1;i<=50;i++){
     let duplicateCanvas2:any;
     QRCode.toCanvas(''+i,{
         margin: 3,
-        scale:4
+        scale:5
     }, function (err,canvas){
         if(err){
             console.log(err)
