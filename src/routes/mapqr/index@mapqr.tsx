@@ -1,14 +1,12 @@
 import { component$ } from "@builder.io/qwik";
 import QRCode from "qrcode";
-import { supabase } from "~/services/firebase";
 //import QRCode from "react-qr-code";
 
 
 
 export async function getFiles(){
-const {data} =  await supabase.from('Mapping').select('*')
-console.log(data)
-for(let i =1;i<=6000;i++){
+
+for(let i =300;i<=301;i++){
     let originalCanvas:any;
     QRCode.toCanvas(''+i,{
         margin: 3,

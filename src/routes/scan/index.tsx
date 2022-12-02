@@ -10,7 +10,6 @@ import { BarCode } from '~/integrations/react/registration';
 
 
 
-
 export const users = ['invincibleinventor@gmail.com','bhargavanrajeshr@gmail.com','aish160490@gmail.com','erp.thetvs2021@gmail.com','srameshnba@gmail.com']
 
 export const Options = component$(()=>{
@@ -148,7 +147,9 @@ export default component$(() => {
     payment:'',
     totalprice:0,
     magicprice:0,
+    cl:0,
     parentsprice:0,
+    mon:0,
     admn:0,
     magicstate:false,parentsstate:false
   })
@@ -203,17 +204,67 @@ const payment = form.payment.value;
   })
 
   const getResults = $(async (res:any) => {
-    state.qr=res
+
+    const v=prompt('Admission Number')
+ async function check(v:any){
+  const{data,error}=await supabase.from('Mapping').select('*').eq('ID',v)
+  if(data && data.length!=0){
+    console.log(error)
+    return false
+    
+  }
+  else{
+    return true
+  }
+ }
+
+ if(await check(v)){
+    const {error} = await supabase.from('Mapping').insert({"ID":res,"Adm No":v})
+    if(error)console.log(error)
+    if(v){
+    state.qr=v
+    }
+    if(error?.code=="23505"){
+      console.log('duplicate')
+      window.location.replace('/done')
+    }
+    else{
 const { data } = await supabase
 .from('Total')
 .select("*")
-.eq("ADM NO",`${res}`)
-if(data && data.length!=0){state.data;state.name=data[0]["STUDENT NAME"];state.id=data[0]["ADM NO"];state.class=data[0]["CLASS"];state.numbermagic=data[0]["MAGIC NUMBER"];state.numberparents=data[0]["PARENTS NUMBER"];state.slot=data[0]["SLOT"];state.magic=data[0]["MAGIC SHOW"];state.payment=data[0]["PAYMENT MODE"];state.parent=data[0]["PARENTS CARNIVAL"];console.log(data)}else{console.log('no data')}
-if(data && data[0]["PARENTS NUMBER"]!=null){
+.eq("ADM NO",`${v}`)
+if(data && data.length!=0){state.data;state.name=data[0]["STUDENT NAME"];state.id=data[0]["ADM NO"];state.class=data[0]["CLASS"];state.numbermagic=data[0]["MAGIC NUMBER"];state.numberparents=data[0]["PARENTS NUMBER"];state.slot=data[0]["SLOT"];state.magic=data[0]["MAGIC SHOW"];state.payment=data[0]["PAYMENT MODE"];state.parent=data[0]["PARENTS CARNIVAL"];
+const test:any = [];
+const l = ["LKG","UKG"]
+const k:any=data[0]["CLASS"].split('-')
+const a = k[0]
+if(l.includes(a)){
+  state.cl=l.indexOf(a)-2
+  
+
+}
+else{
+const roman2arabic = (s:any) => {
+  const map:any = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000};
+  return [...s].reduce((r,c,i,s) => map[s[i+1]] > map[c] ? r-map[c] : r+map[c], 0);
+};
+const k:any=data[0]["CLASS"].split('-')
+
+test.push(k[0])
+state.cl=test.map(roman2arabic)[0];
+}
+console.log(state.cl)
+
+
+console.log(data)}else{console.log('no data')}
+if(data && ((data[0]["PARENTS NUMBER"]!=0) || (data[0]["PARENTS NUMBER"]!=0))){
 console.log('ok')
 
 
+
   window.location.replace('/done')
+
+}}
 }
   })
 
@@ -304,7 +355,7 @@ return(
 
 <div class={`flex flex-col mb-8 ${state.parentsstate?'':'hidden'}`}>
 <label class="text-white text-lg font-poppins font-medium opacity-80 ">Parents Carnival no of participants</label>
-<input type="number" value={state.numberparents} onInput$={(e:any) => (state.parentsprice=Number(Number(50)+Number((Number(e.target.value)-Number(1))*100)))} name="numberparents" id="numberparents" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
+<input type="number" value={state.numberparents} onInput$={(e:any) => (state.parentsprice=Number((state.cl<=6?Number(50):Number(100))+Number((Number(e.target.value)-Number(1))*100)))} name="numberparents" id="numberparents" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
 </input>
 </div>
 
@@ -338,15 +389,7 @@ return(
              console.log(resp.getText())
          }
       }}/>
-    <h1 class="mt-8 text-white text-center mx-auto font-semibold">Or</h1>
-
-    <div class={`flex flex-col my-8}`}>
-<label class="text-white text-lg font-poppins font-medium opacity-80 ">Admn No</label>
-<input  class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  type="number" onInput$={(e:any)=>{if(e){
-  state.admn=e.target.value
-}} } ></input>
-<button  class="py-5 mt-8 text-lg px-6 font-semibold bg-black bg-opacity-30 rounded-md w-full shadow-2xl text-white font-poppins"  onClick$={(e:any)=>{e.preventDefault(),getResults(state.admn)}}>Get Details</button>
-</div>
+    
 
           <h1>{state.qr}</h1>
           </div>

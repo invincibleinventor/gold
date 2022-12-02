@@ -54,8 +54,8 @@
     },
     "payment":{
         "Cash":"cash",
-        "E-Payment":"epayment",
-        "Maybe Later":"maybe"
+        "E-Payment":"epayment (qrcode)",
+        "Maybe Later":"maybe later"
     }
 }
 }
