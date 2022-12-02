@@ -10,7 +10,7 @@ const {data} =  await supabase.from('Mapping').select('*')
 console.log(data)
 const b=data!=null?data:[]
 for(let i =0;i<=b.length-1;i++){
-    console.log(b[i])
+    let originalCanvas:any;
     QRCode.toCanvas(String(b[i]['ID']
        ),{
         margin: 10,
@@ -20,30 +20,65 @@ for(let i =0;i<=b.length-1;i++){
             console.log(err)
         }
         else{
-            console.log(canvas)
-            //downloadURI(url,b[i]['ID'])
-            const mydiv = document.createElement('div')
-            mydiv.classList.add('flex')
-            mydiv.classList.add('flex-row')
-            mydiv.classList.add('space-x-5')
-
-        
-            document.getElementById('ok')?.appendChild(mydiv)
-            mydiv.classList.add('my-2')
-                
-            const context = canvas.getContext('2d')
-            
-            if(context!=null)
-            {        
-                    context.font = "13pt Calibri";}
-                    context?.fillText(b[i]['Code'],0,13);
-                    mydiv.appendChild(canvas)
-                    mydiv.appendChild(canvas.cloneNode(true))
-                    
-                   downloadURI(canvas.toDataURL(),b[i]['Code'])
-
+            originalCanvas = canvas
         }
     })
+
+    // console.log(canvas)
+    //downloadURI(url,b[i]['ID'])
+    const mydiv = document.createElement('div')
+    mydiv.classList.add('flex')
+    mydiv.classList.add('flex-row')
+    mydiv.classList.add('space-x-5')
+
+
+    document.getElementById('ok')?.appendChild(mydiv)
+    mydiv.classList.add('my-2')
+        
+    const context = originalCanvas!.getContext('2d')
+    
+    if(context!=null)
+    {        
+        context.font = "13pt Calibri";
+    }
+    context?.fillText(b[i]['Code'],0,13);
+    mydiv.appendChild(originalCanvas)
+
+
+
+    let duplicateCanvas:any;
+    QRCode.toCanvas(String(b[i]['ID']
+       ),{
+        margin: 10,
+        scale:5
+    }, function (err,canvas){
+        if(err){
+            console.log(err)
+        }
+        else{
+            duplicateCanvas = canvas
+        }
+    })
+    const duplicateDiv = document.createElement('div')
+    duplicateDiv.classList.add('flex')
+    duplicateDiv.classList.add('flex-row')
+    duplicateDiv.classList.add('space-x-5')
+
+
+    document.getElementById('ok')?.appendChild(duplicateDiv)
+    mydiv.classList.add('my-2')
+    const duplicateContext = duplicateCanvas!.getContext('2d')
+        
+    
+    if(duplicateContext!=null)
+    {        
+        duplicateContext.font = "13pt Calibri";
+    }
+    duplicateContext?.fillText(b[i]['Code'],0,13);
+    mydiv.appendChild(duplicateCanvas)
+
+
+    downloadURI(originalCanvas.toDataURL(),b[i]['Code'])
     
 }
 
