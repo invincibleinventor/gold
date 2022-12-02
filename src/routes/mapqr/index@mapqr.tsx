@@ -68,7 +68,7 @@ for(let i =1;i<=6000;i++){
     let duplicateCanvas:any;
     QRCode.toCanvas(''+i,{
         margin: 3,
-        scale:5
+        scale:4
     }, function (err,canvas){
         if(err){
             console.log(err)
@@ -80,7 +80,7 @@ for(let i =1;i<=6000;i++){
     let duplicateCanvas2:any;
     QRCode.toCanvas(''+i,{
         margin: 3,
-        scale:5
+        scale:4
     }, function (err,canvas){
         if(err){
             console.log(err)
