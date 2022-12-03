@@ -9,7 +9,7 @@ import { supabase } from '~/services/firebase';
 import { QRReader } from '~/integrations/react/registration';
 
 
-export const users = ['invincibleinventor@gmail.com','bhargavanrajeshr@gmail.com','aish160490@gmail.com','erp.thetvs2021@gmail.com','srameshnba@gmail.com']
+export const users = ['invincibleinventor@gmail.com','admin@thetvs.com','bhargavanrajeshr@gmail.com','aish160490@gmail.com','erp.thetvs2021@gmail.com','srameshnba@gmail.com']
 
 export const Options = component$(()=>{
   const a:any=Object.values(dt.carnival.events)
@@ -116,7 +116,17 @@ eles.push(<option value=""></option>
 })
 
 
+export async function login(){
+  const { data, error } = await supabase.auth.signInWithPassword({ email: 'admin@thetvs.com', password: '12345678', })
+  console.log(data)
+  if(error){
+    console.log(error)
+  }
+  else{
+    return data?.user?.email
 
+  }
+  }
 
 export default component$(() => {
   const stoot = useStore({
@@ -124,9 +134,15 @@ export default component$(() => {
     user:''
   })
   useClientEffect$(() => {
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
       stoot.isLoggedIn = !!user;
-      if(user?.email!=null && user?.email != undefined){stoot.user = user?.email}
+      if(user?.email!=null && user?.email != undefined){stoot.user = user?.email}else{
+      const a=await login()
+      if(a)
+      stoot.user=a
+      stoot.isLoggedIn=true
+      
+      }
 
     })
   })
@@ -149,6 +165,7 @@ export default component$(() => {
     magicprice:0,
     cl:0,
     parentsprice:0,
+    rest:'',
     childrenprice:0,
     mon:0,
     numberchildren:1,
@@ -186,6 +203,10 @@ const payment = form.payment.value;
     dts= new Date(date.getTime() - date.getTimezoneOffset()*60000);
     const {data}=await supabase.from('Total').select('*').eq('ADM NO',adm)
     const b=data?data:[]
+    if(state.qr){
+      const {error} = await supabase.from('Mapping').insert({"ID":state.rest,"Adm No":state.qr})
+      if(error)console.log(error)
+    }
     const { error } = await supabase
     .from('Total')
     .upsert({ "ADM NO":adm,"ROLL NO":b[0]["ROLL NO"],"GEN":b[0]["GEN"],"STUDENT NAME":name, "EVENTS":eve, "CLASS":classs, "MAGIC NUMBER":numbermagic,"PARENTS NUMBER":numberparents, "CHILDREN NUMBER":numberchildren,"MAGIC SHOW":magic,"PAYMENT MODE":payment,"PARENTS CARNIVAL":parents,"SLOT":slots})
@@ -194,7 +215,7 @@ const payment = form.payment.value;
         }
         else{
           alert('Logged')
-          window.location.replace('/done')
+          window.location.href='/done'
         }    
 
   })
@@ -203,7 +224,7 @@ const payment = form.payment.value;
 
     const v=prompt('Admission Number')
  async function check(v:any){
-  const{data,error}=await supabase.from('Mapping').select('*').eq('ID',v)
+  const{data,error}=await supabase.from('Mapping').select('*').eq('Adm No',v)
   if(data && data.length!=0){
     console.log(error)
     return false
@@ -215,16 +236,13 @@ const payment = form.payment.value;
  }
 
  if(await check(v)){
-    const {error} = await supabase.from('Mapping').insert({"ID":res,"Adm No":v})
-    if(error)console.log(error)
+  
+   
     if(v){
     state.qr=v
+    state.rest=res
     }
-    if(error?.code=="23505"){
-      console.log('duplicate')
-      window.location.replace('/done')
-    }
-    else{
+    
 const { data } = await supabase
 .from('Total')
 .select("*")
@@ -253,14 +271,17 @@ console.log(state.cl)
 
 
 console.log(data)}else{console.log('no data')}
-if(data && ((data[0]["CHILDREN NUMBER"]>1) || (data[0]["PARENTS NUMBER"]>1))){
+if(data && ((data[0]["PARENTS CARNIVAL"]))){
 console.log('ok')
 
 
 
-  window.location.replace('/done')
+  window.location.href='/done'
 
 }}
+else{
+  window.location.href='/done'
+
 }
   })
 
@@ -273,7 +294,10 @@ return(
  <div class="flex flex-col items-center content-center lg:py-20 py-10 mt-16 lg:mt-0">
           <div class="mx-auto w-full">
 
-
+          {(!(stoot.isLoggedIn) && !(users.includes(stoot.user))) &&
+    <h1 class="my-4 text-2xl text-white font-semibold font-poppins mx-auto">No Admin Access</h1>
+    }
+    {((stoot.isLoggedIn) && (users.includes(stoot.user))) &&
    
 <div>
 <form class={`mx-auto my-8 md:my-16 lg:my-20 rounded-xl lg:rounded-2xl p-8 md:p-16 md:px-10 bg-black bg-opacity-30  md:w-3/5 lg:w-2/4 xl:w-2/5 `} preventdefault:submit onSubmit$={handleSubmit$}>
@@ -379,7 +403,7 @@ return(
           </div>
 </form>
 </div>
-
+}
 
 
 
