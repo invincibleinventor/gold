@@ -6,8 +6,7 @@ import { auth } from '~/services/firebase';
 import dt from '../config.json'
 import { $ } from '@builder.io/qwik';
 import { supabase } from '~/services/firebase';
-import { BarCode } from '~/integrations/react/registration';
-
+import { QRReader } from '~/integrations/react/registration';
 
 
 export const users = ['invincibleinventor@gmail.com','bhargavanrajeshr@gmail.com','aish160490@gmail.com','erp.thetvs2021@gmail.com','srameshnba@gmail.com']
@@ -143,6 +142,7 @@ export default component$(() => {
     ,class:'',
     parent:'true',
     magic:'false',
+    input:'',
     slot:'',
     payment:'',
     totalprice:0,
@@ -274,10 +274,7 @@ return(
           <div class="mx-auto w-full">
 
 
-    {(!(stoot.isLoggedIn) && !(users.includes(stoot.user))) &&
-    <h1 class="my-4 text-2xl text-white font-semibold font-poppins mx-auto">No Admin Access</h1>
-    }
-    {((stoot.isLoggedIn) && (users.includes(stoot.user))) &&
+   
 <div>
 <form class={`mx-auto my-8 md:my-16 lg:my-20 rounded-xl lg:rounded-2xl p-8 md:p-16 md:px-10 bg-black bg-opacity-30  md:w-3/5 lg:w-2/4 xl:w-2/5 `} preventdefault:submit onSubmit$={handleSubmit$}>
       <h1 class="font-poppins text-white text-[28px] font-bold text-center">{"Logger"}</h1>
@@ -360,19 +357,29 @@ return(
 
 </div>
 <div class={`${state.qr?'hidden':''}`}>
-<BarCode onUpdate$={ (err, resp): void => {
-         if(resp) {
-             getResults(resp.getText())
-             console.log(resp.getText())
-         }
-      }}/>
+<QRReader onResult$={(result:any) => {
+  
+  if (result) {
+    getResults(result.text)
+  }}} constraints={{
+    facingMode: 'environment'
+}}
+/>
     
+<div class={`flex flex-col mb-8 `}>
+<label class="text-white text-lg font-poppins font-medium opacity-80 ">Type ID written on QR</label>
+<input type="number"  onChange$={(e:any)=>state.input=e.target.value} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
+</input>
+</div>
+<div class="flex flex-col mb-10">
+<button onClick$={(e:any)=>(e.preventDefault(),getResults(state.input))}  class="py-5 text-lg px-6 font-semibold bg-black bg-opacity-30 rounded-md w-full shadow-2xl text-white font-poppins">{"Check"}</button>
+</div>
 
           <h1>{state.qr}</h1>
           </div>
 </form>
 </div>
-}
+
 
 
 
