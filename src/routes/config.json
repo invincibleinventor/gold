@@ -56,6 +56,12 @@
         "Cash":"cash",
         "E-Payment":"epayment (qrcode)",
         "Maybe Later":"maybe later"
+    },
+    "opts":{
+
+        "Adults":"Adults",
+        "Children":"Children",
+        "Both":"Both"
     }
 }
 }

@@ -6,7 +6,7 @@ import QRCode from "qrcode";
 
 export async function getFiles(){
 
-for(let i =300;i<=301;i++){
+for(let i =2856;i<=2857;i++){
     let originalCanvas:any;
     QRCode.toCanvas(''+i,{
         margin: 3,
