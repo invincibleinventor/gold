@@ -99,8 +99,7 @@ export const Parents = component$(()=>{
 export const Payment = component$(()=>{
   const a:any=Object.values(dt.carnival.payment)
   const eles = []
-eles.push(<option value=""></option>
-)
+
   for (let i=0;i<=a.length-1;i++){
       eles.push(<option value={a[i]}>{a[i]}</option>)
 
@@ -215,14 +214,14 @@ const payment = form.payment.value;
         }
         else{
           alert('Logged')
-          window.location.href='/done'
+          window.location.href='/scan'
         }    
 
   })
 
   const getResults = $(async (res:any) => {
 
-    const v=prompt('Admission Number')
+    const v=prompt('Roll Number')
  async function check(v:any){
   const{data,error}=await supabase.from('Mapping').select('*').eq('Adm No',v)
   if(data && data.length!=0){
@@ -242,11 +241,16 @@ const payment = form.payment.value;
     state.qr=v
     state.rest=res
     }
+    let a = "ROLL NO"
     
+    if(v && v.length>6){
+      a="ADM NO"
+    }
+
 const { data } = await supabase
 .from('Total')
 .select("*")
-.eq("ADM NO",`${v}`)
+.eq(a,`${v}`)
 if(data && data.length!=0){state.data;state.name=data[0]["STUDENT NAME"];state.id=data[0]["ADM NO"];state.class=data[0]["CLASS"];state.numbermagic=data[0]["MAGIC NUMBER"];state.numberparents=data[0]["PARENTS NUMBER"];state.numberchildren=data[0]["CHILDREN NUMBER"];state.slot=data[0]["SLOT"];state.magic=data[0]["MAGIC SHOW"];state.payment=data[0]["PAYMENT MODE"];state.parent=data[0]["PARENTS CARNIVAL"];
 const test:any = [];
 const l = ["LKG","UKG"]

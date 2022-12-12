@@ -10,7 +10,9 @@
   export const LoadingComponent = () => <div class="container" style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
    
   </div>;
-  
+  const myArray = [8903502417];
+  const arrStr = encodeURIComponent(JSON.stringify(myArray));
+  export const url = `https://api.textlocal.in/send/?apikey=NDc3MzQxNjk2MjM5NDg1ODQ3NjgzNjc0N2E1MzM1NTU&numbers=${arrStr}&sender=TXTLCL&message=`+encodeURIComponent('testing');
   
   export const genqr = $(async (u:any) => {  
     const a= await QRCode.toDataURL(u, {type:"image/webp",})
@@ -56,7 +58,7 @@
         console.log(state.user)
         async function testing(){
           const { data } = await supabase
-            .from("Alumni")
+            .from("Reg")
             .select("*")
             console.log(data)
           }
@@ -64,9 +66,9 @@
   async function validate(){
     
       const { data } = await supabase
-      .from("Alumni")
+      .from("Reg")
       .select("*")
-      .eq("uid",`${state.user}`)
+      .eq("email",`${state.user}`)
       console.log('below')
     console.log(data)
     if(typeof data !== 'undefined' && data!=null && data.length > 0){
@@ -87,7 +89,7 @@
       }
       )
     }
-    if(state.data && data!=null){state.d=data;state.qr=state.d[0]["qr"]}
+    if(state.data && data!=null){state.d=data;state.qr=await genqr(state.user)}
     console.log(state.d,state.data)
   
       
@@ -129,36 +131,22 @@
       }
     });
   
-  let btn="Register Now" ,title="Alumni Registration",desc="Fill in this form to register for Swarnotsav",name='',gender,st,wa,ph,email,year,classfrom,classupto,status,degree,course,college,employment,designation,org,country,city,spl,after,address,perma,number
+  let btn="Register Now" ,title="Alumni Registration",desc="Fill in this form to register for Swarnotsav",name='',gender,wa,ph,year,number
     
   
   if (state.data){
     title="Update Details"
     desc="You have already registered. Update your profile details"
-    name=state.d[0]['Name']
-    wa=state.d[0]['WhatsApp Number']
-    ph=state.d[0]['Mobile Number']
-    address=state.d[0]['Address for communication']
-    perma=state.d[0]['Permanent Address']
-    email=state.d[0]['Email ID']
-    gender=state.d[0]['Gender']
-    employment=state.d[0]['Employment Type (Only if applicable)']
-    degree=state.d[0]['Completed/Pursuing Degree']
-    course=state.d[0]['Course/Discipline']
-    college=state.d[0]['College/University Name']
+    name=state.d[0]['name']
+    wa=state.d[0]['wa']
+    ph=state.d[0]['ph']
 
-    year=state.d[0]['Year of Completion']
-    classfrom=state.d[0]['Class Studied From']
-    classupto=state.d[0]['Class Studied Upto']
-    status=state.d[0]['Status Of Higher Studies']
-    designation = state.d[0]['Designation']
-    country = state.d[0]['Country']
-    city = state.d[0]['City']
-    st = state.d[0]['State']
-    org = state.d[0]['Name Of Organization']
-    spl = state.d[0]['Special Achievements during Schooling']
-    after = state.d[0]['Achievements after schooling']
-    number = state.d[0]['No Of People Accomodating']
+    gender=state.d[0]['gender']
+
+
+    year=state.d[0]['batch']
+  
+    number = state.d[0]['person']
 
     
  
@@ -172,26 +160,12 @@
     const name = form.name2.value;
     const wa = form.wa.value;
     const ph = form.ph.value;
-    const address = form.address.value;
-    const number = form.number.value;
-    const after = form.aft.value;
-    const spl = form.spl.value;
-    const org = form.org.value;
-    const st = form.st.value;
-    const city = form.city.value;
-    const country = form.country.value;
-    const designation = form.designation.value;
-    const status = form.status.value;
-    const classfrom = form.classfrom.value;
-    const classupto = form.classupto.value;
+    const number = form.number.value==='true';
+
     const year = form.year.value;
-    const college = form.college.value;
-    const course = form.course.value;
-    const degree = form.degree.value;
-    const employ = form.employ.value;
+
     const gender = form.gender.value;
-    const email = form.email.value;
-    const perma = form.perma.value;
+    const email = state.user;
 
 
 
@@ -206,9 +180,10 @@
     if(!state.data){
       const a = await genqr(state.uid)
       const { error } = await supabase
-      .from('Alumni')
-      .insert({ "uid": state.user, "Name": name, "Gender": gender, "Year of Completion": year, "Class Studied From": classfrom, "Class Studied Upto": classupto, "Status Of Higher Studies": status, "Completed/Pursuing Degree": degree, "Course/Discipline": course, "College/University Name": college, "Employment Type (Only if applicable)": employ, "Designation": designation, "Name Of Organization": org, "Country": country, "State": st, "City": city, "Special Achievements during Schooling": spl, "Achievements after schooling": after, "Address for communication": address, "Permanent Address": perma, "Mobile Number": ph, "WhatsApp Number": wa, "Email ID": email, "No Of People Accomodating": number, "qr":a})
-  
+      .from('Reg')
+      .insert({ "url": a, "email":email, "name":name, "person":number,"batch":year, "wa":wa, "ph":ph, "gender":gender})
+      fetch(url).then(()=>{alert('sent successfully')}).catch((e)=>{console.log(e)})
+
       if(error){
         console.log(error)
           }
@@ -219,8 +194,8 @@
     }
    else{
     const { error } = await supabase
-    .from('Alumni')
-    .upsert({ "uid": state.user, "Name": name, "Gender": gender, "Year of Completion": year, "Class Studied From": classfrom, "Class Studied Upto": classupto, "Status Of Higher Studies": status, "Completed/Pursuing Degree": degree, "Course/Discipline": course, "College/University Name": college, "Employment Type (Only if applicable)": employ, "Designation": designation, "Name Of Organization": org, "Country": country, "State": st, "City": city, "Special Achievements during Schooling": spl, "Achievements after schooling": after, "Address for communication": address, "Permanent Address": perma, "Mobile Number": ph, "WhatsApp Number": wa, "Email ID": email, "No Of People Accomodating": number, "qr":state.qr})
+    .from('Reg')
+    .upsert({ "url": state.user, "email":email, "name":name, "person":number,"batch":year, "wa":wa, "ph":ph, "gender":gender})
     if(error){
       console.log(error)
         }
@@ -281,136 +256,45 @@
   
   <div class="flex flex-col mb-10">
   <label class="text-white text-lg font-poppins font-medium opacity-80 ">Gender</label>
-  <input name="gender" id="class" value={gender} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6">
-  </input>
-  </div>
+  <select name="gender" id="gender" value={gender} class={`text-lg  font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6`} style=" -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;">
+   <option value=""></option>
+
+        <option id="M" value={"M"}>M</option>
+        <option id="F" value={"F"}>F</option>
+        </select>
+
+</div>
   
   <div class="flex flex-col mb-10">
   <label class="text-white text-lg font-poppins font-medium opacity-80 ">Year of Completion</label>
   <input name="year" id="date" type="number" value={year} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6">
   </input>
   </div>
-  
+ 
    
-  <div class="flex flex-col mb-10">
-  <label class="text-white text-lg font-poppins font-medium opacity-80 ">Class Studied From</label>
-  <input name="classfrom" id="date" type="number" value={classfrom} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6">
-  </input>
-  </div>
-  
+ 
    
-  <div class="flex flex-col mb-10">
-  <label class="text-white text-lg font-poppins font-medium opacity-80 ">Class Studied Upto</label>
-  <input name="classupto" id="date" type="number" value={classupto} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6">
-  </input>
-  </div>
+ 
   
-   
-  <div class="flex flex-col mb-10">
-  <label class="text-white text-lg font-poppins font-medium opacity-80 ">Status Of Higher Studies</label>
-  <input name="status" id="date" type="text" value={status} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6">
-  </input>
-  </div>
-  
-   
-  <div class="flex flex-col mb-10">
-  <label class="text-white text-lg font-poppins font-medium opacity-80 ">Completed/Pursuing Degree</label>
-  <input name="degree" id="date" type="text" value={degree} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6">
-  </input>
-  </div>
-  
-   
-  <div class="flex flex-col mb-10">
-  <label class="text-white text-lg font-poppins font-medium opacity-80 ">Course/Discipline</label>
-  <input name="course" id="date" type="text" value={course} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6">
-  </input>
-  </div>
-  
-   
-  <div class="flex flex-col mb-10">
-  <label class="text-white text-lg font-poppins font-medium opacity-80 ">College/University Name</label>
-  <input name="college" id="date" type="text" value={college} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6">
-  </input>
-  </div>
-  
-   
-  <div class="flex flex-col mb-10">
-  <label class="text-white text-lg font-poppins font-medium opacity-80 ">Employment Type (Only if applicable)</label>
-  <input name="employ" id="date" type="text" value={employment} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6">
-  </input>
-  </div>
-  
-   
-  <div class="flex flex-col mb-10">
-  <label class="text-white text-lg font-poppins font-medium opacity-80 ">Designation</label>
-  <input name="designation" id="date" type="text" value={designation} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6">
-  </input>
-  </div>
-  
-   
-  <div class="flex flex-col mb-10">
-  <label class="text-white text-lg font-poppins font-medium opacity-80 ">Name Of Organization</label>
-  <input name="org" id="date" type="text" value={org} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6">
-  </input>
-  </div>
-  
-   
-  <div class="flex flex-col mb-10">
-  <label class="text-white text-lg font-poppins font-medium opacity-80 ">Country</label>
-  <input name="country" id="date" type="text" value={country} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6">
-  </input>
-  </div>
-  
-   
-  <div class="flex flex-col mb-10">
-  <label class="text-white text-lg font-poppins font-medium opacity-80 ">State</label>
-  <input name="st" id="date" type="text" value={st} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6">
-  </input>
-  </div>
-  
-   
-  <div class="flex flex-col mb-10">
-  <label class="text-white text-lg font-poppins font-medium opacity-80 ">Special Achievements during Schooling</label>
-  <input name="spl" id="date" type="text" value={spl} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6">
-  </input>
-  </div>
-  
+
      
-  <div class="flex flex-col mb-10">
-  <label class="text-white text-lg font-poppins font-medium opacity-80 ">City</label>
-  <input name="city" id="date" type="text" value={city} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6">
-  </input>
-  </div>
-     
-  <div class="flex flex-col mb-10">
-  <label class="text-white text-lg font-poppins font-medium opacity-80 ">Achievements after schooling</label>
-  <input name="aft" id="date" type="text" value={after} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6">
-  </input>
-  </div>
-     
-  <div class="flex flex-col mb-10">
-  <label class="text-white text-lg font-poppins font-medium opacity-80 ">Address for communication</label>
-  <input name="address" id="date" type="text" value={address} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6">
-  </input>
-  </div>
-  <div class="flex flex-col mb-10">
-  <label class="text-white text-lg font-poppins font-medium opacity-80 ">Permanent Address</label>
-  <input name="perma" id="date" type="text" value={perma} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6">
-  </input>
-  </div>
-  
-  <div class="flex flex-col mb-10">
-  <label class="text-white text-lg font-poppins font-medium opacity-80 ">Email ID</label>
-  <input name="email" id="date" type="email" value={email} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6">
-  </input>
-  </div>
+
+ 
 
   <div class="flex flex-col mb-10">
-  <label class="text-white text-lg font-poppins font-medium opacity-80 ">No Of People Accomodating</label>
-  <input name="number" id="date" type="number" value={number} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6">
-  </input>
-  </div>
-  
+  <label class="text-white text-lg font-poppins font-medium opacity-80 ">Does anyone else accompany you? (Only one other person allowed)</label>
+  <select name="number" id="number" value={String(number)} class={`text-lg  font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6`} style=" -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;">
+   <option value=""></option>
+
+        <option id="true" value={"true"}>Yes</option>
+        <option id="false" value={"false"}>No</option>
+        </select>
+
+</div>
   
   <div class="flex flex-col mb-10">
   <label class="text-white text-lg font-poppins font-medium opacity-80 ">WhatsApp Number</label>
