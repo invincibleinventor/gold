@@ -189,7 +189,7 @@
           }
           else{
             alert('Registered')
-            location.href='/registration'
+            location.href='/alumni'
           }
     }
    else{
