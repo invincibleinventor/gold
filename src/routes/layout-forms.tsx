@@ -5,7 +5,7 @@ export default component$(() => {
 
   return (
     <>
-      <main class="overflow-y-auto px-8 py-4  bg-[#faf2e3]">
+      <main class=" px-8 py-4  bg-[#faf2e3]">
     <section class="md:w-[639px] w-full mx-auto">
           <Slot />
 </section>
