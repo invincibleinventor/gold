@@ -239,7 +239,12 @@
       { (state.isLoggedIn) &&
       <>
         <form class={`mx-auto my-8 md:my-16 lg:my-20 rounded-xl lg:rounded-2xl p-8 md:p-16 md:px-10 bg-black bg-opacity-30  md:w-3/5 lg:w-2/4 xl:w-2/5 `} preventdefault:submit onSubmit$={handleSubmit$}>
+          <img class="w-24 h-24 mx-auto mt-5" src="/logo.jpeg" ></img>
+          <h1 class="font-sans mt-8 mb-12 text-xl font-semibold text-white text-center mx-auto">The TVS School</h1>
         {(state.isLoggedIn && state.data) &&
+
+          
+
         <img class="mx-auto mt-0 mb-10 rounded-md" src={state.qr}></img>
        }
         <h1 class="font-poppins text-white text-[28px] font-bold text-center">{title}</h1>
