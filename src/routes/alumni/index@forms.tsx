@@ -131,12 +131,12 @@
       }
     });
   
-  let btn="Register Now" ,title="Alumni Registration",desc="Fill in this form to register for Swarnotsav",willing,school,name='',gender,wa,ph,year,number
+  let btn="Register Now" ,title="TTS SWARNOTSAV - ALUMNI  REGISTRATION (23.12.22)",desc="TTS SWARNOTSAV - ALUMNI  REGISTRATION (23.12.22)",willing,school,name='',gender,wa,ph,year,number
     
   
   if (state.data){
     title="Update Details"
-    desc="You have already registered. Update your profile details"
+    desc="You have already registered. You can update your profile details if needed"
     name=state.d[0]['name']
     wa=state.d[0]['wa']
     ph=state.d[0]['ph']
@@ -148,7 +148,7 @@
   
     number = state.d[0]['person']
 school = state.d[0]['school']
-    willing = state.d[0]['willing']
+    willing =state.d[0]['willing']
  
     btn="Update Details"
   }
@@ -160,7 +160,7 @@ school = state.d[0]['school']
     const name = form.name2.value;
     const wa = form.wa.value;
     const ph = form.ph.value;
-    const number = form.number.value==='true';
+    const number = form.number.value;
 
     const year = form.year.value;
 
@@ -171,7 +171,7 @@ school = state.d[0]['school']
 
 
   
-  const willing = form.willing.value==='true';
+  const willing = form.willing.value;
   if(state.isLoggedIn){
     
   
@@ -253,24 +253,30 @@ school = state.d[0]['school']
     font-size: 11pt;
     line-height: 1.5;
     letter-spacing: 0;
-    margin-top:12px;">{desc}</h1>
+    margin-top:30px; margin-bottom:12px">{desc}</h1>
     </div>
     <div style="    border-top: 1px solid #dadce0;
   
-  width: 100%;" class="absolute left-0 my-4"></div>
+  width: 100%;" class="absolute left-0 my-3"></div>
   <div style="font-family: Roboto,Arial,sans-serif;
   font-size: 14px;
   font-weight: 400;
   letter-spacing: .2px;
-  line-height: 20px; margin-top:30px; color:#5f6368">{state.user}</div>
+  line-height: 20px; margin-top:42px; color:#5f6368">{state.user}</div>
         </div>
         </div>
         {(state.isLoggedIn && state.data) &&
 
         <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
   <label class="text-[#202124] text-[17px] font-roboto font-normal">Your QR</label>
- 
- <img class="mx-0 w-24 h-24 mt-3 mb-0 ml-0 rounded-none" src={state.qr}/>
+  
+  <div style="font-family: Roboto,Arial,sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: .2px;
+  line-height: 20px; margin-top:8px; color:#5f6368">Kindly bring a photo snap of this QR Code on the day of the event. You will also receive an SMS containing the link for this QR Code.</div>
+ <img class="mx-0 w-24 h-24 mt-5 mb-0 ml-0 rounded-none" src={state.qr}/>
+
   
   </div>
     }
@@ -313,33 +319,34 @@ school = state.d[0]['school']
  
   
 
+ 
+
   <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
-  <label class="text-[#202124] text-[17px] font-roboto font-normal">Are you willing to join golden jubilee celebration?</label>
+  <label class="text-[#202124] text-[17px] font-roboto font-normal">Are you willing to join us in the celebration?</label>
   <select name="willing" id="willing" value={String(willing)} class={`transition-all bg-white px-[2px] ease-linear duration-100  border-b border-b-neutral-300 focus:text-neutral-900 text-neutral-900 focus:border-b-2 focus:border-b-yellow-600 mt-4 outline-none rounded-none text-md pt-3 pb-2`} style=" -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;">
    <option value=""></option>
-   <option  value={"true"}>Yes</option>
+   <option value={"1"}>Yes</option>
 
-        <option  value={"false"}>No</option>
+        <option value={"2"}>No</option>
         </select>
 
 </div>
 
- 
-
-  <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
-  <label class="text-[#202124] text-[17px] font-roboto font-normal">If so, How many persons are coming?</label>
+<div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
+  <label class="text-[#202124] text-[17px] font-roboto font-normal">If yes, How many persons are coming?</label>
   <select name="number" id="number" value={String(number)} class={`transition-all bg-white px-[2px] ease-linear duration-100  border-b border-b-neutral-300 focus:text-neutral-900 text-neutral-900 focus:border-b-2 focus:border-b-yellow-600 mt-4 outline-none rounded-none text-md pt-3 pb-2`} style=" -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;">
    <option value=""></option>
-   <option id="false" value={"false"}>1</option>
+   <option value={"1"}>1</option>
 
-        <option id="true" value={"true"}>2</option>
+        <option value={"2"}>2</option>
         </select>
 
 </div>
+
 
 
   
