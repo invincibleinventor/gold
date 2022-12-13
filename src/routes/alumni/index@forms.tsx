@@ -265,14 +265,15 @@ school = state.d[0]['school']
   line-height: 20px; margin-top:30px; color:#5f6368">{state.user}</div>
         </div>
         </div>
+        {(state.isLoggedIn && state.data) &&
+
         <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
   <label class="text-[#202124] text-[17px] font-roboto font-normal">Your QR</label>
-  {(state.isLoggedIn && state.data) &&
-
+ 
  <img class="mx-0 w-24 h-24 mt-3 mb-0 ml-0 rounded-none" src={state.qr}/>
-  }
-  </div>
   
+  </div>
+    }
   <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
   <label class="text-[#202124] text-[17px] font-roboto font-normal ">Name of the Alumni<br/>(Name followed by initial in BLOCK letters)
 </label>
