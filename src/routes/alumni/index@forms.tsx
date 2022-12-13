@@ -265,21 +265,7 @@ school = state.d[0]['school']
   line-height: 20px; margin-top:42px; color:#5f6368">{state.user}</div>
         </div>
         </div>
-        {(state.isLoggedIn && state.data) &&
-
-        <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
-  <label class="text-[#202124] text-[17px] font-roboto font-normal">Your QR</label>
-  
-  <div style="font-family: Roboto,Arial,sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: .2px;
-  line-height: 20px; margin-top:8px; color:#5f6368">Kindly bring a photo snap of this QR Code on the day of the event. You will also receive an SMS containing the link for this QR Code.</div>
- <img class="mx-0 w-24 h-24 mt-5 mb-0 ml-0 rounded-none" src={state.qr}/>
-
-  
-  </div>
-    }
+      
   <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
   <label class="text-[#202124] text-[17px] font-roboto font-normal ">Name of the Alumni<br/>(Name followed by initial in BLOCK letters)
 </label>
@@ -303,7 +289,7 @@ school = state.d[0]['school']
   
 
   <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
-  <label class="text-[#202124] text-[17px] font-roboto font-normal">School Name</label>
+  <label class="text-[#202124] text-[17px] font-roboto font-normal">Name of the school</label>
   <input name="school" id="school" type="text" value={school} class="placeholder:text-neutral-500 px-[2px] transition-all ease-linear duration-100  border-b border-b-neutral-300 focus:text-neutral-900 text-neutral-900 focus:border-b-2 focus:border-b-yellow-600 mt-4 outline-none rounded-none text-md pt-3 pb-2">
   </input>
   </div>
@@ -322,7 +308,7 @@ school = state.d[0]['school']
  
 
   <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
-  <label class="text-[#202124] text-[17px] font-roboto font-normal">Willing to join  Golden jubilee celebration</label>
+  <label class="text-[#202124] text-[17px] font-roboto font-normal">Willing to join  Golden jubilee celebration on 23.12.22?</label>
   <select name="willing" id="willing" value={String(willing)} class={`transition-all bg-white px-[2px] ease-linear duration-100  border-b border-b-neutral-300 focus:text-neutral-900 text-neutral-900 focus:border-b-2 focus:border-b-yellow-600 mt-4 outline-none rounded-none text-md pt-3 pb-2`} style=" -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;">
@@ -335,7 +321,7 @@ school = state.d[0]['school']
 </div>
 
 <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
-  <label class="text-[#202124] text-[17px] font-roboto font-normal">If yes, number of persons</label>
+  <label class="text-[#202124] text-[17px] font-roboto font-normal">If yes, number of persons?</label>
   <select name="number" id="number" value={String(number)} class={`transition-all bg-white px-[2px] ease-linear duration-100  border-b border-b-neutral-300 focus:text-neutral-900 text-neutral-900 focus:border-b-2 focus:border-b-yellow-600 mt-4 outline-none rounded-none text-md pt-3 pb-2`} style=" -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;">
@@ -361,7 +347,21 @@ school = state.d[0]['school']
   <input name="ph" id="phone" type="number" value={ph} class="placeholder:text-neutral-500 px-[2px] transition-all ease-linear duration-100  border-b border-b-neutral-300 focus:text-neutral-900 text-neutral-900 focus:border-b-2 focus:border-b-yellow-600 mt-4 outline-none rounded-none text-md pt-3 pb-2">
   </input>
   </div>
- 
+   {(state.isLoggedIn && state.data) &&
+
+        <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
+  <label class="text-[#202124] text-[17px] font-roboto font-normal">Your QR</label>
+  
+  <div style="font-family: Roboto,Arial,sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: .2px;
+  line-height: 20px; margin-top:8px; color:#5f6368">Kindly bring a photo snap of this QR Code on the day of the event. You will also receive an SMS containing the link for this QR Code. Only registered people will be allowed to enter the event.</div>
+ <img class="mx-0 w-24 h-24 mt-5 mb-0 ml-0 rounded-none" src={state.qr}/>
+
+  
+  </div>
+    }
  
   
   <button type="submit" class="py-[10px] mx-0 mt-2 mx-[2px] text-lg px-6 text-lg bg-yellow-700  rounded-md w-max text-[16px] font-semibold text-white font-sans ">{btn}</button>
