@@ -15,7 +15,7 @@
   export const url = `https://api.textlocal.in/send/?apikey=NDc3MzQxNjk2MjM5NDg1ODQ3NjgzNjc0N2E1MzM1NTU&numbers=${arrStr}&sender=TXTLCL&message=`+encodeURIComponent('testing');
   
   export const genqr = $(async (u:any) => {  
-    const a= await QRCode.toDataURL(u, {type:"image/webp",})
+    const a= await QRCode.toDataURL(u, {margin:0,type:"image/webp",})
     console.log(a)
   return  a
     
@@ -242,12 +242,9 @@ school = state.d[0]['school']
     <img class="w-full h-full bg-white rounded-lg border border-neutral-300" src="/Untitled.png" ></img>
         <form class={`mx-auto  mt-3 mb-3 rounded-xl lg:rounded-2xl `} preventdefault:submit onSubmit$={handleSubmit$}>
           
-        {(state.isLoggedIn && state.data) &&
 
           
 
-        <img class="hidden mx-auto mt-0 mb-10 rounded-md" src={state.qr}></img>
-       }
        <div class="bg-white mb-3 rounded-lg border border-neutral-300 relative">
         <div class="h-3 w-full rounded-t-lg bg-yellow-600  "></div>
         <div class="py-5 px-6">        <div class="">        <h1 style="line-height:1.25;" class="font-google text-black text-[24pt]  font-normal text-left">{title}</h1>
@@ -268,7 +265,13 @@ school = state.d[0]['school']
   line-height: 20px; margin-top:30px; color:#5f6368">{state.user}</div>
         </div>
         </div>
-       
+        <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
+  <label class="text-[#202124] text-[17px] font-roboto font-normal">Your QR</label>
+  {(state.isLoggedIn && state.data) &&
+
+ <img class="mx-0 w-24 h-24 mt-3 mb-0 ml-0 rounded-none" src={state.qr}/>
+  }
+  </div>
   
   <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
   <label class="text-[#202124] text-[17px] font-roboto font-normal ">Name of the Alumni<br/>(Name followed by initial in BLOCK letters)
