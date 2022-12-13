@@ -353,7 +353,7 @@ school = state.d[0]['school']
   </input>
   </div>
    {(state.isLoggedIn && state.data) &&
- <div class=" w-max mb-3 shadow-2xl md:w-[calc(100%/2)]  h-max top-0 bottom-0 right-0 left-0 flex flex-col rounded-lg border px-7 py-6 border-neutral-300 bg-white">
+ <div class=" w-full mb-3   h-max top-0 bottom-0 right-0 left-0 flex flex-col rounded-lg border px-7 py-6 border-neutral-300 bg-white">
   <label class="text-[#202124] text-[17px] font-roboto font-normal">Your QR</label>
   
   <div style="font-family: Roboto,Arial,sans-serif;
