@@ -41,6 +41,7 @@
       // eslint-disable-next-line @typescript-eslint/no-array-constructor
       d: Array(),
       nope:'hidden',
+      popup:'hidden',
       qr:''
     });
     
@@ -62,6 +63,8 @@
             .select("*")
             console.log(data)
           }
+
+          state.popup=localStorage.getItem('popup')!
 
   async function validate(){
     
@@ -308,7 +311,7 @@ school = state.d[0]['school']
  
 
   <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
-  <label class="text-[#202124] text-[17px] font-roboto font-normal">Willing to join  Golden jubilee celebration on 23.12.22?</label>
+  <label class="text-[#202124] text-[17px] font-roboto font-normal">Would you like to participate in Golden jubilee celebration on 23.12.22?</label>
   <select name="willing" id="willing" value={String(willing)} class={`transition-all bg-white px-[2px] ease-linear duration-100  border-b border-b-neutral-300 focus:text-neutral-900 text-neutral-900 focus:border-b-2 focus:border-b-yellow-600 mt-4 outline-none rounded-none text-md pt-3 pb-2`} style=" -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;">
@@ -348,19 +351,22 @@ school = state.d[0]['school']
   </input>
   </div>
    {(state.isLoggedIn && state.data) &&
-
-        <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
+   <div class="h-screen w-screen z-[100] absolute bg-black bg-opacity-30">   
+   <div class="relative w-full h-full">     <div class="absolute lg:w-[calc(100%/3)] xl:w-[calc(100%/4)] shadow-2xl md:w-[calc(100%/2)] w-[80%] h-max top-0 bottom-0 right-0 left-0 flex flex-col my-auto mx-auto  rounded-lg border px-7 py-6 border-neutral-300 bg-white">
   <label class="text-[#202124] text-[17px] font-roboto font-normal">Your QR</label>
   
   <div style="font-family: Roboto,Arial,sans-serif;
   font-size: 14px;
   font-weight: 400;
   letter-spacing: .2px;
-  line-height: 20px; margin-top:8px; color:#5f6368">Kindly bring a photo snap of this QR Code on the day of the event. You will also receive an SMS containing the link for this QR Code. Only registered people will be allowed to enter the event.</div>
+  line-height: 20px; margin-top:8px; color:#5f6368" class="l ">You are requested to produce a photo snap of this QR Code on the day of the event. You will also receive an SMS containing the link for this QR Code. Only registered people will be allowed to participate in the event.</div>
  <img class="mx-0 w-24 h-24 mt-5 mb-0 ml-0 rounded-none" src={state.qr}/>
 
   
   </div>
+  </div>
+  </div>
+
     }
  
   
