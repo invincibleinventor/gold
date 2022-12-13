@@ -134,7 +134,7 @@
       }
     });
   
-  let btn="Register Now" ,title="TTS SWARNOTSAV - ALUMNI  REGISTRATION (23.12.22)",desc="TTS SWARNOTSAV - ALUMNI  REGISTRATION (23.12.22)",willing,school,name='',gender,wa,ph,year,number
+  let btn="Register Now" ,title="TTS SWARNOTSAV - ALUMNI  REGISTRATION (23.12.22) FOR GOLDEN JUBILEE CELEBRATION",desc="TTS SWARNOTSAV - ALUMNI  REGISTRATION (23.12.22) FOR GOLDEN JUBILEE CELEBRATION",willing,school,name='',gender,wa,ph,year,number
     
   
   if (state.data){
