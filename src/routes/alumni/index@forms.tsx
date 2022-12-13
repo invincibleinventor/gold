@@ -268,6 +268,8 @@ school = state.d[0]['school']
   line-height: 20px; margin-top:42px; color:#5f6368">{state.user}</div>
         </div>
         </div>
+
+
       
   <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
   <label class="text-[#202124] text-[17px] font-roboto font-normal ">Name of the Alumni<br/>(Name followed by initial in BLOCK letters)
@@ -351,8 +353,7 @@ school = state.d[0]['school']
   </input>
   </div>
    {(state.isLoggedIn && state.data) &&
-   <div class="h-screen w-screen z-[100] absolute bg-black bg-opacity-30">   
-   <div class="relative w-full h-full">     <div class="absolute lg:w-[calc(100%/3)] xl:w-[calc(100%/4)] shadow-2xl md:w-[calc(100%/2)] w-[80%] h-max top-0 bottom-0 right-0 left-0 flex flex-col my-auto mx-auto  rounded-lg border px-7 py-6 border-neutral-300 bg-white">
+ <div class=" w-max mb-3 shadow-2xl md:w-[calc(100%/2)]  h-max top-0 bottom-0 right-0 left-0 flex flex-col rounded-lg border px-7 py-6 border-neutral-300 bg-white">
   <label class="text-[#202124] text-[17px] font-roboto font-normal">Your QR</label>
   
   <div style="font-family: Roboto,Arial,sans-serif;
@@ -364,9 +365,7 @@ school = state.d[0]['school']
 
   
   </div>
-  </div>
-  </div>
-
+  
     }
  
   
