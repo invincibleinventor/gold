@@ -322,7 +322,7 @@ school = state.d[0]['school']
  
 
   <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
-  <label class="text-[#202124] text-[17px] font-roboto font-normal">Are you willing to join us in the celebration?</label>
+  <label class="text-[#202124] text-[17px] font-roboto font-normal">Willing to join  Golden jubilee celebration</label>
   <select name="willing" id="willing" value={String(willing)} class={`transition-all bg-white px-[2px] ease-linear duration-100  border-b border-b-neutral-300 focus:text-neutral-900 text-neutral-900 focus:border-b-2 focus:border-b-yellow-600 mt-4 outline-none rounded-none text-md pt-3 pb-2`} style=" -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;">
@@ -335,7 +335,7 @@ school = state.d[0]['school']
 </div>
 
 <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
-  <label class="text-[#202124] text-[17px] font-roboto font-normal">If yes, How many persons are coming?</label>
+  <label class="text-[#202124] text-[17px] font-roboto font-normal">If yes, number of persons</label>
   <select name="number" id="number" value={String(number)} class={`transition-all bg-white px-[2px] ease-linear duration-100  border-b border-b-neutral-300 focus:text-neutral-900 text-neutral-900 focus:border-b-2 focus:border-b-yellow-600 mt-4 outline-none rounded-none text-md pt-3 pb-2`} style=" -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;">
