@@ -240,7 +240,7 @@ school = state.d[0]['school']
       { (state.isLoggedIn) &&
       <>
     <img class="w-full h-full bg-white rounded-lg border border-neutral-300" src="/Untitled.png" ></img>
-        <form class={`mx-auto  mt-3 rounded-xl lg:rounded-2xl `} preventdefault:submit onSubmit$={handleSubmit$}>
+        <form class={`mx-auto  mt-3 mb-3 rounded-xl lg:rounded-2xl `} preventdefault:submit onSubmit$={handleSubmit$}>
           
         {(state.isLoggedIn && state.data) &&
 
