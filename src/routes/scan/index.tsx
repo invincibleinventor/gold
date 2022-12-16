@@ -7,6 +7,7 @@ import dt from '../config.json'
 import { $ } from '@builder.io/qwik';
 import { supabase } from '~/services/firebase';
 import { QRReader } from '~/integrations/react/registration';
+import { DocumentHead } from '@builder.io/qwik-city';
 
 export const users = ['invincibleinventor@gmail.com','admin@thetvs.com','bhargavanrajeshr@gmail.com','aish160490@gmail.com','erp.thetvs2021@gmail.com','srameshnba@gmail.com','ttsparentscarnival@gmail.com']
 
@@ -410,3 +411,6 @@ return(
     </>
 )
 })
+export const head: DocumentHead = {
+  title: 'Missed out entries - The TVS School',
+};
