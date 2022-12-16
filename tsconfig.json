@@ -7,10 +7,12 @@
     "jsx": "react-jsx",
     "jsxImportSource": "@builder.io/qwik",
     "strict": true,
+    "strictPropertyInitialization": false,
+    "skipLibCheck": true, 
+    "suppressImplicitAnyIndexErrors": true,
     "resolveJsonModule": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "skipLibCheck": true,
     "incremental": true,
     "isolatedModules": true,
     "outDir": "tmp",
@@ -21,9 +23,6 @@
     }
   },
   "files": ["./.eslintrc.cjs"],
-  "settings":{
-    "typescript.validate.enable": true,
-
-  },
+ 
   "include": ["src"]
 }
