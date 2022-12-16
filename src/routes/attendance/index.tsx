@@ -168,7 +168,7 @@ return(
 
           <h1>{state.qr}</h1>
 </form>
-<h1 class="mt-8 text-white text-center mx-auto font-semibold">Or</h1>
+<h1 class="mt-8 text-white text-center mx-auto font-semibold mb-8 lg:mb-0">Or</h1>
           <div class={`flex flex-col mb-8 `}>
 <label class="text-white text-lg font-poppins font-medium opacity-80 ">Type ID written on QR</label>
 <input type="number"  onChange$={(e:any)=>state.input=e.target.value} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
@@ -177,7 +177,7 @@ return(
 <div class="flex flex-col mb-10">
 <button onClick$={(e:any)=>(e.preventDefault(),getResults(state.input))}  class="py-5 text-lg px-6 font-semibold bg-black bg-opacity-30 rounded-md w-full shadow-2xl text-white font-poppins">{"Check with ID"}</button>
 </div>
-<h1 class="mt-8 text-white text-center mx-auto font-semibold">Or</h1>
+<h1 class="mt-8 text-white text-center mx-auto font-semibold mb-8 lg:mb-0">Or</h1>
 <div class={`flex flex-col mb-8 `}>
 <label class="text-white text-lg font-poppins font-medium opacity-80 ">Type Admission Number</label>
 <input type="number"  onChange$={(e:any)=>state.input=e.target.value} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
