@@ -53,15 +53,34 @@ return(
     {((stoot.isLoggedIn) && (users.includes(stoot.user))) &&
 <div>
     
-<form class={`mx-auto my-8 md:my-16 lg:my-20 rounded-xl lg:rounded-2xl p-8 md:p-16 md:px-10 bg-black bg-opacity-30  md:w-3/5 lg:w-2/4 xl:w-2/5 `} preventdefault:submit onSubmit$={handleSubmit$}>
-      <h1 class="font-poppins text-white text-[28px] font-bold text-center">{"Spot Registration"}</h1>
-      <h1 class="font-poppins text-white opacity-80 text-lg my-4 leading-relaxed mt-2 md:mt-3  font-medium text-center mb-10">{"Register people on the spot. No qr required"}</h1>
-      
+<form class={`mx-auto rounded-lg mb-3 mt-3`} preventdefault:submit onSubmit$={handleSubmit$}>
+<div class="bg-white mb-3 rounded-lg border border-neutral-300 relative">
+           <div class="h-3 w-full rounded-t-lg bg-yellow-600  "></div>
+           <div class="py-5 px-6">        <div class="">        <h1 style="line-height:1.25;" class="font-google text-black text-[24pt]  font-normal text-left">{"Spot Registration"}</h1>
+           <h1 style="font-family: 'Roboto';
+       font-weight: 400;
+       font-size: 11pt;
+       line-height: 1.5;
+       letter-spacing: 0;
+       margin-top:30px; margin-bottom:12px">{"Register people on the spot. No qr required"}</h1>
+       </div>
+       <div style="    border-top: 1px solid #dadce0;
+     
+     width: 100%;" class="absolute left-0 my-3"></div>
+     <div style="font-family: Roboto,Arial,sans-serif;
+     font-size: 14px;
+     font-weight: 400;
+     letter-spacing: .2px;
+     line-height: 20px; margin-top:42px; color:#5f6368">{stoot.user}</div>
+           </div>
+           </div>
+   
+   
       <div>
 
-<div class="flex flex-col mb-10">
-<label class="text-white text-lg font-poppins font-medium opacity-80 ">Name</label>
-<input  name="name2" id="name" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
+<div class="co">
+<label class="coin">Name</label>
+<input  name="name2" id="name" class="coout"  >
 </input>
 </div>
 
@@ -69,28 +88,28 @@ return(
 
 
 
-<div class="flex flex-col mb-10">
-<label class="text-white text-lg font-poppins font-medium opacity-80 ">Phone Number</label>
-<input name="adm" id="adm" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
+<div class="co">
+<label class="coin">Phone Number</label>
+<input name="adm" id="adm" class="coout"  >
+</input>
+</div>
+
+
+<div class="co">
+<label class="coin">Adults Number</label>
+<input name="parents" id="parents" class="coout"  >
+</input>
+</div>
+
+<div class="co">
+<label class="coin">Children Number</label>
+<input   name="child" id="child" class="coout"  >
 </input>
 </div>
 
 
 <div class="flex flex-col mb-10">
-<label class="text-white text-lg font-poppins font-medium opacity-80 ">Adults Number</label>
-<input name="parents" id="parents" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
-</input>
-</div>
-
-<div class="flex flex-col mb-10">
-<label class="text-white text-lg font-poppins font-medium opacity-80 ">Children Number</label>
-<input   name="child" id="child" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
-</input>
-</div>
-
-
-<div class="flex flex-col mb-10">
-<button type="submit" class="py-5 text-lg px-6 font-semibold bg-black bg-opacity-30 rounded-md w-full shadow-2xl text-white font-poppins">{"Log this participant"}</button>
+<button type="submit" class="subm">{"Log this participant"}</button>
 </div>
 </div>
 

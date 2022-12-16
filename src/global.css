@@ -7,6 +7,25 @@
  @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.co{
+  @apply flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white;
+}
+
+.coin{
+  @apply text-[#202124] text-[17px] font-roboto font-normal;
+}
+
+.subm{
+ @apply py-[10px] mx-0 mt-2 mx-[2px] text-lg px-6 text-lg bg-yellow-700  rounded-md w-max text-[16px] font-semibold text-white font-sans 
+}
+
+.coout{
+  @apply placeholder:text-neutral-500 px-[2px] transition-all ease-linear duration-100  border-b border-b-neutral-300 focus:text-neutral-900 text-neutral-900 focus:border-b-2 focus:border-b-yellow-600 mt-4 outline-none rounded-none  pt-3 pb-2;
+}
+
+.cout[disabled]{background-color: #000000;}
+
+
 
 @font-face {
   font-family: 'Google Sans';
