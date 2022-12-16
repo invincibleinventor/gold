@@ -5,7 +5,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '~/services/firebase';
 import { supabase } from '~/services/firebase';
 import { $ } from '@builder.io/qwik';
-export const users = ['invincibleinventor@gmail.com','bhargavanrajeshr@gmail.com','aish160490@gmail.com','erp.thetvs2021@gmail.com','srameshnba@gmail.com','goldenjubileeprince@gmail.com']
+export const users = ['invincibleinventor@gmail.com','admin@thetvs.com','bhargavanrajeshr@gmail.com','aish160490@gmail.com','erp.thetvs2021@gmail.com','srameshnba@gmail.com','ttsparentscarnival@gmail.com']
 
 
 export default component$(() => {
