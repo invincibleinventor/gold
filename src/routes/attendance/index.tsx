@@ -29,7 +29,8 @@ export default component$(() => {
     adm:0,
     class:'',
     adults:0,
-    children:0
+    children:0,
+    input:''
   })
    
     const fetch = $(async() => {
@@ -68,6 +69,15 @@ const getResults  = $(async (res:any)=>{
    }
 })
 
+const getAdm  = $(async (res:any)=>{
+state.qr = res
+  state.adm=res
+
+ await fetch()
+  }
+)
+
+
 
 
 const handleSubmit$ = $(async (event:any)=>{
@@ -98,7 +108,8 @@ return(
     {((stoot.isLoggedIn) && (users.includes(stoot.user))) &&
 <div>
     
-<form class={`mx-auto my-8 md:my-16 lg:my-20 rounded-xl lg:rounded-2xl p-8 md:p-16 md:px-10 bg-black bg-opacity-30  md:w-3/5 lg:w-2/4 xl:w-2/5 `} preventdefault:submit onSubmit$={handleSubmit$}>
+<div class={`mx-auto my-8 md:my-16 lg:my-20 rounded-xl lg:rounded-2xl p-8 md:p-16 md:px-10 bg-black bg-opacity-30  md:w-3/5 lg:w-2/4 xl:w-2/5 `} preventdefault:submit onSubmit$={handleSubmit$}>
+  <form>
       <h1 class="font-poppins text-white text-[28px] font-bold text-center">{"Logger"}</h1>
       <h1 class="font-poppins text-white opacity-80 text-lg my-4 leading-relaxed mt-2 md:mt-3  font-medium text-center mb-10">{"Log the details of the participants"}</h1>
       
@@ -151,11 +162,31 @@ return(
             facingMode: 'environment'
         }}
         />
-          <h1 class="mt-8 text-white text-center mx-auto font-semibold">Or</h1>
-
+          
 </div>
+
+
           <h1>{state.qr}</h1>
 </form>
+<h1 class="mt-8 text-white text-center mx-auto font-semibold">Or</h1>
+          <div class={`flex flex-col mb-8 `}>
+<label class="text-white text-lg font-poppins font-medium opacity-80 ">Type ID written on QR</label>
+<input type="number"  onChange$={(e:any)=>state.input=e.target.value} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
+</input>
+</div>
+<div class="flex flex-col mb-10">
+<button onClick$={(e:any)=>(e.preventDefault(),getResults(state.input))}  class="py-5 text-lg px-6 font-semibold bg-black bg-opacity-30 rounded-md w-full shadow-2xl text-white font-poppins">{"Check with ID"}</button>
+</div>
+<h1 class="mt-8 text-white text-center mx-auto font-semibold">Or</h1>
+<div class={`flex flex-col mb-8 `}>
+<label class="text-white text-lg font-poppins font-medium opacity-80 ">Type Admission Number</label>
+<input type="number"  onChange$={(e:any)=>state.input=e.target.value} class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
+</input>
+</div>
+<div class="flex flex-col mb-10">
+<button onClick$={async (e:any)=>(e.preventDefault(),getAdm(state.input))}  class="py-5 text-lg px-6 font-semibold bg-black bg-opacity-30 rounded-md w-full shadow-2xl text-white font-poppins">{"Check with Admission Number"}</button>
+</div>
+</div>
 </div>
 }
 

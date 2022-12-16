@@ -115,7 +115,7 @@ export const Payment = component$(()=>{
 })
 
 
-export async function login(){
+/*export async function login(){
   const { data, error } = await supabase.auth.signInWithPassword({ email: 'admin@thetvs.com', password: '12345678', })
   console.log(data)
   if(error){
@@ -125,7 +125,7 @@ export async function login(){
     return data?.user?.email
 
   }
-  }
+  }*/
 
 export default component$(() => {
   const stoot = useStore({
@@ -136,10 +136,7 @@ export default component$(() => {
     onAuthStateChanged(auth, async (user) => {
       stoot.isLoggedIn = !!user;
       if(user?.email!=null && user?.email != undefined){stoot.user = user?.email}else{
-      const a=await login()
-      if(a)
-      stoot.user=a
-      stoot.isLoggedIn=true
+      
       
       }
 
