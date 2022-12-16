@@ -4,7 +4,6 @@ import { useStore } from '@builder.io/qwik';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '~/services/firebase';
 import { supabase } from '~/services/firebase';
-import { QRReader } from '~/integrations/react/registration';
 import { $ } from '@builder.io/qwik';
 export const users = ['invincibleinventor@gmail.com','bhargavanrajeshr@gmail.com','aish160490@gmail.com','erp.thetvs2021@gmail.com','srameshnba@gmail.com','goldenjubileeprince@gmail.com']
 
@@ -23,23 +22,6 @@ export default component$(() => {
   })
  
 
-  const state = useStore({
-    qr:'',
-    name:'',
-    adm:0,
-    class:'',
-    adults:0,
-    children:0
-  })
-   
-    const fetch = $(async() => {
-        
-       
-    })
-const getResults  = $(async (res:any)=>{
-   
-   
-})
 
 
 
