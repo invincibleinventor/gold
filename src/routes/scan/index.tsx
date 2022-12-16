@@ -135,10 +135,7 @@ export default component$(() => {
   useClientEffect$(() => {
     onAuthStateChanged(auth, async (user) => {
       stoot.isLoggedIn = !!user;
-      if(user?.email!=null && user?.email != undefined){stoot.user = user?.email}else{
-      
-      
-      }
+      if(user?.email!=null && user?.email != undefined){stoot.user = user?.email}
 
     })
   })

@@ -21,5 +21,9 @@
     }
   },
   "files": ["./.eslintrc.cjs"],
+  "settings":{
+    "typescript.validate.enable": true,
+
+  },
   "include": ["src"]
 }
