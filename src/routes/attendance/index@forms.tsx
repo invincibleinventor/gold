@@ -1,7 +1,7 @@
 //@ts-ignore
 import { component$, useClientEffect$ } from '@builder.io/qwik';
 import { useStore } from '@builder.io/qwik';
-import { onAuthStateChanged } from 'firebase/auth';
+import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from 'firebase/auth';
 import { auth } from '~/services/firebase';
 import { supabase } from '~/services/firebase';
 import { QRReader } from '~/integrations/react/registration';
@@ -13,7 +13,9 @@ export const users = ['invincibleinventor@gmail.com','bhargavanrajeshr@gmail.com
 export default component$(() => {
   const stoot = useStore({
     isLoggedIn:false,
-    user:''
+    user:'',
+    loading:false
+
   })
   useClientEffect$(() => {
     onAuthStateChanged(auth, (user) => {
@@ -22,6 +24,30 @@ export default component$(() => {
 
     })
   })
+  const handleGoogleAuth = $(async () => {
+    stoot.loading = true;
+    try {
+      await signInWithPopup(auth, new GoogleAuthProvider()).then((user)=>{
+        async function upload(){
+       const {error } =  await supabase
+        .from('users')
+        .insert({id:user.user.uid,email:user.user.email})
+        if(error){
+console.log(error)
+        }
+        }
+        
+        upload()
+      });
+      
+
+    } catch (error: any) {
+      alert(error.message);
+    } finally {
+      stoot.loading = false;
+    }
+  });
+
  
 
   const state = useStore({
@@ -108,8 +134,8 @@ return(
 
 
     {(!(stoot.isLoggedIn) && !(users.includes(stoot.user))) &&
-    <h1 class="my-4 text-2xl text-white font-semibold font-poppins mx-auto">No Admin Access</h1>
-    }
+            <button class="subm" onClick$={()=>handleGoogleAuth()}>Sign in with Google</button>    }
+          
     {((stoot.isLoggedIn) && (users.includes(stoot.user))) &&
 <div>
     

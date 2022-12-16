@@ -1,7 +1,7 @@
 //@ts-ignore
 import { component$, useClientEffect$ } from '@builder.io/qwik';
 import { useStore } from '@builder.io/qwik';
-import { onAuthStateChanged } from 'firebase/auth';
+import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from 'firebase/auth';
 import { auth } from '~/services/firebase';
 import dt from '../config.json'
 import { $ } from '@builder.io/qwik';
@@ -130,7 +130,8 @@ export const Payment = component$(()=>{
 export default component$(() => {
   const stoot = useStore({
     isLoggedIn:false,
-    user:''
+    user:'',
+    loading:false
   })
   useClientEffect$(() => {
     onAuthStateChanged(auth, async (user) => {
@@ -139,6 +140,33 @@ export default component$(() => {
 
     })
   })
+
+  const handleGoogleAuth = $(async () => {
+    stoot.loading = true;
+    try {
+      await signInWithPopup(auth, new GoogleAuthProvider()).then((user)=>{
+        async function upload(){
+       const {error } =  await supabase
+        .from('users')
+        .insert({id:user.user.uid,email:user.user.email})
+        if(error){
+console.log(error)
+        }
+        }
+        
+        upload()
+      });
+      
+
+    } catch (error: any) {
+      alert(error.message);
+    } finally {
+      stoot.loading = false;
+    }
+  });
+
+
+
   const state = useStore({
     hidden:true,
     name:'',
@@ -293,8 +321,8 @@ return(
           <div class="mx-auto w-full">
 
           {(!(stoot.isLoggedIn) && !(users.includes(stoot.user))) &&
-    <h1 class="my-4 text-2xl text-white font-semibold font-poppins mx-auto">No Admin Access</h1>
-    }
+            <button class="subm" onClick$={()=>handleGoogleAuth()}>Sign in with Google</button>    }
+    
     {((stoot.isLoggedIn) && (users.includes(stoot.user))) &&
    
 <div>

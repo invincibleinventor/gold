@@ -17,7 +17,7 @@ export default component$(() => {
   </div>
   <div class="space-y-4 flex flex-col co">
   <label class="coin">For adding missed out entries (our school)</label>
-  <Link class="subm" href="/scan">Our school missed out</Link>
+  <Link class="subm" href="/scan">Missed out (Our school)</Link>
   </div>
  </div>
   );
