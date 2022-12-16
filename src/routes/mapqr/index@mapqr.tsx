@@ -118,7 +118,7 @@ for(let i =2580;i<=2582;i++){
 }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    function downloadURI(uri:any, name:any) {
+  /*  function downloadURI(uri:any, name:any) {
 
         const link = document.createElement("a");
         link.download = name;
@@ -127,7 +127,7 @@ for(let i =2580;i<=2582;i++){
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-      }
+      }*/
 }
 
 

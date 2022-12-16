@@ -189,10 +189,10 @@ if(parents.value==true){
 }
 const payment = form.payment.value;
 
-    let dts = new Date()
-    const date = new Date()
+   // let dts = new Date()
+    //const date = new Date()
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    dts= new Date(date.getTime() - date.getTimezoneOffset()*60000);
+    //dts= new Date(date.getTime() - date.getTimezoneOffset()*60000);
     const {data}=await supabase.from('Total').select('*').eq('ADM NO',adm)
     const b=data?data:[]
     if(state.qr){

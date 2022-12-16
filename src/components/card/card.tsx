@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { component$, useClientEffect$, useStore } from "@builder.io/qwik"
+import { component$ } from "@builder.io/qwik"
 import { Link } from "@builder.io/qwik-city"
-import { onAuthStateChanged } from "firebase/auth"
-import { auth } from "~/services/firebase"
-import { supabase } from "~/services/firebase"
+//import { onAuthStateChanged } from "firebase/auth"
+//import { auth } from "~/services/firebase"
+//import { supabase } from "~/services/firebase"
 export default component$(({title,desc, src, url}:any) => {
    
 return(
