@@ -1,6 +1,6 @@
-// @ts-ignore
+// @ts-nocheck
 {/* 
-  // @ts-ignore */}
+  // @ts-nocheck */}
 
   import { $, useClientEffect$, component$, useStore } from '@builder.io/qwik';
   import { supabase } from '../../services/firebase';
@@ -134,12 +134,12 @@
       }
     });
   
-  let btn="Register Now" ,title="TTS SWARNOTSAV - ALUMNI  REGISTRATION FOR GOLDEN JUBILEE CELEBRATION (23.12.22)",desc="TTS SWARNOTSAV - ALUMNI  REGISTRATION FOR GOLDEN JUBILEE CELEBRATION (23.12.22)",willing,school,name='',gender,wa,ph,year,number
+  let btn="Register Now" ,title="Registrations Closed",desc="Registrations for this form has already been closed.",willing,school,name='',gender,wa,ph,year,number
     
   
   if (state.data){
-    title="Update Details"
-    desc="You have already registered. You can update your profile details if needed"
+    title="You have registered"
+    desc="You have already registered. Please read below to learn further"
     name=state.d[0]['name']
     wa=state.d[0]['wa']
     ph=state.d[0]['ph']
@@ -271,7 +271,7 @@ school = state.d[0]['school']
 
 
       
-  <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
+  <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white hidden">
   <label class="text-[#202124] text-[17px] font-roboto font-normal ">Name of the Alumni<br/>(Name followed by initial in BLOCK letters)
 </label>
   <input name="name2" id="name" placeholder="Your Answer" class="placeholder:text-neutral-500 px-[2px] transition-all ease-linear duration-100  border-b border-b-neutral-300 focus:text-neutral-900 text-neutral-900 focus:border-b-2 focus:border-b-yellow-600 mt-4 outline-none rounded-none text-md pt-3 pb-2 " value={name} >
@@ -280,7 +280,7 @@ school = state.d[0]['school']
   
   
   
-  <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
+  <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white hidden">
   <label class="text-[#202124] text-[17px] font-roboto font-normal ">Gender</label>
   <select name="gender" id="gender" value={gender} class={' transition-all bg-white px-[2px] ease-linear duration-100  border-b border-b-neutral-300 focus:text-neutral-900 text-neutral-900 focus:border-b-2 focus:border-b-yellow-600 mt-4 outline-none rounded-none text-md pt-3 pb-2'} style=" -webkit-appearance: none;
      ">
@@ -293,13 +293,13 @@ school = state.d[0]['school']
 </div>
   
 
-  <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
+  <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white hidden">
   <label class="text-[#202124] text-[17px] font-roboto font-normal">Name of the school</label>
   <input name="school" id="school" type="text" value={school} class="placeholder:text-neutral-500 px-[2px] transition-all ease-linear duration-100  border-b border-b-neutral-300 focus:text-neutral-900 text-neutral-900 focus:border-b-2 focus:border-b-yellow-600 mt-4 outline-none rounded-none text-md pt-3 pb-2">
   </input>
   </div>
  
-  <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
+  <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white hidden">
   <label class="text-[#202124] text-[17px] font-roboto font-normal">Batch</label>
   <input name="year" id="date" type="number" value={year} class="placeholder:text-neutral-500 px-[2px] transition-all ease-linear duration-100  border-b border-b-neutral-300 focus:text-neutral-900 text-neutral-900 focus:border-b-2 focus:border-b-yellow-600 mt-4 outline-none rounded-none text-md pt-3 pb-2">
   </input>
@@ -312,7 +312,7 @@ school = state.d[0]['school']
 
  
 
-  <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
+  <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white hidden">
   <label class="text-[#202124] text-[17px] font-roboto font-normal">Would you like to participate in Golden jubilee celebration on 23.12.22?</label>
   <select name="willing" id="willing" value={String(willing)} class={`transition-all bg-white px-[2px] ease-linear duration-100  border-b border-b-neutral-300 focus:text-neutral-900 text-neutral-900 focus:border-b-2 focus:border-b-yellow-600 mt-4 outline-none rounded-none text-md pt-3 pb-2`} style=" -webkit-appearance: none;
       -moz-appearance: none;
@@ -325,7 +325,7 @@ school = state.d[0]['school']
 
 </div>
 
-<div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
+<div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white hidden">
   <label class="text-[#202124] text-[17px] font-roboto font-normal">If yes, number of persons? (Maximum 1 person is allowed to accompany you)</label>
   <select name="number" id="number" value={String(number)} class={`transition-all bg-white px-[2px] ease-linear duration-100  border-b border-b-neutral-300 focus:text-neutral-900 text-neutral-900 focus:border-b-2 focus:border-b-yellow-600 mt-4 outline-none rounded-none text-md pt-3 pb-2`} style=" -webkit-appearance: none;
       -moz-appearance: none;
@@ -341,13 +341,13 @@ school = state.d[0]['school']
 
 
   
-<div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
+<div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white hidden">
   <label class="text-[#202124] text-[17px] font-roboto font-normal">WhatsApp Number</label>
   <input name="wa" id="whatsapp" type="number" value={wa} class="placeholder:text-neutral-500 px-[2px] transition-all ease-linear duration-100  border-b border-b-neutral-300 focus:text-neutral-900 text-neutral-900 focus:border-b-2 focus:border-b-yellow-600 mt-4 outline-none rounded-none text-md pt-3 pb-2">
   </input>
   </div>
  
-  <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white">
+  <div class="flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white hidden">
   <label class="text-[#202124] text-[17px] font-roboto font-normal">Phone Number</label>
   <input name="ph" id="phone" type="number" value={ph} class="placeholder:text-neutral-500 px-[2px] transition-all ease-linear duration-100  border-b border-b-neutral-300 focus:text-neutral-900 text-neutral-900 focus:border-b-2 focus:border-b-yellow-600 mt-4 outline-none rounded-none text-md pt-3 pb-2">
   </input>
@@ -369,7 +369,7 @@ school = state.d[0]['school']
     }
  
   
-  <button type="submit" class="py-[10px] mx-0 mt-2 mx-[2px] text-lg px-6 text-lg bg-yellow-700  rounded-md w-max text-[16px] font-semibold text-white font-sans ">{btn}</button>
+  <button type="submit" disabled class="py-[10px] hidden mx-0 mt-2 mx-[2px] text-lg px-6 text-lg bg-yellow-700  rounded-md w-max text-[16px] font-semibold text-white font-sans ">{btn}</button>
   
         </form>
       

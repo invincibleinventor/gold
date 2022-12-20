@@ -16,8 +16,6 @@
     "incremental": true,
     "isolatedModules": true,
     "outDir": "tmp",
-    "noEmit": true,
-    "noUnusedLocals": true,
 
     "types": ["node", "vite/client"],
     "paths": {
