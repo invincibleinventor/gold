@@ -8,7 +8,7 @@ export async function getData(){
     return data
 }
 export async function getFiles(){
-    let data=await getData()
+    const data=await getData()
 console.log(data)
 const b=data!=null?data:[]
 for(let i =0;i<=b.length-1;i++){
