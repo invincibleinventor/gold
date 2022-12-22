@@ -113,7 +113,7 @@ const handleSubmit$ = $(async (event:any)=>{
     let dts = new Date()
     const date = new Date()
     dts= new Date(date.getTime());
-   const {data,error}  = await supabase.from('allog').upsert({
+   const {error}  = await supabase.from('allog').upsert({
         "name":name,"email":email,"ph":number,"persons":persons,"time":dts })
         if(error){alert(error);console.log(error)}
         else{alert('Logged Data')}

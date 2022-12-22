@@ -19,15 +19,10 @@ console.log(err)
         }
         else{
            // console.log(data)
-            let a = b[i]
+            const a = b[i]
             a["url"]=data
            // console.log(a)
-            async function update(){
-               const {data,error} =  await supabase.from('Reg').upsert(a);
-               if(error){
-                console.log(error)
-               }
-            }
+            
            // update()
         }
     })
@@ -69,9 +64,9 @@ if(context!=null){
                         console.log(error)
                        }
                     }
-                    update()
+                    update()*/
                downloadURI(canvas.toDataURL(),b[i]['ph'])
-*/
+
         }
     })
     
