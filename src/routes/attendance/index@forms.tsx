@@ -57,29 +57,31 @@ console.log(error)
     class:'',
     adults:0,
     children:0,
-    input:''
+    input:'',
+    number:0,
+    parts:0,
+    email:''
   })
    
-    const fetch = $(async(res:any='ADM NO') => {
-        const {data,error} = await supabase.from('Total').select('*').eq(res,state.adm)
+    const fetch = $(async() => {
+        const {data,error} = await supabase.from('Reg').select('*').eq('ph',state.number)
         if(error){
     
             alert(error)
         }
         else{
             if(data){
-                state.name=String(data[0]["STUDENT NAME"])
-                state.class=String(data[0]["CLASS"])
-                state.adm=Number(data[0]["ADM NO"])
-                state.adults=Number(data[0]["PARENTS NUMBER"])
-                state.children=Number(data[0]["CHILDREN NUMBER"])
+                state.name=String(data[0]["name"])
+                state.number=Number(data[0]["ph"])
+                state.parts=Number(data[0]["person"])
+                state.email=String(data[0]["email"])
     
             }
         }
     })
 const getResults  = $(async (res:any)=>{
     state.qr = res
-   const {data,error}= await supabase.from('Mapping').select('*').eq('ID',Number(res))
+   const {data,error}= await supabase.from('Reg').select('*').eq('ph',Number(res))
    if(error){
     alert(error)
 
@@ -89,24 +91,14 @@ const getResults  = $(async (res:any)=>{
    else{
     if(data){
         console.log(data[0])
-    state.adm=Number(data[0]["Adm No"])
+    state.number=Number(data[0]["ph"])
 
    await fetch()
     }
    }
 })
 
-const getAdm  = $(async (res:any)=>{
-  let nodename = 'ADM NO'
-  if(res.length<=6){
-    nodename='ROLL NO'
-  }
-state.qr = res
-  state.adm=res
 
- await fetch(nodename)
-  }
-)
 
 
 
@@ -115,16 +107,16 @@ const handleSubmit$ = $(async (event:any)=>{
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const name = form.name2.value;
-    const classs=form.class.value;
-    const adm=form.adm.value;
-    const parents = form.parents.value;
-    const children = form.child.value;
+    const email=form.email.value;
+    const number=form.number.value;
+    const persons = form.persons.value;
     let dts = new Date()
     const date = new Date()
     dts= new Date(date.getTime());
-   await supabase.from('Log').upsert({
-        "NAME":name,"CLASS":classs,"ADM NO":adm,"ADULTS":parents,"CHILDREN":children ,"TIME":dts })
-        alert('Logged Data')  
+   const {data,error}  = await supabase.from('allog').upsert({
+        "name":name,"email":email,"ph":number,"persons":persons,"time":dts })
+        if(error){alert(error);console.log(error)}
+        else{alert('Logged Data')}
 
 })
 return(
@@ -177,30 +169,25 @@ return(
 
 
 <div class="co">
-<label class="coin">Class</label>
-<input disabled value={state.class} name="class" id="class" class="coout"  >
+<label class="coin">Email</label>
+<input disabled value={state.email} name="email" id="email" class="coout"  >
 </input>
 </div>
 
 
 <div class="co">
-<label class="coin ">Admission Number</label>
-<input disabled value={state.adm} name="adm" id="adm" class="coout">
+<label class="coin ">Phone Number</label>
+<input disabled value={state.number} name="number" id="number" class="coout">
 </input>
 </div>
 
 
 <div class="co">
-<label class="coin">Adults Number</label>
-<input  value={state.adults} name="parents" id="parents" class="coout">
+<label class="coin">Total Persons</label>
+<input  value={state.parts} name="persons" id="persons" class="coout">
 </input>
 </div>
 
-<div class="co">
-<label class="coin">Children Number</label>
-<input  value={state.children} name="child" id="child" class="coout"  >
-</input>
-</div>
 
 
 <div class="mb-4">
@@ -225,22 +212,14 @@ return(
 <div class={state.qr?'hidden':''}>
 <h1 class="coin mx-auto text-center mb-4">Or</h1>
 <div class="co">
-<label class="coin">Type ID On QR</label>
+<label class="coin">Type Phone Number (Not whatsapp)</label>
 <input type="number"  onChange$={(e:any)=>state.input=e.target.value} class="coout"  >
 </input>
 </div>
 <div class="flex flex-col mb-4">
-<button onClick$={async (e:any)=>(e.preventDefault(),getResults(state.input))}  class="subm">{"Check with ID Number"}</button>
+<button onClick$={async (e:any)=>(e.preventDefault(),getResults(state.input))}  class="subm">{"Check with Phone Number"}</button>
 </div>
-<h1 class="coin mx-auto text-center mb-4">Or</h1>
-<div class="co">
-<label class="coin">Type Admission/Roll Number</label>
-<input type="number"  onChange$={(e:any)=>state.input=e.target.value} class="coout"  >
-</input>
-</div>
-<div class="flex flex-col mb-4">
-<button onClick$={async (e:any)=>(e.preventDefault(),getAdm(state.input))}  class="subm">{"Check with Adm or Roll no"}</button>
-</div>
+
 </div>
 
 </div>

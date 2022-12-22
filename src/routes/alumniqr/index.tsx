@@ -13,6 +13,24 @@ console.log(data)
 const b=data!=null?data:[]
 for(let i =0;i<=b.length-1;i++){
     console.log(b[i])
+    QRCode.toDataURL(String(b[i]['ph']),{margin:10,scale:5}, function (err,data){
+        if(err){
+console.log(err)
+        }
+        else{
+           // console.log(data)
+            let a = b[i]
+            a["url"]=data
+           // console.log(a)
+            async function update(){
+               const {data,error} =  await supabase.from('Reg').upsert(a);
+               if(error){
+                console.log(error)
+               }
+            }
+           // update()
+        }
+    })
     QRCode.toCanvas(String(b[i]['ph']
        ),{
         margin: 10,
@@ -42,8 +60,17 @@ if(context!=null){
                     context.font = "13pt Calibri";
                     }
              
-                    
-                downloadURI(canvas.toDataURL(),b[i]['ph'])
+                    let a = b[i]
+                    a["url"]=canvas.toDataURL()
+                   // console.log(a)
+                    async function update(){
+                       const {data,error} =  await supabase.from('Reg').upsert(a);
+                       if(error){
+                        console.log(error)
+                       }
+                    }
+                    update()
+               // downloadURI(canvas.toDataURL(),b[i]['ph'])
 
         }
     })
