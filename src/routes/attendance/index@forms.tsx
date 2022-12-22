@@ -56,6 +56,7 @@ console.log(error)
     adm:0,
     class:'',
     adults:0,
+    gender:'M',
     children:0,
     input:'',
     number:0,
@@ -75,6 +76,7 @@ console.log(error)
                 state.number=Number(data[0]["ph"])
                 state.parts=Number(data[0]["person"])
                 state.email=String(data[0]["email"])
+                state.gender=String(data[0]["gender"])
     
             }
         }
@@ -114,9 +116,9 @@ const handleSubmit$ = $(async (event:any)=>{
     const date = new Date()
     dts= new Date(date.getTime());
    const {error}  = await supabase.from('allog').upsert({
-        "name":name,"email":email,"ph":number,"persons":persons,"time":dts })
+        "name":name,"email":email,"ph":number,"persons":persons,"time":dts, "gender":state.gender })
         if(error){alert(error);console.log(error)}
-        else{alert('Logged Data')}
+        else{alert('Logged Data');window.location.replace('/attendance')}
 
 })
 return(
