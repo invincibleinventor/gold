@@ -60,9 +60,9 @@ if(context!=null){
                     context.font = "13pt Calibri";
                     }
              
-                    let a = b[i]
+                   /* let a = b[i]
                     a["url"]=canvas.toDataURL()
-                   // console.log(a)
+                   console.log(a)
                     async function update(){
                        const {data,error} =  await supabase.from('Reg').upsert(a);
                        if(error){
@@ -70,8 +70,8 @@ if(context!=null){
                        }
                     }
                     update()
-               // downloadURI(canvas.toDataURL(),b[i]['ph'])
-
+               downloadURI(canvas.toDataURL(),b[i]['ph'])
+*/
         }
     })
     
