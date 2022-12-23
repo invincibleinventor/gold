@@ -9,7 +9,14 @@ import { $ } from '@builder.io/qwik';
 import { DocumentHead } from '@builder.io/qwik-city';
 export const users = ['invincibleinventor@gmail.com','bhargavanrajeshr@gmail.com','aish160490@gmail.com','erp.thetvs2021@gmail.com','srameshnba@gmail.com','goldenjubileeprince@gmail.com',"ttsparentscarnival@gmail.com"]
 
-
+export async function check(e:any){
+  const {data,error} = await supabase.from('allog').select('*').eq('ph',e)
+  if(data && data.length>0){
+    console.log(data)
+    return false
+  }
+  else{return true}
+}
 export default component$(() => {
   const stoot = useStore({
     isLoggedIn:false,
@@ -92,11 +99,19 @@ const getResults  = $(async (res:any)=>{
    }
    else{
     if(data){
+        const a  = await check(Number(res))
+        console.log(a)
+        if(a){
         console.log(data[0])
     state.number=Number(data[0]["ph"])
 
    await fetch()
     }
+    else{
+      window.location.replace('/done')
+    }
+  }
+ 
    }
 })
 

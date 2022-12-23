@@ -11,14 +11,7 @@ export default component$(() => {
   <label class="coin">For attendance</label>
   <Link class="subm" href="/attendance">Attendance</Link>
   </div>
-  <div class=" space-y-4 flex flex-col co">
-  <label class="coin">For spot registration</label>
-  <Link class="subm" href="/spot">Spot registration</Link>
-  </div>
-  <div class="space-y-4 flex flex-col co">
-  <label class="coin">For adding missed out entries (our school)</label>
-  <Link class="subm" href="/scan">Missed out (Our school)</Link>
-  </div>
+
  </div>
   );
 });
