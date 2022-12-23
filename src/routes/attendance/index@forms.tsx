@@ -127,12 +127,12 @@ const handleSubmit$ = $(async (event:any)=>{
     const email=form.email.value;
     const number=form.number.value;
     const persons = form.persons.value;
-    let dts = new Date()
-    const date = new Date()
-    dts= new Date(date.getTime());
+    const dts = new Date().toLocaleTimeString();
+
+console.log(dts)
    const {error}  = await supabase.from('allog').upsert({
         "name":name,"email":email,"ph":number,"persons":persons,"time":dts, "gender":state.gender })
-        if(error){alert(error);console.log(error)}
+        if(error){console.log(error)}
         else{alert('Logged Data');window.location.replace('/attendance')}
 
 })
