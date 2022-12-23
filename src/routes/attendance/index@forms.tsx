@@ -10,7 +10,7 @@ import { DocumentHead } from '@builder.io/qwik-city';
 export const users = ['invincibleinventor@gmail.com','bhargavanrajeshr@gmail.com','aish160490@gmail.com','erp.thetvs2021@gmail.com','srameshnba@gmail.com','goldenjubileeprince@gmail.com',"ttsparentscarnival@gmail.com"]
 
 export async function check(e:any){
-  const {data,error} = await supabase.from('allog').select('*').eq('ph',e)
+  const {data} = await supabase.from('allog').select('*').eq('ph',e)
   if(data && data.length>0){
     console.log(data)
     return false
