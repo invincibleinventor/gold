@@ -110,6 +110,7 @@ console.log(error)
         }
         
         upload()
+        window.location.replace('/admin')
       });
       
 
