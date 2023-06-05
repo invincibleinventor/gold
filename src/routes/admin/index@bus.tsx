@@ -1,7 +1,7 @@
 //@ts-ignore
 import { component$, useClientEffect$ } from '@builder.io/qwik';
 import { useStore } from '@builder.io/qwik';
-import { onAuthStateChanged } from 'firebase/auth';
+import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from 'firebase/auth';
 import { auth } from '~/services/firebase';
 import dt from '../config.json'
 import { $ } from '@builder.io/qwik';
@@ -24,6 +24,8 @@ export const Options = component$(()=>{
     )
 
 })
+
+    
 export default component$(() => {
   const stoot = useStore({
     isLoggedIn:false,
@@ -39,12 +41,35 @@ export default component$(() => {
   const state = useStore({
     hidden:true,
     name:'',
+    loading:true,
     email:'',
     data:'',
     input:'',
     qr:'',
     stop:''
   })
+  const handleGoogleAuth = $(async () => {
+    state.loading = true;
+    try {
+      await signInWithPopup(auth, new GoogleAuthProvider()).then((user)=>{
+        async function upload(){
+       const {error } =  await supabase
+        .from('users')
+        .insert({id:user.user.uid,email:user.user.email})
+        if(error){
+  console.log(error)
+        }
+        }
+        
+        upload()
+        window.location.replace('/admin')
+      });
+    } catch (error: any) {
+      alert(error.message);
+    } finally {
+      state.loading = false;
+    }
+  });
   const handleSubmit$ = $( async (event: Event) => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
@@ -102,8 +127,8 @@ return(
 
     {(!(stoot.isLoggedIn) && !(stoot.user == "invincibleinventor@gmail.com")) &&
     <>
-    <h1 class="my-4 text-2xl text-white font-semibold font-poppins mx-auto">No Admin Access</h1>
-    <a href="/registration" class="py-5 text-lg px-6 font-semibold bg-black bg-opacity-30 rounded-md w-full shadow-2xl text-white font-poppins">Sign In</a>
+    <h1 class="my-6  mb-8 text-2xl text-white font-semibold font-poppins ml-10">{stoot.isLoggedIn?'No Admin Access':'Please sign in to your account'}</h1>
+    <button class={stoot.isLoggedIn?`hidden`:`bg-white shadow-2xl ml-10 font-semibold font-poppins text-blue-900 px-10 transition-all ease-linear duration-100 hover:scale-105 py-3 rounded-md text-lg`} onClick$={()=>handleGoogleAuth()}>Sign In With Google</button>
 
     </>
     }
@@ -113,7 +138,7 @@ return(
 
 <form preventdefault:submit onSubmit$={handleSubmit$}>
       <h1 class="font-poppins text-white text-[28px] font-bold text-center">{"Logger"}</h1>
-      <h1 class="font-poppins text-white opacity-80 text-lg my-4 leading-relaxed mt-2 md:mt-3  font-medium text-center mb-10">{"Log the details of the participants"}</h1>
+      <h1 class="font-poppins text-white opacity-80 text-lg my-4 leading-relaxed mt-2 md:mt-4  font-medium text-center mb-10">{"Log attendance of the students"}</h1>
       
 
 <div class={`${!state.qr?'hidden': 'flex flex-col mb-10'}`}>
