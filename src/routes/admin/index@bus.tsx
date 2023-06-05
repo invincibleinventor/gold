@@ -29,12 +29,16 @@ export const Options = component$(()=>{
 export default component$(() => {
   const stoot = useStore({
     isLoggedIn:false,
-    user:''
+    user:'',
+    access:false
   })
   useClientEffect$(() => {
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
       stoot.isLoggedIn = !!user;
-      if(user?.email!=null && user?.email != undefined){stoot.user = user?.email}
+    
+      
+      if(user?.email!=null && user?.email != undefined){  const {data,error } =  await supabase
+      .from('allowed').select('*').eq('id',user.email);if(data && data.length>0){stoot.access=true}else{console.log(error)}stoot.user = user?.email}
 
     })
   })
@@ -121,51 +125,59 @@ if(data && data.length!=0){state.data;state.stop=data[0]["Bus Stop"];state.name=
 
 return(
     <>
- <div class="flex flex-col items-center content-center lg:py-20 py-10 mt-16 lg:mt-0">
+ <div class="flex flex-col items-center content-center lg:py-20 md:py-10 md:mt-16 lg:mt-0">
       <div class="mx-auto w-full">
 
 
-    {(!(stoot.isLoggedIn)) &&
+    {(!(stoot.isLoggedIn) && !(stoot.access)) && 
     <>
-    <h1 class="my-6  mb-8 text-xl text-white font-semibold font-poppins ml-10">{stoot.isLoggedIn?'No Admin Access':'Please sign in to your account'}</h1>
-    <button class={stoot.isLoggedIn?`hidden`:`bg-white shadow-2xl ml-10 font-semibold font-poppins text-blue-900 px-10 transition-all ease-linear duration-100 hover:scale-105 py-3 rounded-md text-md`} onClick$={()=>handleGoogleAuth()}>Sign In With Google</button>
-
+    <h1 class=" mt-8  mb-8 text-md md:text-lg lg:text-xl text-white font-semibold font-poppins ml-10">{stoot.isLoggedIn?'No Admin Access':'Please sign in to your account'}</h1>
+    <button class={stoot.isLoggedIn?`hidden`:`bg-white shadow-2xl ml-10 font-semibold font-poppins text-blue-900 px-10 transition-all ease-linear duration-100 hover:scale-105 py-3 rounded-md text-sm md:text-md`} onClick$={()=>handleGoogleAuth()}>Sign In With Google</button>
+    
     </>
     }
-    {((stoot.isLoggedIn)) &&
+        {((stoot.isLoggedIn) && !(stoot.access)) && 
+        <>
+            <h1 class="mt-8 mb-8 text-sm leading-loose md:text-lg opacity-80 text-white font-semibold font-poppins mx-10 md:ml-10">{'No admin access for this account. Please sign in to an account with admin access'}</h1>
+            <button class={`bg-white shadow-2xl ml-10 font-semibold font-poppins text-blue-900 px-10 transition-all ease-linear duration-100 hover:scale-105 py-3 rounded-md text-sm md:text-md`} onClick$={()=>handleGoogleAuth()}>Use Another Account</button>
+
+            </>
+        }
+
+    {((stoot.isLoggedIn) && (stoot.access)) &&
 <div>
-<div class={`mx-auto my-8 md:my-16 lg:my-20 rounded-xl lg:rounded-2xl p-8 md:p-16 md:px-10 bg-black bg-opacity-30  md:w-3/5 lg:w-2/4 xl:w-2/5 `} >
+<div class={`mx-auto  md:my-16 lg:my-20 rounded-xl lg:rounded-2xl p-8 md:p-16 md:px-10 bg-black bg-opacity-30  md:w-3/5 lg:w-2/4 xl:w-2/5 `} >
 
 <form preventdefault:submit onSubmit$={handleSubmit$}>
-      <h1 class="font-poppins text-white text-[28px] font-bold text-center">{"Logger"}</h1>
-      <h1 class="font-poppins text-white opacity-80 text-lg my-4 leading-relaxed mt-2 md:mt-4  font-medium text-center mb-10">{"Log attendance of the students"}</h1>
+      <h1 class="font-poppins text-white text-lg md:text-[28px] font-bold text-center">{"Logger"}</h1>
+      <h1 class="font-poppins text-white opacity-80 text-sm md:text-lg my-4 leading-relaxed mt-4 md:mt-4  font-medium text-center mb-10">{"Log attendance of the students"}</h1>
       
 
 <div class={`${!state.qr?'hidden': 'flex flex-col mb-10'}`}>
-<label class="text-white text-lg font-poppins font-medium opacity-80 ">Name</label>
-<input disabled value={state.name} name="name2" id="name" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
+<label class="text-white text-md md:text-lg font-poppins font-medium opacity-80 ">Name</label>
+<input disabled value={state.name} name="name2" id="name" class="text-md md:text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
 </input>
 </div>
 
 <div class={`${!state.qr?'hidden': 'flex flex-col mb-10'}`}>
-<label class="text-white text-lg font-poppins font-medium opacity-80 ">Admission</label>
-<input disabled value={state.email} name="email" id="email" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
+<label class="text-white text-md md:text-lg font-poppins font-medium opacity-80 ">Admission</label>
+<input disabled value={state.email} name="email" id="email" class="text-md md:text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
 </input>
 </div>
 <div class={`${!state.qr?'hidden': 'flex flex-col mb-10'}`}>
-<label class="text-white text-lg font-poppins font-medium opacity-80 ">Bus Stop</label>
-<input value={state.stop} name="stop" id="stop" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
+<label class="text-white text-md md:text-lg font-poppins font-medium opacity-80 ">Bus Stop</label>
+<input value={state.stop} name="stop" id="stop" class="text-md md:text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md py-4 px-6"  >
 </input>
 </div>
 
 
 
 <div class={`${!state.qr?'hidden': 'flex flex-col mb-10'}`}>
-<label class="text-white text-lg font-poppins font-medium opacity-80 ">Event</label>
+<label class="text-white text-md md:text-lg font-poppins font-medium opacity-80 ">Event</label>
 <Options></Options>
 </div>
 <div class={`${!state.qr?'hidden': 'flex flex-col mb-10'}`}>
-<button type="submit" class="py-5 text-lg px-6 font-semibold bg-black bg-opacity-30 rounded-md w-full shadow-2xl text-white font-poppins">{"Log this participant"}</button>
+<button type="submit" class="py-5 text-md md:text-lg px-6 font-semibold bg-black bg-opacity-30 rounded-md w-full shadow-2xl text-white font-poppins">{"Log this participant"}</button>
 </div>
 <QRReader className={state.qr?`hidden`:''} onResult$={(result:any) => {
   
@@ -173,15 +185,15 @@ return(
             getResults(result)
           }}} constraints={{facingMode: 'environment'}}/>
           <h1 className={state.qr?`hidden`:''} >{state.qr}</h1>
-          <div className={state.qr?`hidden`:''}>         <h1 class="text-white mt-4 text-lg text-center mx-auto font-poppins font-medium opacity-80 ">Or</h1>
-          <h1 class="text-white  text-lg font-poppins font-semibold opacity-80 mt-6 my-4">Type Admission Number</h1>
+          <div className={state.qr?`hidden`:''}>         <h1 class="text-white mt-4 text-md md:text-lg text-center mx-auto font-poppins font-medium opacity-80 ">Or</h1>
+          <h1 class="text-white  text-md md:text-lg font-poppins font-semibold opacity-80 mt-6 my-4">Type Admission Number</h1>
           </div>
 
 
 </form>
 
-<input className={state.qr?`hidden`:''}  onChange$={(e:any)=>state.input=e.target.value} name="adm" id="adm" class="text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md w-full py-4 px-6"  ></input>
-          <button className={state.qr?`hidden`:''} onClick$={async (e:any)=>(e.preventDefault(),getResults(state.input))} class="py-5 my-6 text-lg px-6 font-semibold bg-black bg-opacity-30 rounded-md w-full shadow-2xl text-white font-poppins">{"Check this number"}</button>
+<input className={state.qr?`hidden`:''}  onChange$={(e:any)=>state.input=e.target.value} name="adm" id="adm" class="text-md md:text-lg font-semibold bg-black bg-opacity-20 border-b border-b-indigo-900 text-white mt-2 shadow-2xl outline-none rounded-md w-full py-4 px-6"  ></input>
+          <button className={state.qr?`hidden`:''} onClick$={async (e:any)=>(e.preventDefault(),getResults(state.input))} class="py-5 my-6 text-md md:text-lg px-6 font-semibold bg-black bg-opacity-30 rounded-md w-full shadow-2xl text-white font-poppins">{"Check this number"}</button>
 
 </div>
 </div>
