@@ -171,7 +171,7 @@ return(
   
           if (result) {
             getResults(result)
-          }}} constraints={{facingMode: 'user'}}/>
+          }}} constraints={{facingMode: 'environment'}}/>
           <h1 className={state.qr?`hidden`:''} >{state.qr}</h1>
           <div className={state.qr?`hidden`:''}>         <h1 class="text-white mt-4 text-lg text-center mx-auto font-poppins font-medium opacity-80 ">Or</h1>
           <h1 class="text-white  text-lg font-poppins font-semibold opacity-80 mt-6 my-4">Type Admission Number</h1>
