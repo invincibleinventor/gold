@@ -103,7 +103,8 @@ return(
     {(!(stoot.isLoggedIn) && !(stoot.user == "invincibleinventor@gmail.com")) &&
     <>
     <h1 class="my-4 text-2xl text-white font-semibold font-poppins mx-auto">No Admin Access</h1>
-    <a href="/registration"></a>
+    <a href="/registration" class="py-5 text-lg px-6 font-semibold bg-black bg-opacity-30 rounded-md w-full shadow-2xl text-white font-poppins">Sign In</a>
+
     </>
     }
     {((stoot.isLoggedIn) && (stoot.user == "invincibleinventor@gmail.com")) &&
