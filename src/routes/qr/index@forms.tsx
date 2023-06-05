@@ -6,14 +6,14 @@ import { supabase } from "~/services/firebase";
 
  
 export async function genqr(){
-    const {data} =  await supabase.from('Total').select('*')
+    const {data} =  await supabase.from('Bus').select('*')
     const b=data!=null?data:[]
     for(let i =0;i<=b.length-1;i++){
         console.log(b[i])
-       const  encrypted = CryptoJS.AES.encrypt(String(b[i]["ADM NO"]),"thisisthebestkeyforhashingit").toString()
+       const  encrypted = CryptoJS.AES.encrypt(String(b[i]["Admission Num"]),"thisisthebestkeyforhashingit").toString()
     
-        if(b[i]["HASH"]==null){
-        await supabase.from('Total').upsert({"ADM NO":b[i]["ADM NO"],"STUDENT NAME":b[i]["STUDENT NAME"],"GEN":b[i]["GEN"],"CLASS":b[i]["CLASS"],"HASH":encrypted,"EVENTS":b[i]["EVENTS"],"MAGIC NUMBER":b[i]["MAGIC NUMBER"],"PARENTS NUMBER":b[i]["PARENTS NUMBER"],"MAGIC SHOW":b[i]["MAGIC SHOW"],"PARENTS CARNIVAL":b[i]["PARENTS CARNIVAL"],"SLOT":b[i]["SLOT"],"PAYMENT MODE":b[i]["PAYMENT MODE"]})
+        if(b[i]["Hash"]==null){
+        await supabase.from('Bus').upsert({"Admission Num":b[i]["Admission Num"],"StudName":b[i]["StudName"],"Bus Stop":b[i]["Bus Stop"],"Class":b[i]["Class"],"Hash":encrypted,})
 
         }
         console.log(b.length)
@@ -24,12 +24,12 @@ export async function genqr(){
 
 
 export async function getFiles(){
-const {data} =  await supabase.from('Total').select('*').eq('CLASS','I- A')
+const {data} =  await supabase.from('Bus').select('*')
 console.log(data)
 const b=data!=null?data:[]
 for(let i =0;i<=b.length-1;i++){
     console.log(b[i])
-    QRCode.toCanvas(b[i]['HASH'], function (err,canvas){
+    QRCode.toCanvas(b[i]['Hash'], function (err,canvas){
         if(err){
             console.log(err)
         }
@@ -38,11 +38,12 @@ for(let i =0;i<=b.length-1;i++){
             //downloadURI(url,b[i]['ID'])
             document.getElementById('ok')?.append(canvas)
             canvas.classList.add('my-2')
+            canvas.classList.add('mx-2')
             const context = canvas.getContext('2d')
             if(context!=null)
-            {            context.font = "13pt Calibri";}
-            context?.fillText(b[i]['ADM NO'], 20, 13);
-            downloadURI(canvas.toDataURL(),b[i]['ADM NO'])
+            {            context.font = "8pt Calibri";}
+            context?.fillText(b[i]['StudName'], 20, 12);
+            //downloadURI(canvas.toDataURL(),b[i]['Admission Num'])
 
         }
     })
@@ -66,10 +67,10 @@ export default component$(()=>{
 
     return(
         <div class="flex h-full w-full items-center content-center flex-col">
-            <div id="ok" class="grid  md:grid-cols-2 grid-cols-1 lg:grid-cols-3">
+            <div id="ok" class="grid  md:grid-cols-2  grid-cols-1 lg:grid-cols-3">
 
             </div>
-<button class="bg-white shadow-2xl my-20 font-medium lg:font-semibold font-poppins text-blue-900 px-10  transition-all ease-linear duration-100 hover:scale-105 py-3 rounded-md text-lg text-center"  onClick$={()=>getFiles()}>Get All QRs</button>
+<button class="subm"  onClick$={()=>getFiles()}>Get All QRs</button>
    
    </div>)
 

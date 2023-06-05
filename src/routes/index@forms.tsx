@@ -8,8 +8,8 @@ export default component$(() => {
   return (
  <div class="flex my-auto mx-auto  flex-col space-y-3">
   <div class="space-y-4 flex flex-col co">
-  <label class="coin">For attendance</label>
-  <Link class="subm" href="/attendance">Attendance</Link>
+  <label class="coin">For Bus Attendance</label>
+  <Link class="subm" href="/admin">Attendance</Link>
   </div>
 
  </div>

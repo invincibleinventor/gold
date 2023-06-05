@@ -22,11 +22,17 @@
 
 
     }
+
 },
+
 "kreeda":{
     "1":"Football",
     "2":"Basketball",
     "3":"Carrom"
+},
+"bus":{
+    "1":"Entry",
+    "2":"Exit"
 },
 "carnival":
 {
