@@ -127,8 +127,8 @@ return(
 
     {(!(stoot.isLoggedIn) && !(stoot.user == "invincibleinventor@gmail.com")) &&
     <>
-    <h1 class="my-6  mb-8 text-2xl text-white font-semibold font-poppins ml-10">{stoot.isLoggedIn?'No Admin Access':'Please sign in to your account'}</h1>
-    <button class={stoot.isLoggedIn?`hidden`:`bg-white shadow-2xl ml-10 font-semibold font-poppins text-blue-900 px-10 transition-all ease-linear duration-100 hover:scale-105 py-3 rounded-md text-lg`} onClick$={()=>handleGoogleAuth()}>Sign In With Google</button>
+    <h1 class="my-6  mb-8 text-xl text-white font-semibold font-poppins ml-10">{stoot.isLoggedIn?'No Admin Access':'Please sign in to your account'}</h1>
+    <button class={stoot.isLoggedIn?`hidden`:`bg-white shadow-2xl ml-10 font-semibold font-poppins text-blue-900 px-10 transition-all ease-linear duration-100 hover:scale-105 py-3 rounded-md text-md`} onClick$={()=>handleGoogleAuth()}>Sign In With Google</button>
 
     </>
     }
@@ -173,7 +173,7 @@ return(
             getResults(result)
           }}} constraints={{facingMode: 'user'}}/>
           <h1 className={state.qr?`hidden`:''} >{state.qr}</h1>
-          <div className={state.qr?`hidden`:''}>         <h1 class="text-white text-lg text-center mx-auto font-poppins font-medium opacity-80 ">Or</h1>
+          <div className={state.qr?`hidden`:''}>         <h1 class="text-white mt-4 text-lg text-center mx-auto font-poppins font-medium opacity-80 ">Or</h1>
           <h1 class="text-white  text-lg font-poppins font-semibold opacity-80 mt-6 my-4">Type Admission Number</h1>
           </div>
 
