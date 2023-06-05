@@ -125,14 +125,14 @@ return(
       <div class="mx-auto w-full">
 
 
-    {(!(stoot.isLoggedIn) && !(stoot.user == "invincibleinventor@gmail.com")) &&
+    {(!(stoot.isLoggedIn)) &&
     <>
     <h1 class="my-6  mb-8 text-xl text-white font-semibold font-poppins ml-10">{stoot.isLoggedIn?'No Admin Access':'Please sign in to your account'}</h1>
     <button class={stoot.isLoggedIn?`hidden`:`bg-white shadow-2xl ml-10 font-semibold font-poppins text-blue-900 px-10 transition-all ease-linear duration-100 hover:scale-105 py-3 rounded-md text-md`} onClick$={()=>handleGoogleAuth()}>Sign In With Google</button>
 
     </>
     }
-    {((stoot.isLoggedIn) && (stoot.user == "invincibleinventor@gmail.com")) &&
+    {((stoot.isLoggedIn)) &&
 <div>
 <div class={`mx-auto my-8 md:my-16 lg:my-20 rounded-xl lg:rounded-2xl p-8 md:p-16 md:px-10 bg-black bg-opacity-30  md:w-3/5 lg:w-2/4 xl:w-2/5 `} >
 
