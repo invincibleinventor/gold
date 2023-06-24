@@ -203,7 +203,7 @@ return(
     {((stoot.isLoggedIn) && (stoot.access)) &&
 <div class="h-[100vh]">
 
-<QRReader className={state.qr?`hidden`:'mx-10 rounded-md h-96 w-96'} onResult$={(result:any) => {
+<QRReader className={state.qr?`hidden`:'mb-5 rounded-md h-96 w-96'} onResult$={(result:any) => {
   
           if (result) {
             getResults(result)
