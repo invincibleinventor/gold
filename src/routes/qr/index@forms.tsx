@@ -3,17 +3,22 @@ import CryptoJS from "crypto-js";
 import QRCode from "qrcode";
 import { supabase } from "~/services/firebase";
 //import QRCode from "react-qr-code";
-
  
 export async function genqr(){
-    const {data} =  await supabase.from('Bus').select('*')
+    const {data,error} =  await supabase.from('Bus').select('*')
+    if(error){
+        console.log(error)
+    }
+    else{
+        console.log('ok'+data)
+    }
     const b=data!=null?data:[]
     for(let i =0;i<=b.length-1;i++){
         console.log(b[i])
        const  encrypted = CryptoJS.AES.encrypt(String(b[i]["Admission Num"]),"thisisthebestkeyforhashingit").toString()
     
         if(b[i]["Hash"]==null){
-        await supabase.from('Bus').upsert({"Admission Num":b[i]["Admission Num"],"StudName":b[i]["StudName"],"Bus Stop":b[i]["Bus Stop"],"Class":b[i]["Class"],"Hash":encrypted,})
+        await supabase.from('Bus').upsert({"Admission Num":b[i]["Admission Num"],"StudName":b[i]["StudName"],"Bus Stop":b[i]["Bus Stop"],"Class":b[i]["Class"],"Route":b[i]["Route"],"Hash":encrypted,})
 
         }
         console.log(b.length)
@@ -21,9 +26,8 @@ export async function genqr(){
     }
 }
 
-
-
 export async function getFiles(){
+    genqr()
 const {data} =  await supabase.from('Bus').select('*')
 console.log(data)
 const b=data!=null?data:[]

@@ -11,6 +11,16 @@
   @apply flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white;
 }
 
+.float-label-input {
+  margin: 32px 0;     
+}
+
+.float-label-input:focus-within label,
+.float-label-input input:not(:placeholder-shown) + label {
+  transform: translateY(-1.5rem) scale(0.75);
+  background-color: white;
+}
+
 .coin{
   @apply text-[#202124] text-[17px] font-roboto font-normal;
 }
