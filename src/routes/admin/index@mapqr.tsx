@@ -93,7 +93,7 @@ export default component$(() => {
 
       if(user?.email!=null && user?.email != undefined){  const {data,error } =  await supabase
       .from('allowed').select('*').eq('id',user.email);if(data && data.length>0){stoot.access=true}else{console.log(error)}stoot.user = user?.email;state.loading=false}
-
+state.loading=false
     })
   })
  
