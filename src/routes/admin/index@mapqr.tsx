@@ -228,7 +228,7 @@ return(
 
 {state.success && 
 <div class="h-[100vh] flex  items-center content-center">
-<img class="w-48 h-48 my-auto" src="success.gif"/>
+<img class="w-48 h-48 my-auto" src="/success.gif"/>
 </div>
 }
           </div>
