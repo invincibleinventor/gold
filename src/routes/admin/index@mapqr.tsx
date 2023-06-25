@@ -187,7 +187,7 @@ return(
     <>
     <div class="my-auto flex flex-col content-center items-center">
     <h1 class=" mt-8  mb-4 text-sm md:text-md lg:text-lg text-center text-black font-normal font-sans ">{stoot.isLoggedIn?'No Admin Access':'Please sign in to your account'}</h1>
-    <button class={stoot.isLoggedIn?`hidden`:`bg-blue-200  mx-auto font-semibold font-sans text-cyan-700 px-10 transition-all ease-linear duration-100 hover:scale-105 py-3 rounded-md text-xs md:text-sm`} onClick$={()=>handleGoogleAuth()}>Sign In With Google</button>
+    <button class={stoot.isLoggedIn?`hidden`:`bg-blue-200  mx-auto font-semibold font-sans text-blue-700 px-10 transition-all ease-linear duration-100 hover:scale-105 py-3 rounded-md text-xs md:text-sm`} onClick$={()=>handleGoogleAuth()}>Sign In With Google</button>
     </div>
     </>
     }
@@ -195,7 +195,7 @@ return(
         <>
         <div class="my-auto flex flex-col content-center items-center">
             <h1 class="mt-8  mb-4 text-sm text-center md:text-md lg:text-lg text-black font-normal font-sans mx-10">{'No admin access for this account. Please sign in to an account with admin access'}</h1>
-            <button class={`bg-blue-200  mx-auto font-semibold font-sans text-cyan-700 px-10 transition-all ease-linear duration-100 hover:scale-105 py-3 rounded-md text-xs md:text-sm`} onClick$={()=>handleGoogleAuth()}>Use Another Account</button>
+            <button class={`bg-blue-200  mx-auto font-semibold font-sans text-blue-700 px-10 transition-all ease-linear duration-100 hover:scale-105 py-3 rounded-md text-xs md:text-sm`} onClick$={()=>handleGoogleAuth()}>Use Another Account</button>
 </div>
             </>
         }
@@ -215,7 +215,7 @@ return(
   
 
 
-          <button className={state.qr?`hidden`:'bg-blue-200 mx-10  font-semibold font-sans text-cyan-700 px-10 transition-all ease-linear duration-100 hover:scale-105 py-3 rounded-md text-xs md:text-sm mx-auto'} onClick$={async (e:any)=>(e.preventDefault(),getResults(state.input))}>{"Check this number"}</button>
+          <button className={state.qr?`hidden`:'bg-blue-200 mx-10  font-semibold font-sans text-blue-700 px-10 transition-all ease-linear duration-100 hover:scale-105 py-3 rounded-md text-xs md:text-sm mx-auto'} onClick$={async (e:any)=>(e.preventDefault(),getResults(state.input))}>{"Check this number"}</button>
 </div>
 </div>
 
