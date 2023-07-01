@@ -7,7 +7,14 @@ import dt from '../config.json'
 import { $ } from '@builder.io/qwik';
 import { supabase } from '~/services/firebase';
 import { Ov, QRReader } from '~/integrations/react/registration';
+export async function check(adm){
+  const {data,error }= await supabase.from('Bus Log').select('*').eq('uid',adm)
+  if(error){
+    alert(error)
 
+  }
+  else{return data}
+}
 /*
 
 <form preventdefault:submit onSubmit$={handleSubmit$}>
@@ -83,7 +90,7 @@ export default component$(() => {
     qr:'',
     success:false,
     stop:'',
-    route: ''
+    route: '',maps:{}
   })
   useClientEffect$(() => {
 
@@ -92,7 +99,7 @@ export default component$(() => {
       state.loading=true
 
       if(user?.email!=null && user?.email != undefined){  const {data,error } =  await supabase
-      .from('allowed').select('*').eq('id',user.email);if(data && data.length>0){stoot.access=true}else{console.log(error)}stoot.user = user?.email;state.loading=false}
+      .from('allowed').select('*').eq('id',user.email);if(data && data.length>0){stoot.access=true;const {data,error} = await supabase.from('Maps').select('*'); state.maps=data}else{console.log(error)}stoot.user = user?.email;state.loading=false}
 state.loading=false
     })
   })
@@ -127,14 +134,27 @@ state.loading=false
     const name = state.name;
     const adm = state.email;
     const stop = state.stop;
-    const route = state.route;
+    var route = state.route;
+    var r = state.maps
     console.log(adm)
     const eve = "Entry"
 
     let dts = new Date()
     const date = new Date()
     dts= new Date(date.getTime() - date.getTimezoneOffset()*60000);
+   
+    var c=await check(adm)
+    var bd = new Date(c?c["time"]:'null')
+    var diffInMillis = dts.getTime() - bd.getTime()
+    var isLessThan1Hour = diffInMillis < 60 * 60 * 1000;
 
+    var a=r.length
+    for(let i = 0 ; i <a; i++){
+      if(r[i]["Area"]==stop){
+        route=r[i]["Route"]
+      }
+    }
+    if(!isLessThan1Hour){
     const { error } = await supabase
     .from('Bus Log')
     .insert({ uid:adm,name:name, time:dts,event:eve,stop:stop, route:route })
@@ -149,7 +169,12 @@ state.loading=false
           },3000)
         }    
 
-  })
+  }else{
+    alert('You cannot enter same value again')
+  }}
+
+  )
+  
 
   const getResults = $(async (res:any) => {
     state.qr=res
