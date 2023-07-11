@@ -86,6 +86,7 @@ export default component$(() => {
     loading:false,
     email:'',
     data:'',
+    roll:'',
     input:'',
     qr:'',
     success:false,
@@ -134,6 +135,7 @@ state.loading=false
     const name = state.name;
     const adm = state.email;
     const stop = state.stop;
+    const roll = state.roll;
     var route = state.route;
     var r = state.maps
     console.log(adm)
@@ -156,8 +158,8 @@ state.loading=false
     }*/
     if(!isLessThan1Hour){
     const { error } = await supabase
-    .from('Bus Log')
-    .insert({ uid:adm,name:name, time:dts,event:eve,stop:stop, route:5 })
+    .from('Stud Log')
+    .insert({ uid:adm,name:name, time:dts,event:eve, "roll no":roll })
     if(error){
       console.log(error)
         }
@@ -185,15 +187,15 @@ console.log(state.qr)
 
     }
     else if (res.length==8 )[
-      col = "Admission Num"
+      col = "ADM NO"
 
     ]
 
 const { data } = await supabase
-.from('Bus')
+.from('List')
 .select("*")
 .eq(col,`${res}`)
-if(data && data.length!=0){state.data;state.route=data[0]["Route"];state.stop=data[0]["Bus Stop"];state.name=data[0]["StudName"];state.email=data[0]["Admission Num"];handleSubmit$()}else{console.log('no data')}
+if(data && data.length!=0){state.data;state.roll=data[0]["ROLL NO"];state.name=data[0]["STUDENT NAME"];state.email=data[0]["ADM NO"];handleSubmit$()}else{console.log('no data')}
 
   })
 
