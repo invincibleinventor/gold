@@ -18,7 +18,7 @@ export default component$(()=>{
    const getResults =  $(async() => { 
      try {
     
-      await signInWithEmailAndPassword(auth,state.email,state.password).then((user:any)=>{
+      await signInWithEmailAndPassword(auth,'admin@thetvs.com',state.password).then((user:any)=>{
         async function upload(){
        const {error } =  await supabase
         .from('users')
@@ -44,7 +44,6 @@ export default component$(()=>{
       <div class="h-screen w-screen flex flex-row items-center content-center" >
         <div class=" w-screen flex flex-col items-center content-center">
         
-        <input placeholder="Type Email" className={'block w-auto bg-white mx-10 focus:outline-none focus:shadow-outline border border-gray-300 rounded-md py-3 px-4 block appearance-none leading-normal focus:border-blue-400 text-sm md:text-md my-5'}  onChange$={(e:any)=>state.email=e.target.value} name="email" id="email" ></input>
         <input placeholder="Type Password" className={'block w-auto bg-white mx-10 focus:outline-none focus:shadow-outline border border-gray-300 rounded-md py-3 px-4 block appearance-none leading-normal focus:border-blue-400 text-sm md:text-md mb-5'}  onChange$={(e:any)=>state.password=e.target.value} type='password' name="pass" id="pass" ></input>
   
 
