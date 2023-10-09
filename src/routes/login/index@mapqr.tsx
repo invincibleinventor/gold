@@ -18,7 +18,7 @@ export default component$(()=>{
    const getResults =  $(async() => { 
      try {
     
-      await signInWithEmailAndPassword(auth,'admin@thetvs.com',state.password).then((user:any)=>{
+      await signInWithEmailAndPassword(auth,'trial@gmail.com',state.password).then((user:any)=>{
         async function upload(){
        const {error } =  await supabase
         .from('users')
