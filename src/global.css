@@ -8,7 +8,7 @@
 @tailwind components;
 @tailwind utilities;
 .co{
-  @apply flex flex-col mb-3 rounded-lg border px-7 py-6 border-neutral-300 bg-white;
+  @apply flex flex-col py-6 mb-3 bg-white border rounded-lg px-7 border-neutral-300;
 }
 
 .float-label-input {
@@ -21,6 +21,9 @@
   background-color: white;
 }
 
+.font-sans{
+  font-family: 'Jost';
+}
 .coin{
   @apply text-[#202124] text-[17px] font-roboto font-normal;
 }
